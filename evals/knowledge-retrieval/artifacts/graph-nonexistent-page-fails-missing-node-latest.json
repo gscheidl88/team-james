@@ -1,0 +1,7 @@
+{
+  "probe_kind": "neighbors",
+  "probe_ok": false,
+  "failure_class": "missing_source_node",
+  "page_id": "nonexistent-page-xyzzy-sentinel",
+  "stale_reasons": []
+}

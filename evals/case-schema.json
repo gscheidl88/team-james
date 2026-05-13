@@ -1,0 +1,123 @@
+{
+  "$schema_version": "1.0",
+  "description": "Canonical record schema for real workflow eval cases extracted from workspace artifacts.",
+  "required_fields": [
+    "id",
+    "created",
+    "suite",
+    "mode",
+    "case_type",
+    "source_family",
+    "source_path",
+    "title",
+    "description",
+    "test_type",
+    "test_payload",
+    "expected_outcome",
+    "confidence",
+    "components_covered"
+  ],
+  "enums": {
+    "suite": [
+      "research-synthesis",
+      "handoff",
+      "trace-quality",
+      "hypothesis-discipline",
+      "reconcile",
+      "knowledge-retrieval"
+    ],
+    "mode": [
+      "capability",
+      "regression"
+    ],
+    "case_type": [
+      "plan-validation",
+      "daily-session",
+      "review-signal",
+      "history-transition",
+      "trace-assertion",
+      "reconcile-review"
+    ],
+    "source_family": [
+      "plans",
+      "daily-notes",
+      "memory-reviews",
+      "review-history",
+      "wiki"
+    ],
+    "test_type": [
+      "file_contains",
+      "trace_review",
+      "retrieval_probe"
+    ],
+    "expected_outcome": [
+      "pass",
+      "warn",
+      "degraded"
+    ],
+    "confidence": [
+      "high",
+      "medium",
+      "low",
+      "uncertain"
+    ],
+    "components_covered": [
+      "verifier",
+      "checkpoint",
+      "ledger",
+      "reconcile"
+    ]
+  },
+  "field_notes": {
+    "id": "Stable kebab-case identifier. Prefix with suite slug when possible.",
+    "created": "ISO-8601 timestamp for when the case record was created.",
+    "suite": "Target workflow suite that owns the case.",
+    "mode": "capability or regression; must match suite intent.",
+    "case_type": "Artifact-specific extraction class.",
+    "source_family": "High-level family of the artifact the case was mined from.",
+    "source_path": "Workspace-relative path to the original artifact.",
+    "title": "Short human-readable label.",
+    "description": "One-sentence description of what the case verifies.",
+    "test_type": "Executable evaluation primitive currently supported by the runner.",
+    "test_payload": "Payload consumed by the runner; for file_contains use path + contains, for trace_review use trace_fixture + assertions.",
+    "expected_outcome": "Expected evaluation result for the case.",
+    "confidence": "Curator confidence that the case is representative and stable.",
+    "evidence": "Optional list of concrete supporting observations from the source artifact.",
+    "contradiction": "Optional known counter-signal; use null if none.",
+    "next_test": "Optional next refinement or follow-up check for weak cases.",
+    "components_covered": "List of ablation-relevant controls exercised by the case.",
+    "notes": "Optional curator notes, including whether the case was backfilled from production-like history."
+  },
+  "example": {
+    "id": "handoff-2026-04-15-001",
+    "created": "2026-04-15T18:00:00",
+    "suite": "handoff",
+    "mode": "capability",
+    "case_type": "plan-validation",
+    "source_family": "plans",
+    "source_path": "plans/2026-04-15-agi-harness-epistemic-upgrades.md",
+    "title": "Plan carries checkpoint and handoff state",
+    "description": "Verify that a complex-task plan preserves checkpoint state and handoff legibility.",
+    "test_type": "file_contains",
+    "test_payload": {
+      "path": "plans\\2026-04-15-agi-harness-epistemic-upgrades.md",
+      "contains": [
+        "### Checkpoint Summary",
+        "handoff_state",
+        "validation_plan"
+      ]
+    },
+    "expected_outcome": "pass",
+    "confidence": "high",
+    "evidence": [
+      "Plan contains explicit handoff state section",
+      "Checkpoint summary is visible as a reusable block"
+    ],
+    "contradiction": null,
+    "next_test": "Validate the same structure on a second independent plan artifact.",
+    "components_covered": [
+      "checkpoint"
+    ],
+    "notes": "Backfilled from a real workspace plan rather than a synthetic fixture."
+  }
+}

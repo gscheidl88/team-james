@@ -1,0 +1,40 @@
+id: investment-research
+name: Investment Research
+version: "1.0"
+owner: Magnus
+category: research
+description: Educational workflow for factsheet analysis, KID interpretation, market-context synthesis, and structured investment-product comparison
+triggers:
+  - investment research
+  - factsheet
+  - kid
+  - priip
+  - fund analysis
+  - market context
+inputs:
+  - type: pdf
+    description: Factsheet, KID, or basis information PDF for a financial product
+  - type: url
+    description: Product landing page or public market-context source
+  - type: query
+    description: Comparison or diligence question
+outputs:
+  - type: research_brief
+    description: Structured product analysis with risks, assumptions, and open questions
+  - type: wiki_page
+    path: wiki/{slug}.md
+    description: Durable reference page when the result should remain discoverable
+  - type: parser_json
+    path: tools/investment/outputs/{name}.json
+    description: Structured extraction from a PDF document
+tools_preferred:
+  - view
+  - web_fetch
+  - web_search
+  - powershell
+  - uv run tools/investment/factsheet_parser.py
+constraints:
+  research_only_not_personalized_advice: true
+  data_freshness_must_be_noted: true
+  evidence_markers_required_when_uncertain: true
+dependencies: []

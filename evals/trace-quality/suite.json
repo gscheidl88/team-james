@@ -1,0 +1,516 @@
+{
+  "name": "trace-quality",
+  "mode": "regression",
+  "description": "Runs agent review on seeded delegated-task trace fixtures and a real runtime roundtrip. Checks that verification and failure signals remain measurable, that coverage gaps (no-spawn, expectation gaps, declared-no-delegation) resolve to correct verdicts, and that operational history markers persist in daily notes.",
+  "cases": [
+    {
+      "id": "trace-review-captures-failure-and-verification",
+      "type": "trace_review",
+      "trace_fixture": "fixtures\\trace-quality.jsonl",
+      "components": ["verifier", "checkpoint"],
+      "assertions": [
+        {
+          "path": "status",
+          "equals": "warn"
+        },
+        {
+          "path": "coverage_verdict",
+          "equals": "has_delegation"
+        },
+        {
+          "path": "summary.total_tasks",
+          "equals": 1
+        },
+        {
+          "path": "summary.completed_tasks",
+          "equals": 1
+        },
+        {
+          "path": "summary.verification_tasks",
+          "equals": 1
+        },
+        {
+          "path": "summary.cross_family_verification_tasks",
+          "equals": 1
+        },
+        {
+          "path": "summary.fallback_actions_used",
+          "equals": 1
+        },
+        {
+          "path": "summary.failure_class_counts.tool",
+          "equals": 1
+        }
+      ]
+    },
+    {
+      "id": "trace-review-empty-trace-is-warn",
+      "type": "trace_review",
+      "trace_fixture": "fixtures\\empty-trace.jsonl",
+      "components": ["checkpoint"],
+      "assertions": [
+        {
+          "path": "status",
+          "equals": "warn"
+        },
+        {
+          "path": "coverage_verdict",
+          "equals": "empty_trace"
+        },
+        {
+          "path": "summary.total_tasks",
+          "equals": 0
+        },
+        {
+          "path": "reasons",
+          "contains": "unverified-empty-trace"
+        }
+      ]
+    },
+    {
+      "id": "trace-review-missing-trace-file-is-warn",
+      "type": "trace_review",
+      "trace_fixture": "fixtures\\nonexistent-trace.jsonl",
+      "components": ["checkpoint"],
+      "assertions": [
+        {
+          "path": "status",
+          "equals": "warn"
+        },
+        {
+          "path": "coverage_verdict",
+          "equals": "no_trace_file"
+        },
+        {
+          "path": "summary.total_tasks",
+          "equals": 0
+        }
+      ]
+    },
+    {
+      "id": "trace-review-has-events-no-spawn-is-warn",
+      "type": "trace_review",
+      "trace_fixture": "fixtures\\has-events-no-spawn.jsonl",
+      "components": ["checkpoint"],
+      "assertions": [
+        {
+          "path": "status",
+          "equals": "warn"
+        },
+        {
+          "path": "coverage_verdict",
+          "equals": "has_events_no_spawn"
+        },
+        {
+          "path": "reasons",
+          "contains": "has-events-no-spawn"
+        }
+      ]
+    },
+    {
+      "id": "audit-has-events-no-spawn-reports-coverage-gap",
+      "type": "trace_audit",
+      "trace_fixture": "fixtures\\has-events-no-spawn.jsonl",
+      "components": ["checkpoint"],
+      "assertions": [
+        {
+          "path": "exit_code",
+          "equals": 1
+        },
+        {
+          "path": "stdout",
+          "contains": "coverage_gap"
+        },
+        {
+          "path": "stdout",
+          "not_contains": "unclosed delegation"
+        }
+      ]
+    },
+    {
+      "id": "trace-review-expectation-gap-is-warn",
+      "type": "trace_review",
+      "trace_fixture": "fixtures\\expectation-gap.jsonl",
+      "components": ["checkpoint", "ledger"],
+      "assertions": [
+        {
+          "path": "status",
+          "equals": "warn"
+        },
+        {
+          "path": "coverage_verdict",
+          "equals": "has_delegation"
+        },
+        {
+          "path": "summary.expected_delegations",
+          "equals": 2
+        },
+        {
+          "path": "summary.delegation_gap",
+          "equals": 1
+        },
+        {
+          "path": "reasons",
+          "contains": "delegation-below-expectation"
+        }
+      ]
+    },
+    {
+      "id": "trace-review-declared-no-delegation-is-ok",
+      "type": "trace_review",
+      "trace_fixture": "fixtures\\declared-no-delegation.jsonl",
+      "components": ["checkpoint"],
+      "assertions": [
+        {
+          "path": "status",
+          "equals": "ok"
+        },
+        {
+          "path": "coverage_verdict",
+          "equals": "declared_no_delegation"
+        },
+        {
+          "path": "summary.expected_delegations",
+          "equals": 0
+        },
+        {
+          "path": "summary.delegation_gap",
+          "equals": 0
+        }
+      ]
+    },
+    {
+      "id": "runtime-delegate-spawn-complete-audit-roundtrip",
+      "type": "runtime_delegate_audit",
+      "components": ["verifier", "checkpoint"],
+      "assertions": [
+        {
+          "path": "coverage_verdict",
+          "equals": "has_delegation"
+        },
+        {
+          "path": "summary.total_tasks",
+          "equals": 1
+        },
+        {
+          "path": "summary.expected_delegations",
+          "equals": 1
+        },
+        {
+          "path": "summary.delegation_gap",
+          "equals": 0
+        }
+      ]
+    },
+    {
+      "id": "runtime-routed-delegate-captures-preflight-and-verifiability",
+      "type": "runtime_delegate_audit",
+      "components": ["verifier", "checkpoint", "ledger"],
+      "task_id": "runtime-routed-task",
+      "spawn_args": [
+        "--task-id", "runtime-routed-task",
+        "--agent-type", "general-purpose",
+        "--model", "claude-sonnet-4.5",
+        "--goal", "Implement a routed delegation hardening slice.",
+        "--dod-text", "Preflight, verifiability, and verification metadata are captured.",
+        "--verification-plan", "Run workflow evals and inspect the resulting review payload.",
+        "--agent-role", "developer",
+        "--requested-tools", "view", "powershell",
+        "--complexity", "complex",
+        "--task-type", "code",
+        "--risk", "high",
+        "--cost-profile", "normal",
+        "--metadata", "open_hypotheses=1"
+      ],
+      "assertions": [
+        {
+          "path": "status",
+          "equals": "ok"
+        },
+        {
+          "path": "coverage_verdict",
+          "equals": "has_delegation"
+        },
+        {
+          "path": "summary.preflight_checked_tasks",
+          "equals": 1
+        },
+        {
+          "path": "summary.verifiability_profiled_tasks",
+          "equals": 1
+        },
+        {
+          "path": "summary.contract_complete_tasks",
+          "equals": 1
+        },
+        {
+          "path": "summary.verification_tasks",
+          "equals": 1
+        }
+      ]
+    },
+    {
+      "id": "runtime-cao-helper-prepares-and-spawns-routed-task",
+      "type": "runtime_cao_helper",
+      "components": ["verifier", "checkpoint", "ledger"],
+      "task_id": "runtime-cao-helper-task",
+      "prepare_args": [
+        "--task-id", "runtime-cao-helper-task",
+        "--goal", "Build a CAO helper bundle for a routed code task.",
+        "--dod", "The helper emits routed metadata, a delegate command, and a prompt block.",
+        "--verification-plan", "Run workflow evals and inspect the resulting review payload.",
+        "--agent-role", "developer",
+        "--requested-tools", "view", "powershell",
+        "--complexity", "complex",
+        "--task-type", "code",
+        "--risk", "high",
+        "--plan-path", "plans\\2026-05-02-strategic-agentic-slices.md",
+        "--handoff-state", "Slice 1 runtime coverage",
+        "--hypothesis", "A CAO helper can reduce spawn friction without replacing delegate.py.",
+        "--confidence", "medium",
+        "--evidence", "delegate.py already owns the audited spawn path.",
+        "--next-test", "Run helper-driven spawn plus agent_review.",
+        "--open-hypotheses", "1",
+        "--skill-context-file", "skills\\orchestration\\SKILL.md"
+      ],
+      "spawn_after_prepare": true,
+      "prepare_assertions": [
+        {
+          "path": "spawn_ready",
+          "equals": true
+        },
+        {
+          "path": "recommended_agent_type",
+          "equals": "general-purpose"
+        },
+        {
+          "path": "selected_model",
+          "equals": "claude-sonnet-4.5"
+        },
+        {
+          "path": "preflight.status",
+          "equals": "ok"
+        },
+        {
+          "path": "delegate_spawn_command",
+          "contains": "delegate.py"
+        },
+        {
+          "path": "task_prompt_block",
+          "contains": "[TASK METADATA]"
+        }
+      ],
+      "review_assertions": [
+        {
+          "path": "status",
+          "equals": "ok"
+        },
+        {
+          "path": "summary.contract_complete_tasks",
+          "equals": 1
+        },
+        {
+          "path": "summary.preflight_checked_tasks",
+          "equals": 1
+        },
+        {
+          "path": "summary.verifiability_profiled_tasks",
+          "equals": 1
+        },
+        {
+          "path": "summary.hypothesis_tasks",
+          "equals": 1
+        }
+      ]
+    },
+    {
+      "id": "runtime-cao-helper-reports-preflight-denial",
+      "type": "runtime_cao_helper",
+      "components": ["checkpoint"],
+      "prepare_exit_code": 1,
+      "prepare_args": [
+        "--task-id", "runtime-cao-helper-denied",
+        "--goal", "Show a denied routed helper path.",
+        "--dod", "The helper surfaces the preflight denial cleanly.",
+        "--verification-plan", "Inspect the helper payload for denied tools.",
+        "--agent-role", "developer",
+        "--requested-tools", "view", "task",
+        "--complexity", "complex",
+        "--task-type", "code",
+        "--risk", "high"
+      ],
+      "prepare_assertions": [
+        {
+          "path": "spawn_ready",
+          "equals": false
+        },
+        {
+          "path": "blocking_errors",
+          "contains": "routed delegation preflight failed for role 'developer'"
+        },
+        {
+          "path": "preflight.status",
+          "equals": "denied"
+        },
+        {
+          "path": "preflight.denied",
+          "contains": "task"
+        }
+      ]
+    },
+    {
+      "id": "runtime-session-wrapper-logs-routed-delegation",
+      "type": "runtime_session_delegation",
+      "components": ["verifier", "checkpoint", "ledger"],
+      "task_id": "runtime-session-wrapper-task",
+      "request_args": [
+        "-TaskId", "runtime-session-wrapper-task",
+        "-Goal", "Run the session delegation wrapper for a routed code task.",
+        "-Dod", "The wrapper raises expectation floor and logs the routed spawn.",
+        "-VerificationPlan", "Run audit plus agent_review on the generated trace.",
+        "-AgentRole", "developer",
+        "-RequestedTools", "view,powershell",
+        "-Complexity", "complex",
+        "-TaskType", "code",
+        "-Risk", "high",
+        "-PlanPath", "plans\\2026-05-02-strategic-agentic-slices.md",
+        "-HandoffState", "Slice 2 runtime coverage",
+        "-Hypothesis", "Session lifecycle wrapping is the strongest proven local enforcement surface.",
+        "-Confidence", "medium",
+        "-Evidence", "No repo-local hook schema is checked in, but session scripts are proven runtime surfaces.",
+        "-Contradiction", "Product hooks may still exist outside this repo.",
+        "-NextTest", "Complete the delegated task and run agent_review.",
+        "-OpenHypotheses", "1"
+      ],
+      "assertions": [
+        {
+          "path": "status",
+          "equals": "ok"
+        },
+        {
+          "path": "coverage_verdict",
+          "equals": "has_delegation"
+        },
+        {
+          "path": "summary.expected_delegations",
+          "equals": 1
+        },
+        {
+          "path": "summary.delegation_gap",
+          "equals": 0
+        },
+        {
+          "path": "summary.contract_complete_tasks",
+          "equals": 1
+        },
+        {
+          "path": "summary.preflight_checked_tasks",
+          "equals": 1
+        }
+      ]
+    },
+    {
+      "id": "audit-spawn-no-terminal-reports-open-delegation",
+      "type": "trace_audit",
+      "trace_fixture": "fixtures\\spawn-no-terminal.jsonl",
+      "components": ["checkpoint"],
+      "assertions": [
+        {
+          "path": "exit_code",
+          "equals": 1
+        },
+        {
+          "path": "stdout",
+          "contains": "unclosed delegation"
+        },
+        {
+          "path": "stdout",
+          "not_contains": "coverage_gap"
+        }
+      ]
+    },
+    {
+      "id": "runtime-spawn-missing-required-fields-exits-2",
+      "type": "runtime_delegate_spawn_validation",
+      "components": ["verifier"],
+      "scenarios": [
+        {
+          "label": "missing-agent-type",
+          "spawn_args": ["--task-id", "val-test-no-type", "--model", "claude-haiku-4.5"],
+          "assertions": [
+            { "path": "exit_code", "equals": 2 },
+            { "path": "stderr", "contains": "--agent-type is required" }
+          ]
+        },
+        {
+          "label": "missing-model",
+          "spawn_args": ["--task-id", "val-test-no-model", "--agent-type", "explore"],
+          "assertions": [
+            { "path": "exit_code", "equals": 2 },
+            { "path": "stderr", "contains": "--model is required" }
+          ]
+        },
+        {
+          "label": "missing-both",
+          "spawn_args": ["--task-id", "val-test-no-both"],
+          "assertions": [
+            { "path": "exit_code", "equals": 2 },
+            { "path": "stderr", "contains": "--agent-type is required" },
+            { "path": "stderr", "contains": "--model is required" }
+          ]
+        },
+        {
+          "label": "routed-model-override-missing-reason",
+          "spawn_args": [
+            "--task-id", "val-test-override-missing-reason",
+            "--agent-type", "general-purpose",
+            "--model", "gpt-5.2-codex",
+            "--goal", "Implement a routed code task",
+            "--dod-text", "Code task implemented",
+            "--verification-plan", "Run evals",
+            "--agent-role", "developer",
+            "--requested-tools", "view", "powershell",
+            "--complexity", "complex",
+            "--task-type", "code",
+            "--risk", "high"
+          ],
+          "assertions": [
+            { "path": "exit_code", "equals": 2 },
+            { "path": "stderr", "contains": "--model-override-reason" }
+          ]
+        },
+        {
+          "label": "routed-policy-denied-tool",
+          "spawn_args": [
+            "--task-id", "val-test-policy-denied",
+            "--agent-type", "general-purpose",
+            "--model", "claude-sonnet-4.5",
+            "--goal", "Investigate a research task",
+            "--dod-text", "Research task investigated",
+            "--verification-plan", "Inspect the returned notes",
+            "--agent-role", "researcher",
+            "--requested-tools", "powershell",
+            "--complexity", "standard",
+            "--task-type", "analysis",
+            "--risk", "medium"
+          ],
+          "assertions": [
+            { "path": "exit_code", "equals": 1 },
+            { "path": "stderr", "contains": "preflight failed" },
+            { "path": "stderr", "contains": "powershell" }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "daily-note-preserves-phase4-green-baseline",
+      "type": "file_contains",
+      "path": "PersonalNotes\\Daily\\2026-04-15.md",
+      "components": ["verifier", "checkpoint"],
+      "contains": [
+        "### [15:39] Session · AGI Harness Phase 4",
+        "workflow eval status `ok`; suites `4`; cases `6`; failed cases `0`"
+      ]
+    }
+  ]
+}

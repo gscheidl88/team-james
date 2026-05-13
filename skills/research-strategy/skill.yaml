@@ -1,0 +1,27 @@
+id: research-strategy
+name: Research & Strategy
+version: "1.0"
+owner: Researcher
+category: knowledge
+description: Deep research, competitive analysis, strategic decisions, ADRs
+triggers:
+  - research
+  - analysis
+  - competitive landscape
+  - decision record
+  - technology evaluation
+inputs:
+  - type: url
+    description: Repository, article, or documentation URL to research
+  - type: query
+    description: Research question or topic
+outputs:
+  - type: wiki_page
+    path: wiki/{slug}.md
+  - type: summary
+    description: Key findings and recommendations
+tools_preferred:
+  - github-mcp-server
+  - web_fetch
+  - web_search
+dependencies: []

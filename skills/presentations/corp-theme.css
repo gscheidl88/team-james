@@ -1,0 +1,844 @@
+/* @theme corp */
+
+/*
+  Corp Theme — McKinsey-Inspired Professional Marp Theme
+  ═══════════════════════════════════════════════════════
+  File:    skills/presentations/corp-theme.css
+  Version: 1.0
+  Author:  Researcher Agent (Gerhards_Analyst)
+  Created: 2026-04-11
+
+  Usage (CLI):
+    marp --theme ./skills/presentations/corp-theme.css --pdf deck.md
+
+  Usage (VS Code — add to .vscode/settings.json):
+    "markdown.marp.themes": ["./skills/presentations/corp-theme.css"]
+
+  Usage (front-matter):
+    theme: corp
+
+  Slide classes:
+    <!-- _class: lead -->      → Title slide (dark navy, centered)
+    <!-- _class: divider -->   → Section break (accent blue, centered)
+    <!-- _class: invert -->    → Dark content slide
+
+  Component CSS classes (use inside <div> elements):
+    .kpi-grid / .kpi-card / .kpi-number / .kpi-label / .kpi-delta / .kpi-up / .kpi-down
+    .columns-2 / .columns-3 / .columns-left
+    .exec-summary / .exec-box
+    .pull-quote
+    .timeline / .tl-step / .tl-dot / .tl-title / .tl-date / .tl-dot.done / .tl-dot.active / .tl-dot.future
+    .icon-grid / .icon-card
+*/
+
+/* ═══════════════════════════════════════════════════════
+   DESIGN TOKENS
+   ═══════════════════════════════════════════════════════ */
+
+:root {
+  /* McKinsey palette */
+  --corp-navy:        #003366;
+  --corp-navy-dark:   #001f44;
+  --corp-navy-mid:    #0044aa;
+  --corp-blue:        #0055a5;
+  --corp-blue-light:  #0099cc;
+  --corp-charcoal:    #1a1a2e;
+  --corp-gray:        #5a6a7a;
+  --corp-gray-light:  #9aaabf;
+  --corp-border:      #d0d8e8;
+  --corp-row-alt:     #f2f5fa;
+  --corp-bg:          #fafbfd;
+  --corp-white:       #ffffff;
+  --corp-accent:      #0066cc;
+  --corp-yellow:      #f5a623;
+  --corp-green:       #1a7c3e;
+  --corp-red:         #b31b1b;
+  --corp-amber:       #b36000;
+
+  /* Typography */
+  --font-body:    "Calibri", "Segoe UI", "Arial", sans-serif;
+  --font-heading: "Calibri", "Segoe UI", "Arial", sans-serif;
+}
+
+/* ═══════════════════════════════════════════════════════
+   BASE SLIDE — Standard content slide
+   ═══════════════════════════════════════════════════════ */
+
+section {
+  background-color: var(--corp-white);
+  color: var(--corp-charcoal);
+  font-family: var(--font-body);
+  font-size: 24px;
+  line-height: 1.5;
+  /* Reserve explicit safe area for Marp header/footer and page number. */
+  padding: 74px 64px 96px 64px;
+  box-sizing: border-box;
+  width: 1280px;
+  height: 720px;
+  position: relative;
+}
+
+/* ── Headings ── */
+
+h1 {
+  font-family: var(--font-heading);
+  font-size: 42px;
+  font-weight: 700;
+  color: var(--corp-navy);
+  line-height: 1.2;
+  margin-top: 0;
+  margin-bottom: 0.6em;
+  border-bottom: 2px solid var(--corp-accent);
+  padding-bottom: 0.3em;
+  letter-spacing: -0.01em;
+}
+
+h2 {
+  font-family: var(--font-heading);
+  font-size: 36px;
+  font-weight: 700;
+  color: var(--corp-navy);
+  line-height: 1.25;
+  margin-top: 0;
+  margin-bottom: 0.5em;
+  border-bottom: 2px solid var(--corp-accent);
+  padding-bottom: 0.25em;
+  letter-spacing: -0.01em;
+}
+
+h3 {
+  font-size: 24px;
+  font-weight: 700;
+  color: var(--corp-blue);
+  margin-top: 0.5em;
+  margin-bottom: 0.3em;
+}
+
+h4 {
+  font-size: 20px;
+  font-weight: 600;
+  color: var(--corp-gray);
+  margin-top: 0.4em;
+  margin-bottom: 0.3em;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+
+/* ── Body text ── */
+
+p {
+  margin: 0 0 0.5em 0;
+}
+
+ul, ol {
+  margin: 0.2em 0 0.5em 0;
+  padding-left: 1.4em;
+}
+
+li {
+  margin-bottom: 0.3em;
+  line-height: 1.45;
+}
+
+li::marker {
+  color: var(--corp-blue);
+}
+
+strong {
+  color: var(--corp-navy);
+  font-weight: 700;
+}
+
+em {
+  color: var(--corp-gray);
+}
+
+a {
+  color: var(--corp-accent);
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+code {
+  font-family: "Cascadia Code", "Consolas", "Courier New", monospace;
+  font-size: 0.85em;
+  background: var(--corp-row-alt);
+  color: var(--corp-navy);
+  padding: 0.1em 0.35em;
+  border-radius: 3px;
+  border: 1px solid var(--corp-border);
+}
+
+pre {
+  background: #1e2a3a;
+  color: #e0e8f0;
+  border-radius: 6px;
+  padding: 1rem 1.2rem;
+  font-size: 18px;
+  line-height: 1.5;
+  overflow: hidden;
+}
+
+pre code {
+  background: transparent;
+  border: none;
+  padding: 0;
+  color: inherit;
+  font-size: inherit;
+}
+
+/* ── Blockquote ── */
+
+blockquote {
+  font-size: 24px;
+  font-style: italic;
+  color: var(--corp-gray);
+  border-left: 5px solid var(--corp-accent);
+  margin: 0.8em 0;
+  padding: 0.6em 1.2em;
+  background: #f0f5ff;
+  border-radius: 0 6px 6px 0;
+}
+
+blockquote p {
+  margin: 0;
+}
+
+/* ── Tables ── */
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 18px;
+  margin-top: 0.8em;
+}
+
+th {
+  background-color: var(--corp-navy);
+  color: var(--corp-white);
+  padding: 10px 14px;
+  text-align: left;
+  font-weight: 600;
+  letter-spacing: 0.03em;
+  font-size: 18px;
+}
+
+td {
+  padding: 9px 14px;
+  border-bottom: 1px solid var(--corp-border);
+  color: var(--corp-charcoal);
+  vertical-align: top;
+}
+
+tr:nth-child(even) td {
+  background-color: var(--corp-row-alt);
+}
+
+/* Totals / summary row — apply by making last row bold in Markdown */
+tr:last-child td {
+  background-color: #e8f0fb;
+  font-weight: 700;
+  border-top: 2px solid var(--corp-navy);
+}
+
+th:nth-child(n+2),
+td:nth-child(n+2) {
+  /* Numbers right-aligned by default for numeric columns */
+  /* Override per-table if needed with inline style */
+}
+
+/* ── Header ── */
+
+header {
+  position: absolute;
+  top: 16px;
+  left: 64px;
+  right: 64px;
+  font-size: 14px;
+  color: var(--corp-gray-light);
+  font-weight: 500;
+  letter-spacing: 0.04em;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid var(--corp-border);
+  padding-bottom: 6px;
+}
+
+/* ── Footer ── */
+
+footer {
+  position: absolute;
+  bottom: 16px;
+  left: 64px;
+  right: 64px;
+  font-size: 13px;
+  color: var(--corp-gray-light);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-top: 1px solid var(--corp-border);
+  padding-top: 6px;
+}
+
+/* Page number (Marp inserts this via paginate: true) */
+section::after {
+  font-size: 13px;
+  color: var(--corp-gray-light);
+  font-weight: 500;
+}
+
+/* Density helpers for content-heavy slides */
+section.compact {
+  font-size: 22px;
+  line-height: 1.4;
+}
+
+section.compact table {
+  font-size: 16px;
+}
+
+section.compact th,
+section.compact td {
+  padding: 7px 10px;
+}
+
+section.dense {
+  font-size: 20px;
+  line-height: 1.35;
+}
+
+section.dense table {
+  font-size: 15px;
+}
+
+section.dense th,
+section.dense td {
+  padding: 6px 8px;
+}
+
+/* ═══════════════════════════════════════════════════════
+   TITLE SLIDE — section.lead
+   ═══════════════════════════════════════════════════════ */
+
+section.lead {
+  background-color: var(--corp-navy);
+  background-image: linear-gradient(135deg, var(--corp-navy-dark) 0%, var(--corp-navy) 60%, var(--corp-navy-mid) 100%);
+  color: var(--corp-white);
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+section.lead h1 {
+  color: var(--corp-white);
+  font-size: 52px;
+  border-bottom: 3px solid rgba(255,255,255,0.35);
+  padding-bottom: 0.4em;
+  margin-bottom: 0.3em;
+  max-width: 900px;
+}
+
+section.lead h2 {
+  color: rgba(255,255,255,0.82);
+  font-size: 30px;
+  font-weight: 400;
+  border-bottom: none;
+  margin-bottom: 1.2em;
+}
+
+section.lead h3 {
+  color: rgba(255,255,255,0.7);
+  font-size: 22px;
+  font-weight: 400;
+}
+
+section.lead p {
+  color: rgba(255,255,255,0.75);
+  font-size: 20px;
+}
+
+section.lead strong {
+  color: var(--corp-white);
+}
+
+/* Logo placeholder — top-right corner on title slide */
+section.lead::before {
+  content: "CORP";
+  position: absolute;
+  top: 32px;
+  right: 64px;
+  font-size: 22px;
+  font-weight: 700;
+  color: rgba(255,255,255,0.5);
+  letter-spacing: 0.1em;
+  border: 2px solid rgba(255,255,255,0.3);
+  padding: 4px 12px;
+  border-radius: 3px;
+}
+
+section.lead footer {
+  color: rgba(255,255,255,0.45);
+  border-top-color: rgba(255,255,255,0.2);
+}
+
+section.lead header {
+  color: rgba(255,255,255,0.45);
+  border-bottom-color: rgba(255,255,255,0.2);
+}
+
+/* ═══════════════════════════════════════════════════════
+   SECTION DIVIDER — section.divider
+   ═══════════════════════════════════════════════════════ */
+
+section.divider {
+  background-color: var(--corp-accent);
+  background-image: linear-gradient(135deg, var(--corp-navy) 0%, var(--corp-accent) 100%);
+  color: var(--corp-white);
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+section.divider h1,
+section.divider h2 {
+  color: var(--corp-white);
+  font-size: 56px;
+  border-bottom: 3px solid rgba(255,255,255,0.4);
+  padding-bottom: 0.3em;
+}
+
+section.divider p {
+  color: rgba(255,255,255,0.8);
+  font-size: 24px;
+}
+
+section.divider footer,
+section.divider header {
+  color: rgba(255,255,255,0.5);
+  border-color: rgba(255,255,255,0.25);
+}
+
+/* ═══════════════════════════════════════════════════════
+   DARK CONTENT SLIDE — section.invert
+   ═══════════════════════════════════════════════════════ */
+
+section.invert {
+  background-color: #0d1b2e;
+  color: rgba(255,255,255,0.9);
+}
+
+section.invert h1,
+section.invert h2 {
+  color: #7ab3e8;
+  border-bottom-color: rgba(255,255,255,0.2);
+}
+
+section.invert h3 {
+  color: #a8c8f0;
+}
+
+section.invert strong {
+  color: var(--corp-white);
+}
+
+section.invert code {
+  background: rgba(255,255,255,0.1);
+  color: #a8c8f0;
+  border-color: rgba(255,255,255,0.15);
+}
+
+section.invert td {
+  color: rgba(255,255,255,0.85);
+  border-bottom-color: rgba(255,255,255,0.12);
+}
+
+section.invert tr:nth-child(even) td {
+  background-color: rgba(255,255,255,0.06);
+}
+
+section.invert tr:last-child td {
+  background-color: rgba(255,255,255,0.12);
+  border-top-color: rgba(255,255,255,0.3);
+}
+
+section.invert th {
+  background-color: rgba(255,255,255,0.15);
+  color: var(--corp-white);
+}
+
+section.invert footer,
+section.invert header {
+  color: rgba(255,255,255,0.4);
+  border-color: rgba(255,255,255,0.15);
+}
+
+section.invert blockquote {
+  background: rgba(255,255,255,0.06);
+  border-left-color: #7ab3e8;
+  color: rgba(255,255,255,0.75);
+}
+
+/* ═══════════════════════════════════════════════════════
+   KPI COMPONENTS
+   ═══════════════════════════════════════════════════════ */
+
+.kpi-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1.2rem;
+  margin-top: 1rem;
+}
+
+/* Three KPIs per row variant */
+.kpi-grid-3 {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.5rem;
+  margin-top: 1rem;
+}
+
+.kpi-card {
+  border: 1.5px solid var(--corp-border);
+  border-radius: 8px;
+  padding: 1.2rem 1.4rem;
+  background: var(--corp-white);
+  box-shadow: 0 2px 8px rgba(0,51,102,0.07);
+  text-align: center;
+  transition: box-shadow 0.15s ease;
+}
+
+.kpi-number {
+  font-size: 56px;
+  font-weight: 700;
+  color: var(--corp-blue);
+  line-height: 1;
+  margin-bottom: 0.25rem;
+  font-family: var(--font-heading);
+  letter-spacing: -0.02em;
+}
+
+.kpi-label {
+  font-size: 14px;
+  color: var(--corp-gray);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  font-weight: 600;
+  margin-bottom: 0.4rem;
+}
+
+.kpi-delta {
+  font-size: 17px;
+  font-weight: 600;
+  margin-top: 0.3rem;
+}
+
+.kpi-up   { color: var(--corp-green); }
+.kpi-down { color: var(--corp-red); }
+.kpi-flat { color: var(--corp-gray); }
+
+/* ═══════════════════════════════════════════════════════
+   COLUMN LAYOUTS
+   ═══════════════════════════════════════════════════════ */
+
+/* 2-column equal split */
+.columns-2 {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2rem;
+  margin-top: 0.8rem;
+}
+
+/* 3-column equal split */
+.columns-3 {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.6rem;
+  margin-top: 0.8rem;
+}
+
+/* 2-column 40/60 left-heavy split */
+.columns-left {
+  display: grid;
+  grid-template-columns: 2fr 3fr;
+  gap: 2rem;
+  margin-top: 0.8rem;
+}
+
+/* Column card style for content within columns */
+.col-card {
+  padding: 1rem 1.1rem;
+  border-left: 4px solid var(--corp-blue);
+  background: #f7f9fc;
+  border-radius: 0 6px 6px 0;
+}
+
+.col-card h3 {
+  color: var(--corp-navy);
+  font-size: 19px;
+  margin-bottom: 0.5rem;
+  margin-top: 0;
+}
+
+/* ═══════════════════════════════════════════════════════
+   EXECUTIVE SUMMARY 3-BOX
+   ═══════════════════════════════════════════════════════ */
+
+.exec-summary {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.5rem;
+  margin-top: 1rem;
+}
+
+.exec-box {
+  border: 2px solid var(--corp-navy);
+  border-radius: 6px;
+  padding: 1.1rem 1.3rem;
+  background: #f7f9fc;
+}
+
+.exec-box h3 {
+  color: var(--corp-navy);
+  font-size: 15px;
+  text-transform: uppercase;
+  letter-spacing: 0.07em;
+  margin-bottom: 0.5rem;
+  border-bottom: 2px solid var(--corp-accent);
+  padding-bottom: 0.35rem;
+  margin-top: 0;
+}
+
+.exec-box p {
+  font-size: 18px;
+  color: var(--corp-charcoal);
+  margin: 0;
+  line-height: 1.45;
+}
+
+/* ═══════════════════════════════════════════════════════
+   PULL QUOTE
+   ═══════════════════════════════════════════════════════ */
+
+.pull-quote {
+  border-left: 6px solid var(--corp-blue);
+  padding: 1.4rem 1.8rem;
+  margin: 1.2rem 0;
+  background: #f0f5ff;
+  border-radius: 0 8px 8px 0;
+}
+
+.pull-quote blockquote {
+  font-size: 30px;
+  font-style: italic;
+  color: var(--corp-charcoal);
+  margin: 0 0 0.8rem 0;
+  line-height: 1.4;
+  border: none;
+  padding: 0;
+  background: transparent;
+}
+
+.pull-quote .attribution {
+  font-size: 17px;
+  color: var(--corp-gray);
+  font-weight: 600;
+  font-style: normal;
+}
+
+/* ═══════════════════════════════════════════════════════
+   PROCESS TIMELINE
+   ═══════════════════════════════════════════════════════ */
+
+.timeline {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 0;
+  margin-top: 1.5rem;
+  position: relative;
+}
+
+.timeline::before {
+  content: "";
+  position: absolute;
+  top: 27px;
+  left: 12%;
+  right: 12%;
+  height: 3px;
+  background: var(--corp-blue);
+  z-index: 0;
+}
+
+.tl-step {
+  text-align: center;
+  position: relative;
+  z-index: 1;
+  padding: 0 0.7rem;
+}
+
+.tl-dot {
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  background: var(--corp-blue);
+  color: var(--corp-white);
+  font-size: 22px;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 0.8rem auto;
+  box-shadow: 0 2px 8px rgba(0,85,165,0.3);
+}
+
+.tl-dot.done {
+  background: var(--corp-green);
+}
+
+.tl-dot.active {
+  background: var(--corp-blue);
+  box-shadow: 0 0 0 5px rgba(0,85,165,0.18);
+}
+
+.tl-dot.future {
+  background: var(--corp-border);
+  color: var(--corp-gray);
+  box-shadow: none;
+}
+
+.tl-title {
+  font-size: 17px;
+  font-weight: 700;
+  color: var(--corp-navy);
+  margin-bottom: 0.25rem;
+}
+
+.tl-date {
+  font-size: 14px;
+  color: var(--corp-gray);
+  margin-bottom: 0.25rem;
+}
+
+/* ═══════════════════════════════════════════════════════
+   ICON + NUMBER + LABEL CARD GRID
+   ═══════════════════════════════════════════════════════ */
+
+.icon-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1.4rem;
+  margin-top: 1.2rem;
+}
+
+.icon-card {
+  text-align: center;
+  padding: 1.3rem 0.8rem;
+  border: 1px solid var(--corp-border);
+  border-radius: 10px;
+  background: var(--corp-bg);
+  box-shadow: 0 1px 4px rgba(0,51,102,0.06);
+}
+
+.icon-card .icon {
+  font-size: 42px;
+  margin-bottom: 0.35rem;
+  line-height: 1;
+}
+
+.icon-card .figure {
+  font-size: 38px;
+  font-weight: 700;
+  color: var(--corp-navy);
+  line-height: 1.1;
+  margin-bottom: 0.2rem;
+  letter-spacing: -0.02em;
+}
+
+.icon-card .metric {
+  font-size: 14px;
+  color: var(--corp-gray);
+  margin-top: 0.2rem;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+
+/* ═══════════════════════════════════════════════════════
+   HIGHLIGHT / CALLOUT BOX
+   ═══════════════════════════════════════════════════════ */
+
+.highlight {
+  background: #fff8e6;
+  border-left: 5px solid var(--corp-yellow);
+  padding: 0.9rem 1.2rem;
+  border-radius: 0 6px 6px 0;
+  margin: 0.8rem 0;
+  font-size: 22px;
+}
+
+.alert {
+  background: #fff5f5;
+  border-left: 5px solid var(--corp-red);
+  padding: 0.9rem 1.2rem;
+  border-radius: 0 6px 6px 0;
+  margin: 0.8rem 0;
+  font-size: 22px;
+}
+
+.success {
+  background: #f0fff4;
+  border-left: 5px solid var(--corp-green);
+  padding: 0.9rem 1.2rem;
+  border-radius: 0 6px 6px 0;
+  margin: 0.8rem 0;
+  font-size: 22px;
+}
+
+/* ═══════════════════════════════════════════════════════
+   PHOTO CAPTION
+   ═══════════════════════════════════════════════════════ */
+
+.photo-caption {
+  position: absolute;
+  bottom: 52px;
+  right: 20px;
+  font-size: 11px;
+  color: rgba(255,255,255,0.65);
+  text-align: right;
+  max-width: 280px;
+  line-height: 1.4;
+}
+
+/* ═══════════════════════════════════════════════════════
+   IMAGE OVERLAY (section.bg-overlay)
+   ═══════════════════════════════════════════════════════ */
+
+section.bg-overlay::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 20, 51, 0.62);
+  z-index: 0;
+}
+
+section.bg-overlay * {
+  position: relative;
+  z-index: 1;
+}
+
+section.bg-overlay h1,
+section.bg-overlay h2 {
+  color: var(--corp-white);
+  border-bottom-color: rgba(255,255,255,0.35);
+}
+
+section.bg-overlay p,
+section.bg-overlay li {
+  color: rgba(255,255,255,0.88);
+}

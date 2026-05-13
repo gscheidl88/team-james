@@ -1,0 +1,50 @@
+# .gitignore — Team_James Agent Framework
+
+# ── Personal memory (never commit) ───────────────────────────────────────────
+memory/USER.md
+memory/MEMORY.md
+memory/MEMORY.md.bak
+memory/reviews/
+
+# ── Personal notes ───────────────────────────────────────────────────────────
+PersonalNotes/
+
+# ── Personal sources / raw inputs ────────────────────────────────────────────
+sources/private/
+
+# ── Mnemosyne vector memory ───────────────────────────────────────────────────
+.mnemosyne/
+
+# ── Python ───────────────────────────────────────────────────────────────────
+__pycache__/
+*.py[cod]
+*.pyo
+.venv/
+venv/
+.env
+*.env.local
+
+# ── Secrets ──────────────────────────────────────────────────────────────────
+*.key
+*.pem
+*.p12
+secrets.yaml
+secrets.json
+
+# ── OS artifacts ─────────────────────────────────────────────────────────────
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# ── Backup files ─────────────────────────────────────────────────────────────
+*.bak
+*.backup
+
+# ── Session artifacts ─────────────────────────────────────────────────────────
+plans/*.md
+!plans/_template-complex-task.md
+
+# ── Runtime outputs ──────────────────────────────────────────────────────────
+wiki/reviews/
+*.jsonl
+*.log

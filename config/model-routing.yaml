@@ -1,0 +1,131 @@
+version: "1.0"
+owner: "James"
+updated: "2026-04-15"
+
+model_families:
+  premium:
+    - claude-opus-4.5
+    - claude-opus-4.6
+    - gpt-5.4
+  standard:
+    - claude-sonnet-4.5
+    - claude-sonnet-4.6
+    - gpt-5.2
+    - gpt-5.2-codex
+  economy:
+    - claude-haiku-4.5
+    - gpt-4.1
+    - gpt-5-mini
+    - gpt-5.4-mini
+
+defaults:
+  cost_profile: normal
+  cross_family_verification: true
+  document_model_override: true
+
+cost_profiles:
+  budget:
+    primary_cap: economy
+    verifier_cap: economy
+    skip_verification_for:
+      - trivial
+  normal:
+    primary_cap: standard
+    verifier_cap: standard
+  unlimited:
+    primary_cap: premium
+    verifier_cap: premium
+
+complexity_rules:
+  trivial:
+    primary_tier: economy
+    verification_need: none
+  standard:
+    primary_tier: standard
+    verification_need: spot-check
+  complex:
+    primary_tier: standard
+    verification_need: spot-check
+  critical:
+    primary_tier: premium
+    verification_need: full-review
+
+task_type_overrides:
+  lookup:
+    preferred_agent_type: explore
+    preferred_primary:
+      - claude-haiku-4.5
+      - gpt-4.1
+    verifier_prompt: "Check factual accuracy, missing sources, and obvious blind spots."
+  code:
+    preferred_agent_type: general-purpose
+    preferred_primary:
+      - claude-sonnet-4.5
+      - gpt-5.2-codex
+    verifier_prompt: "Review for bugs, security risks, edge cases, and regression risk."
+  analysis:
+    preferred_agent_type: general-purpose
+    preferred_primary:
+      - claude-sonnet-4.5
+      - gpt-5.2
+    verifier_prompt: "Check numerical reasoning, assumptions, and whether evidence supports the conclusion."
+  synthesis:
+    preferred_agent_type: general-purpose
+    preferred_primary:
+      - claude-opus-4.5
+      - gpt-5.4
+    verifier_prompt: "Check logic, tradeoffs, omitted alternatives, and internal consistency."
+  decision:
+    preferred_agent_type: general-purpose
+    preferred_primary:
+      - claude-opus-4.5
+      - gpt-5.4
+    verifier_prompt: "Challenge assumptions, evaluate risks, and test whether the decision is robust."
+
+risk_rules:
+  low:
+    minimum_verification: none
+  medium:
+    minimum_verification: spot-check
+  high:
+    minimum_verification: full-review
+
+verification_routing:
+  claude_primary:
+    spot_check:
+      - gpt-4.1
+      - gpt-5.4-mini
+    full_review:
+      - gpt-5.4
+  gpt_primary:
+    spot_check:
+      - claude-haiku-4.5
+      - claude-sonnet-4.5
+    full_review:
+      - claude-opus-4.5
+
+escalation_rules:
+  disagreement_and_risk_medium_or_higher:
+    action: escalate
+    arbitration_models:
+      - claude-opus-4.5
+      - gpt-5.4
+  low_confidence_primary:
+    action: force_spot_check
+  high_risk_keywords:
+    action: force_full_review
+    keywords:
+      - security
+      - auth
+      - credentials
+      - finance
+      - payments
+      - production
+      - migration
+
+logging:
+  require_task_metadata: true
+  log_primary_model: true
+  log_verifier_model: true
+  log_verification_need: true
+  log_model_override_reason: true

@@ -1,0 +1,33 @@
+id: software-development
+name: Software Development
+version: "1.0"
+owner: Developer
+category: engineering
+description: Python tool development, automation scripts, uv inline scripts, tooling
+triggers:
+  - build
+  - implement
+  - script
+  - automate
+  - tool
+  - fix
+inputs:
+  - type: spec
+    description: Feature description or bug report
+  - type: file
+    description: Existing file to modify or extend
+outputs:
+  - type: python_script
+    path: tools/{module}/{name}.py
+  - type: diff
+    description: Code changes with explanation
+tools_preferred:
+  - powershell (uv run)
+  - view
+  - edit
+  - create
+constraints:
+  - uv_inline_scripts_preferred: true
+  - no_mcps_unless_no_alternative: true
+  - logging_required: true
+dependencies: []

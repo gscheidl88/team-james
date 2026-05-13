@@ -1,0 +1,24 @@
+{
+  "probe_kind": "search",
+  "probe_ok": true,
+  "query": "session lifecycle preflight checkpoint guard recovery",
+  "top": 5,
+  "result_count": 5,
+  "top_hit_file": "memory-session-lifecycle.md",
+  "top_hit_title": "Memory Session Lifecycle",
+  "top_hit_score": 0.0328,
+  "top_files": [
+    "memory-session-lifecycle.md",
+    "autonomic-tooling-pattern.md",
+    "agent-orchestration-policy.md",
+    "memory-runtime-tooling.md",
+    "claude-code-harness.md"
+  ],
+  "top_titles": [
+    "Memory Session Lifecycle",
+    "Autonomic Tooling Pattern",
+    "Agent Orchestration Policy and Model Routing",
+    "Memory Runtime Tooling",
+    "Claude Code Harness — Pattern Analysis & Fit Assessment"
+  ]
+}

@@ -1,0 +1,24 @@
+{
+  "probe_kind": "search",
+  "probe_ok": true,
+  "query": "autonomic tool-driven routine automation workspace operations",
+  "top": 5,
+  "result_count": 5,
+  "top_hit_file": "autonomic-tooling-pattern.md",
+  "top_hit_title": "Autonomic Tooling Pattern",
+  "top_hit_score": 0.0328,
+  "top_files": [
+    "autonomic-tooling-pattern.md",
+    "agent-ecosystem-upgrade-opportunities.md",
+    "agent-team-setup.md",
+    "github-copilot-hooks.md",
+    "agent-orchestration-policy.md"
+  ],
+  "top_titles": [
+    "Autonomic Tooling Pattern",
+    "Agent Ecosystem Upgrade Opportunities",
+    "Gerhards Agent Team — Architecture & Setup",
+    "GitHub Copilot Hooks",
+    "Agent Orchestration Policy and Model Routing"
+  ]
+}

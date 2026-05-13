@@ -1,0 +1,10 @@
+{
+  "probe_kind": "search",
+  "probe_ok": false,
+  "failure_class": "stale_index",
+  "stale_reasons": [
+    "missing-table"
+  ],
+  "query": "sentinel stale index regression probe",
+  "top": 3
+}

@@ -1,0 +1,694 @@
+{
+  "meta": {
+    "tool": "event_log_to_process_map.py",
+    "generated_at": "2026-04-26T21:38:47.733700+00:00",
+    "source_records": 22,
+    "retained_records": 22,
+    "cases": 5,
+    "top_variants": 10,
+    "hierarchy_enabled": false,
+    "max_hierarchy_depth": 1,
+    "source_path": "sources\\process-visualization\\sample-event-log.csv",
+    "direction": "LR"
+  },
+  "input": {
+    "case_id_field": "case_id",
+    "activity_field": "activity",
+    "timestamp_field": "timestamp",
+    "actor_field": "actor",
+    "lane_field": "",
+    "lifecycle_field": "",
+    "activity_path_field": "",
+    "parent_activity_field": ""
+  },
+  "summary": {
+    "cases": 5,
+    "activities": 7,
+    "transitions": 12,
+    "avg_case_length": 4.4,
+    "median_case_duration_seconds": 7200.0,
+    "hierarchy_groups": 0
+  },
+  "hierarchy": {
+    "enabled": false,
+    "max_depth": 1,
+    "groups": []
+  },
+  "activities": [
+    {
+      "id": "node_archive_case_5a48d2c9",
+      "key": "Archive Case",
+      "label": "Archive Case",
+      "full_path": "Archive Case",
+      "hierarchy_path": "",
+      "hierarchy_parent": "",
+      "hierarchy_parts": [
+        "Archive Case"
+      ],
+      "hierarchy_level": 0,
+      "hierarchy_group": "",
+      "count": 5,
+      "case_share": 1.0,
+      "avg_position": 3.4,
+      "suggested_lane": "Operations",
+      "actors": [
+        {
+          "name": "Operations",
+          "count": 5
+        }
+      ]
+    },
+    {
+      "id": "node_receive_request_231c34f6",
+      "key": "Receive Request",
+      "label": "Receive Request",
+      "full_path": "Receive Request",
+      "hierarchy_path": "",
+      "hierarchy_parent": "",
+      "hierarchy_parts": [
+        "Receive Request"
+      ],
+      "hierarchy_level": 0,
+      "hierarchy_group": "",
+      "count": 5,
+      "case_share": 1.0,
+      "avg_position": 0.0,
+      "suggested_lane": "Sales",
+      "actors": [
+        {
+          "name": "Sales",
+          "count": 5
+        }
+      ]
+    },
+    {
+      "id": "node_review_request_2dcf3fc3",
+      "key": "Review Request",
+      "label": "Review Request",
+      "full_path": "Review Request",
+      "hierarchy_path": "",
+      "hierarchy_parent": "",
+      "hierarchy_parts": [
+        "Review Request"
+      ],
+      "hierarchy_level": 0,
+      "hierarchy_group": "",
+      "count": 4,
+      "case_share": 0.8,
+      "avg_position": 1.5,
+      "suggested_lane": "Operations",
+      "actors": [
+        {
+          "name": "Operations",
+          "count": 4
+        }
+      ]
+    },
+    {
+      "id": "node_approve_request_bbf07976",
+      "key": "Approve Request",
+      "label": "Approve Request",
+      "full_path": "Approve Request",
+      "hierarchy_path": "",
+      "hierarchy_parent": "",
+      "hierarchy_parts": [
+        "Approve Request"
+      ],
+      "hierarchy_level": 0,
+      "hierarchy_group": "",
+      "count": 3,
+      "case_share": 0.6,
+      "avg_position": 2.67,
+      "suggested_lane": "Manager",
+      "actors": [
+        {
+          "name": "Manager",
+          "count": 3
+        }
+      ]
+    },
+    {
+      "id": "node_fast_track_review_8b967704",
+      "key": "Fast Track Review",
+      "label": "Fast Track Review",
+      "full_path": "Fast Track Review",
+      "hierarchy_path": "",
+      "hierarchy_parent": "",
+      "hierarchy_parts": [
+        "Fast Track Review"
+      ],
+      "hierarchy_level": 0,
+      "hierarchy_group": "",
+      "count": 2,
+      "case_share": 0.4,
+      "avg_position": 1.0,
+      "suggested_lane": "Operations",
+      "actors": [
+        {
+          "name": "Operations",
+          "count": 2
+        }
+      ]
+    },
+    {
+      "id": "node_reject_request_a2156991",
+      "key": "Reject Request",
+      "label": "Reject Request",
+      "full_path": "Reject Request",
+      "hierarchy_path": "",
+      "hierarchy_parent": "",
+      "hierarchy_parts": [
+        "Reject Request"
+      ],
+      "hierarchy_level": 0,
+      "hierarchy_group": "",
+      "count": 2,
+      "case_share": 0.4,
+      "avg_position": 2.0,
+      "suggested_lane": "Manager",
+      "actors": [
+        {
+          "name": "Manager",
+          "count": 2
+        }
+      ]
+    },
+    {
+      "id": "node_request_more_info_8fff06a5",
+      "key": "Request More Info",
+      "label": "Request More Info",
+      "full_path": "Request More Info",
+      "hierarchy_path": "",
+      "hierarchy_parent": "",
+      "hierarchy_parts": [
+        "Request More Info"
+      ],
+      "hierarchy_level": 0,
+      "hierarchy_group": "",
+      "count": 1,
+      "case_share": 0.2,
+      "avg_position": 2.0,
+      "suggested_lane": "Operations",
+      "actors": [
+        {
+          "name": "Operations",
+          "count": 1
+        }
+      ]
+    }
+  ],
+  "transitions": [
+    {
+      "source": "Archive Case",
+      "target": "__END__",
+      "source_id": "node_archive_case_5a48d2c9",
+      "target_id": "__END__",
+      "source_key": "Archive Case",
+      "target_key": "__END__",
+      "source_path": "Archive Case",
+      "target_path": "",
+      "count": 5,
+      "case_share": 1.0,
+      "median_wait_seconds": null,
+      "mean_wait_seconds": null
+    },
+    {
+      "source": "__START__",
+      "target": "Receive Request",
+      "source_id": "__START__",
+      "target_id": "node_receive_request_231c34f6",
+      "source_key": "__START__",
+      "target_key": "Receive Request",
+      "source_path": "",
+      "target_path": "Receive Request",
+      "count": 5,
+      "case_share": 1.0,
+      "median_wait_seconds": null,
+      "mean_wait_seconds": null
+    },
+    {
+      "source": "Approve Request",
+      "target": "Archive Case",
+      "source_id": "node_approve_request_bbf07976",
+      "target_id": "node_archive_case_5a48d2c9",
+      "source_key": "Approve Request",
+      "target_key": "Archive Case",
+      "source_path": "Approve Request",
+      "target_path": "Archive Case",
+      "count": 3,
+      "case_share": 0.6,
+      "median_wait_seconds": 1200.0,
+      "mean_wait_seconds": 1300.0
+    },
+    {
+      "source": "Receive Request",
+      "target": "Review Request",
+      "source_id": "node_receive_request_231c34f6",
+      "target_id": "node_review_request_2dcf3fc3",
+      "source_key": "Receive Request",
+      "target_key": "Review Request",
+      "source_path": "Receive Request",
+      "target_path": "Review Request",
+      "count": 3,
+      "case_share": 0.6,
+      "median_wait_seconds": 3600.0,
+      "mean_wait_seconds": 3400.0
+    },
+    {
+      "source": "Receive Request",
+      "target": "Fast Track Review",
+      "source_id": "node_receive_request_231c34f6",
+      "target_id": "node_fast_track_review_8b967704",
+      "source_key": "Receive Request",
+      "target_key": "Fast Track Review",
+      "source_path": "Receive Request",
+      "target_path": "Fast Track Review",
+      "count": 2,
+      "case_share": 0.4,
+      "median_wait_seconds": 840.0,
+      "mean_wait_seconds": 840.0
+    },
+    {
+      "source": "Reject Request",
+      "target": "Archive Case",
+      "source_id": "node_reject_request_a2156991",
+      "target_id": "node_archive_case_5a48d2c9",
+      "source_key": "Reject Request",
+      "target_key": "Archive Case",
+      "source_path": "Reject Request",
+      "target_path": "Archive Case",
+      "count": 2,
+      "case_share": 0.4,
+      "median_wait_seconds": 600.0,
+      "mean_wait_seconds": 600.0
+    },
+    {
+      "source": "Review Request",
+      "target": "Approve Request",
+      "source_id": "node_review_request_2dcf3fc3",
+      "target_id": "node_approve_request_bbf07976",
+      "source_key": "Review Request",
+      "target_key": "Approve Request",
+      "source_path": "Review Request",
+      "target_path": "Approve Request",
+      "count": 2,
+      "case_share": 0.4,
+      "median_wait_seconds": 4050.0,
+      "mean_wait_seconds": 4050.0
+    },
+    {
+      "source": "Fast Track Review",
+      "target": "Approve Request",
+      "source_id": "node_fast_track_review_8b967704",
+      "target_id": "node_approve_request_bbf07976",
+      "source_key": "Fast Track Review",
+      "target_key": "Approve Request",
+      "source_path": "Fast Track Review",
+      "target_path": "Approve Request",
+      "count": 1,
+      "case_share": 0.2,
+      "median_wait_seconds": 2100.0,
+      "mean_wait_seconds": 2100.0
+    },
+    {
+      "source": "Fast Track Review",
+      "target": "Reject Request",
+      "source_id": "node_fast_track_review_8b967704",
+      "target_id": "node_reject_request_a2156991",
+      "source_key": "Fast Track Review",
+      "target_key": "Reject Request",
+      "source_path": "Fast Track Review",
+      "target_path": "Reject Request",
+      "count": 1,
+      "case_share": 0.2,
+      "median_wait_seconds": 1800.0,
+      "mean_wait_seconds": 1800.0
+    },
+    {
+      "source": "Request More Info",
+      "target": "Review Request",
+      "source_id": "node_request_more_info_8fff06a5",
+      "target_id": "node_review_request_2dcf3fc3",
+      "source_key": "Request More Info",
+      "target_key": "Review Request",
+      "source_path": "Request More Info",
+      "target_path": "Review Request",
+      "count": 1,
+      "case_share": 0.2,
+      "median_wait_seconds": 8100.0,
+      "mean_wait_seconds": 8100.0
+    },
+    {
+      "source": "Review Request",
+      "target": "Reject Request",
+      "source_id": "node_review_request_2dcf3fc3",
+      "target_id": "node_reject_request_a2156991",
+      "source_key": "Review Request",
+      "target_key": "Reject Request",
+      "source_path": "Review Request",
+      "target_path": "Reject Request",
+      "count": 1,
+      "case_share": 0.2,
+      "median_wait_seconds": 2700.0,
+      "mean_wait_seconds": 2700.0
+    },
+    {
+      "source": "Review Request",
+      "target": "Request More Info",
+      "source_id": "node_review_request_2dcf3fc3",
+      "target_id": "node_request_more_info_8fff06a5",
+      "source_key": "Review Request",
+      "target_key": "Request More Info",
+      "source_path": "Review Request",
+      "target_path": "Request More Info",
+      "count": 1,
+      "case_share": 0.2,
+      "median_wait_seconds": 2400.0,
+      "mean_wait_seconds": 2400.0
+    }
+  ],
+  "variants": [
+    {
+      "path": "Receive Request > Review Request > Approve Request > Archive Case",
+      "count": 1,
+      "share": 0.2,
+      "activity_ids": [
+        "node_receive_request_231c34f6",
+        "node_review_request_2dcf3fc3",
+        "node_approve_request_bbf07976",
+        "node_archive_case_5a48d2c9"
+      ],
+      "activity_keys": [
+        "Receive Request",
+        "Review Request",
+        "Approve Request",
+        "Archive Case"
+      ],
+      "activity_paths": [
+        "Receive Request",
+        "Review Request",
+        "Approve Request",
+        "Archive Case"
+      ],
+      "steps": [
+        {
+          "id": "node_receive_request_231c34f6",
+          "key": "Receive Request",
+          "label": "Receive Request",
+          "full_path": "Receive Request",
+          "hierarchy_parent": "",
+          "hierarchy_level": 0
+        },
+        {
+          "id": "node_review_request_2dcf3fc3",
+          "key": "Review Request",
+          "label": "Review Request",
+          "full_path": "Review Request",
+          "hierarchy_parent": "",
+          "hierarchy_level": 0
+        },
+        {
+          "id": "node_approve_request_bbf07976",
+          "key": "Approve Request",
+          "label": "Approve Request",
+          "full_path": "Approve Request",
+          "hierarchy_parent": "",
+          "hierarchy_level": 0
+        },
+        {
+          "id": "node_archive_case_5a48d2c9",
+          "key": "Archive Case",
+          "label": "Archive Case",
+          "full_path": "Archive Case",
+          "hierarchy_parent": "",
+          "hierarchy_level": 0
+        }
+      ],
+      "case_ids": [
+        "1001"
+      ]
+    },
+    {
+      "path": "Receive Request > Review Request > Reject Request > Archive Case",
+      "count": 1,
+      "share": 0.2,
+      "activity_ids": [
+        "node_receive_request_231c34f6",
+        "node_review_request_2dcf3fc3",
+        "node_reject_request_a2156991",
+        "node_archive_case_5a48d2c9"
+      ],
+      "activity_keys": [
+        "Receive Request",
+        "Review Request",
+        "Reject Request",
+        "Archive Case"
+      ],
+      "activity_paths": [
+        "Receive Request",
+        "Review Request",
+        "Reject Request",
+        "Archive Case"
+      ],
+      "steps": [
+        {
+          "id": "node_receive_request_231c34f6",
+          "key": "Receive Request",
+          "label": "Receive Request",
+          "full_path": "Receive Request",
+          "hierarchy_parent": "",
+          "hierarchy_level": 0
+        },
+        {
+          "id": "node_review_request_2dcf3fc3",
+          "key": "Review Request",
+          "label": "Review Request",
+          "full_path": "Review Request",
+          "hierarchy_parent": "",
+          "hierarchy_level": 0
+        },
+        {
+          "id": "node_reject_request_a2156991",
+          "key": "Reject Request",
+          "label": "Reject Request",
+          "full_path": "Reject Request",
+          "hierarchy_parent": "",
+          "hierarchy_level": 0
+        },
+        {
+          "id": "node_archive_case_5a48d2c9",
+          "key": "Archive Case",
+          "label": "Archive Case",
+          "full_path": "Archive Case",
+          "hierarchy_parent": "",
+          "hierarchy_level": 0
+        }
+      ],
+      "case_ids": [
+        "1002"
+      ]
+    },
+    {
+      "path": "Receive Request > Fast Track Review > Approve Request > Archive Case",
+      "count": 1,
+      "share": 0.2,
+      "activity_ids": [
+        "node_receive_request_231c34f6",
+        "node_fast_track_review_8b967704",
+        "node_approve_request_bbf07976",
+        "node_archive_case_5a48d2c9"
+      ],
+      "activity_keys": [
+        "Receive Request",
+        "Fast Track Review",
+        "Approve Request",
+        "Archive Case"
+      ],
+      "activity_paths": [
+        "Receive Request",
+        "Fast Track Review",
+        "Approve Request",
+        "Archive Case"
+      ],
+      "steps": [
+        {
+          "id": "node_receive_request_231c34f6",
+          "key": "Receive Request",
+          "label": "Receive Request",
+          "full_path": "Receive Request",
+          "hierarchy_parent": "",
+          "hierarchy_level": 0
+        },
+        {
+          "id": "node_fast_track_review_8b967704",
+          "key": "Fast Track Review",
+          "label": "Fast Track Review",
+          "full_path": "Fast Track Review",
+          "hierarchy_parent": "",
+          "hierarchy_level": 0
+        },
+        {
+          "id": "node_approve_request_bbf07976",
+          "key": "Approve Request",
+          "label": "Approve Request",
+          "full_path": "Approve Request",
+          "hierarchy_parent": "",
+          "hierarchy_level": 0
+        },
+        {
+          "id": "node_archive_case_5a48d2c9",
+          "key": "Archive Case",
+          "label": "Archive Case",
+          "full_path": "Archive Case",
+          "hierarchy_parent": "",
+          "hierarchy_level": 0
+        }
+      ],
+      "case_ids": [
+        "1003"
+      ]
+    },
+    {
+      "path": "Receive Request > Review Request > Request More Info > Review Request > Approve Request > Archive Case",
+      "count": 1,
+      "share": 0.2,
+      "activity_ids": [
+        "node_receive_request_231c34f6",
+        "node_review_request_2dcf3fc3",
+        "node_request_more_info_8fff06a5",
+        "node_review_request_2dcf3fc3",
+        "node_approve_request_bbf07976",
+        "node_archive_case_5a48d2c9"
+      ],
+      "activity_keys": [
+        "Receive Request",
+        "Review Request",
+        "Request More Info",
+        "Review Request",
+        "Approve Request",
+        "Archive Case"
+      ],
+      "activity_paths": [
+        "Receive Request",
+        "Review Request",
+        "Request More Info",
+        "Review Request",
+        "Approve Request",
+        "Archive Case"
+      ],
+      "steps": [
+        {
+          "id": "node_receive_request_231c34f6",
+          "key": "Receive Request",
+          "label": "Receive Request",
+          "full_path": "Receive Request",
+          "hierarchy_parent": "",
+          "hierarchy_level": 0
+        },
+        {
+          "id": "node_review_request_2dcf3fc3",
+          "key": "Review Request",
+          "label": "Review Request",
+          "full_path": "Review Request",
+          "hierarchy_parent": "",
+          "hierarchy_level": 0
+        },
+        {
+          "id": "node_request_more_info_8fff06a5",
+          "key": "Request More Info",
+          "label": "Request More Info",
+          "full_path": "Request More Info",
+          "hierarchy_parent": "",
+          "hierarchy_level": 0
+        },
+        {
+          "id": "node_review_request_2dcf3fc3",
+          "key": "Review Request",
+          "label": "Review Request",
+          "full_path": "Review Request",
+          "hierarchy_parent": "",
+          "hierarchy_level": 0
+        },
+        {
+          "id": "node_approve_request_bbf07976",
+          "key": "Approve Request",
+          "label": "Approve Request",
+          "full_path": "Approve Request",
+          "hierarchy_parent": "",
+          "hierarchy_level": 0
+        },
+        {
+          "id": "node_archive_case_5a48d2c9",
+          "key": "Archive Case",
+          "label": "Archive Case",
+          "full_path": "Archive Case",
+          "hierarchy_parent": "",
+          "hierarchy_level": 0
+        }
+      ],
+      "case_ids": [
+        "1004"
+      ]
+    },
+    {
+      "path": "Receive Request > Fast Track Review > Reject Request > Archive Case",
+      "count": 1,
+      "share": 0.2,
+      "activity_ids": [
+        "node_receive_request_231c34f6",
+        "node_fast_track_review_8b967704",
+        "node_reject_request_a2156991",
+        "node_archive_case_5a48d2c9"
+      ],
+      "activity_keys": [
+        "Receive Request",
+        "Fast Track Review",
+        "Reject Request",
+        "Archive Case"
+      ],
+      "activity_paths": [
+        "Receive Request",
+        "Fast Track Review",
+        "Reject Request",
+        "Archive Case"
+      ],
+      "steps": [
+        {
+          "id": "node_receive_request_231c34f6",
+          "key": "Receive Request",
+          "label": "Receive Request",
+          "full_path": "Receive Request",
+          "hierarchy_parent": "",
+          "hierarchy_level": 0
+        },
+        {
+          "id": "node_fast_track_review_8b967704",
+          "key": "Fast Track Review",
+          "label": "Fast Track Review",
+          "full_path": "Fast Track Review",
+          "hierarchy_parent": "",
+          "hierarchy_level": 0
+        },
+        {
+          "id": "node_reject_request_a2156991",
+          "key": "Reject Request",
+          "label": "Reject Request",
+          "full_path": "Reject Request",
+          "hierarchy_parent": "",
+          "hierarchy_level": 0
+        },
+        {
+          "id": "node_archive_case_5a48d2c9",
+          "key": "Archive Case",
+          "label": "Archive Case",
+          "full_path": "Archive Case",
+          "hierarchy_parent": "",
+          "hierarchy_level": 0
+        }
+      ],
+      "case_ids": [
+        "1005"
+      ]
+    }
+  ]
+}

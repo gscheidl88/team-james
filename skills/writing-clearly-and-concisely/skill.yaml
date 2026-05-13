@@ -1,0 +1,42 @@
+name: writing-clearly-and-concisely
+description: "Apply Strunk's Elements of Style + AI-writing anti-patterns to all prose for humans."
+version: "1.0"
+agent: all
+category: communication
+tools_required: []
+triggers:
+  - "any documentation task"
+  - "wiki page creation or update"
+  - "commit message writing"
+  - "report or summary"
+  - "plan file writing"
+  - "any prose a human will read"
+key_rules:
+  - "active voice"
+  - "positive form"
+  - "concrete/specific language"
+  - "omit needless words"
+  - "topic sentence first"
+  - "emphatic word at sentence end"
+banned_words:
+  - pivotal
+  - crucial
+  - leverage
+  - delve
+  - robust
+  - seamless
+  - groundbreaking
+  - multifaceted
+  - foster
+  - tapestry
+  - "it is important to note"
+  - "ensure reliability"
+source: "https://github.com/softaworks/agent-toolkit/tree/main/skills/writing-clearly-and-concisely"
+adapted_by: "James (CAO)"
+adapted_date: "2026-04-13"
+changes_from_source:
+  - "Added Gerhards wiki L0/L1/L2 standard"
+  - "Added team-specific examples"
+  - "Integrated with AGENTS.md writing conventions"
+wiki_ref: "[[writing-style]]"
+is_valid: true

@@ -1,0 +1,171 @@
+{
+  "version": 1,
+  "description": "Source-of-truth inventory for preparing the workspace as a clean GitHub-deployable repository.",
+  "categories": {
+    "commit": [
+      {
+        "path": ".github/",
+        "reason": "Workspace instructions and repository-level automation belong in the published framework."
+      },
+      {
+        "path": "agents/",
+        "reason": "Agent definitions are core reusable framework assets."
+      },
+      {
+        "path": "config/",
+        "reason": "Model routing, failure taxonomy, and future publish config should be versioned."
+      },
+      {
+        "path": "evals/*.json",
+        "reason": "Suite definitions are source-of-truth test contracts."
+      },
+      {
+        "path": "evals/**/*.jsonl",
+        "reason": "Only curated fixture files should be committed; generated review outputs should not."
+      },
+      {
+        "path": "memory/procedures.md",
+        "reason": "Reusable operating rules belong in the repository."
+      },
+      {
+        "path": "plans/_template-*.md",
+        "reason": "Templates are reusable; session-specific plans are not."
+      },
+      {
+        "path": "README.md",
+        "reason": "Repository entry point."
+      },
+      {
+        "path": "CONTRIBUTING.md",
+        "reason": "Contributor workflow and repo conventions belong in the published framework."
+      },
+      {
+        "path": "SECURITY.md",
+        "reason": "Security reporting and secret-handling guidance should ship with the repository."
+      },
+      {
+        "path": "LICENSE",
+        "reason": "Public repository licensing must be explicit."
+      },
+      {
+        "path": "skills/",
+        "reason": "Skills are reusable framework components."
+      },
+      {
+        "path": "sources/",
+        "reason": "Immutable source material may be versioned when safe and intentional."
+      },
+      {
+        "path": "team-config.yaml",
+        "reason": "Top-level team configuration belongs with the framework."
+      },
+      {
+        "path": "tools/",
+        "reason": "Automation scripts are core productized functionality."
+      },
+      {
+        "path": "wiki/",
+        "reason": "Durable knowledge pages and schema files are part of the system design."
+      },
+      {
+        "path": ".gitignore",
+        "reason": "Publish hygiene rules must be versioned."
+      },
+      {
+        "path": "AGENTS.md",
+        "reason": "Top-level workspace operating contract."
+      },
+      {
+        "path": "memory/MEMORY.example.md",
+        "reason": "Sanitized example memory file is safe to publish."
+      },
+      {
+        "path": "memory/USER.example.md",
+        "reason": "Sanitized example user profile is safe to publish."
+      }
+    ],
+    "ignore": [
+      {
+        "path": ".env",
+        "reason": "Contains secrets and must remain local-only."
+      },
+      {
+        "path": ".obsidian/",
+        "reason": "Editor/vault config is local environment state, not framework logic."
+      },
+      {
+        "path": ".tmp-*",
+        "reason": "Temporary working artifacts should never be part of the repo."
+      },
+      {
+        "path": "PersonalNotes/",
+        "reason": "Personal daily notes and private operational history should stay local."
+      },
+      {
+        "path": "memory/reviews/*.json",
+        "reason": "Generated review outputs are runtime artifacts."
+      },
+      {
+        "path": "memory/reviews/*.md",
+        "reason": "Generated review outputs are runtime artifacts, except explicit templates."
+      },
+      {
+        "path": "memory/reviews/*.jsonl",
+        "reason": "History streams are local runtime telemetry."
+      },
+      {
+        "path": "plans/*.md",
+        "reason": "Session-specific plan files are local work artifacts except templates."
+      },
+      {
+        "path": "wiki/reviews/",
+        "reason": "Generated review pages are runtime outputs."
+      },
+      {
+        "path": ".wiki_index/",
+        "reason": "Search/index artifacts are generated state."
+      }
+    ],
+    "template_or_example": [
+      {
+        "path": "memory/MEMORY.md",
+        "reason": "Current file contains workspace-specific durable memory; publish should likely use an example/template version."
+      },
+      {
+        "path": "memory/USER.md",
+        "reason": "Contains Gerhard-specific profile information and should likely become a template/example."
+      },
+      {
+        "path": "README.md",
+        "reason": "Needs expansion into install/usage/contributing/security guidance for public consumption."
+      },
+      {
+        "path": "plans/emma-watson-referat.md",
+        "reason": "Example output may be kept only if explicitly reclassified as a sample."
+      }
+    ],
+    "relocate_or_decide": [
+      {
+        "path": "memory/MEMORY.md",
+        "reason": "Need explicit decision between shipping a seeded example memory or moving real operational memory fully local."
+      },
+      {
+        "path": "memory/USER.md",
+        "reason": "Need explicit decision between template, example, or local-only handling."
+      },
+      {
+        "path": "START-SESSION.md",
+        "reason": "Could stay as repo onboarding doc or move under docs/commands depending on publish style."
+      },
+      {
+        "path": "memory/reviews/ablation-review-template.md",
+        "reason": "This is a durable template inside a generated-output folder; either carve out templates or move it to examples/templates."
+      }
+    ]
+  },
+  "notes": [
+    "The current workspace is both framework and personal vault; publication requires separating reusable framework assets from local runtime state.",
+    "Curated fixture files under evals/ are commit-worthy, but generated review artifacts are not.",
+    "The next implementation step after this inventory is to harden .gitignore and secret handling so the ignore policy matches this inventory."
+  ]
+}

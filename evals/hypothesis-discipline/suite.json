@@ -1,0 +1,65 @@
+{
+  "name": "hypothesis-discipline",
+  "mode": "regression",
+  "description": "Runs agent review on a seeded analysis trace and checks that hypothesis, contradiction, and verification signals remain measurable, while also preserving real plan and daily-note evidence.",
+  "cases": [
+    {
+      "id": "hypothesis-review-captures-open-hypotheses",
+      "type": "trace_review",
+      "trace_fixture": "fixtures\\hypothesis-discipline.jsonl",
+      "components": ["verifier", "ledger"],
+      "assertions": [
+        {
+          "path": "status",
+          "equals": "ok"
+        },
+        {
+          "path": "summary.total_tasks",
+          "equals": 1
+        },
+        {
+          "path": "summary.completed_tasks",
+          "equals": 1
+        },
+        {
+          "path": "summary.hypothesis_tasks",
+          "equals": 1
+        },
+        {
+          "path": "summary.open_hypotheses",
+          "equals": 2
+        },
+        {
+          "path": "summary.contradiction_tasks",
+          "equals": 1
+        },
+        {
+          "path": "summary.verification_tasks",
+          "equals": 1
+        }
+      ]
+    },
+    {
+      "id": "backfill-plan-keeps-hypothesis-ledger-visible",
+      "type": "file_contains",
+      "path": "plans\\2026-04-15-eval-backfill-and-repo-publish.md",
+      "components": ["ledger"],
+      "contains": [
+        "## Hypothesis Ledger",
+        "Pilot-extract 5 real cases and validate quality",
+        "### Source priority"
+      ]
+    },
+    {
+      "id": "daily-note-preserves-phase5-ablation-warning",
+      "type": "file_contains",
+      "path": "PersonalNotes\\Daily\\2026-04-15.md",
+      "components": ["verifier", "ledger"],
+      "contains": [
+        "### [15:44] Session · AGI Harness Phase 5",
+        "reconcile-ablation-not-eval-backed",
+        "baseline workflow eval `ok`"
+      ]
+    }
+  ]
+}

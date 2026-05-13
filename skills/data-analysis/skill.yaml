@@ -1,0 +1,27 @@
+id: data-analysis
+name: Data Analysis
+version: "1.0"
+owner: Analyst
+category: analysis
+description: Data analysis, pattern recognition, reporting, synthesis across sources
+triggers:
+  - analyse
+  - compare
+  - synthesise
+  - report
+  - evaluate
+inputs:
+  - type: file
+    description: CSV, JSON, Markdown, or wiki pages to analyse
+  - type: query
+    description: Analysis question or hypothesis
+outputs:
+  - type: wiki_page
+    path: wiki/{slug}.md
+  - type: report
+    description: Structured analysis with findings and recommendations
+tools_preferred:
+  - python (uv inline scripts)
+  - view
+  - grep
+dependencies: []

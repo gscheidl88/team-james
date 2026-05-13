@@ -1,0 +1,71 @@
+version: "1.0"
+owner: "James"
+updated: "2026-05-02"
+
+defaults:
+  required_contract_fields:
+    - goal
+    - dod
+    - verification_plan
+    - agent_role
+    - requested_tools
+  required_review_signals:
+    - trace_review
+
+task_types:
+  lookup:
+    verifiability: high
+    default_autonomy_level: high
+    required_review_signals:
+      - source_check
+  code:
+    verifiability: medium
+    default_autonomy_level: medium
+    required_review_signals:
+      - diff_review
+      - test_or_build_signal
+  analysis:
+    verifiability: medium
+    default_autonomy_level: medium
+    required_review_signals:
+      - evidence_check
+      - contradiction_check
+  synthesis:
+    verifiability: low
+    default_autonomy_level: low
+    required_review_signals:
+      - logic_review
+      - alternative_check
+  decision:
+    verifiability: low
+    default_autonomy_level: low
+    required_review_signals:
+      - risk_review
+      - robustness_check
+
+complexity_overrides:
+  trivial: {}
+  standard: {}
+  complex:
+    required_review_signals:
+      - checkpoint_review
+  critical:
+    autonomy_cap: low
+    required_contract_fields:
+      - fallback_action
+      - escalate_when
+    required_review_signals:
+      - full_review
+
+risk_overrides:
+  low: {}
+  medium:
+    required_review_signals:
+      - verifier_check
+  high:
+    autonomy_cap: low
+    required_contract_fields:
+      - verification_need
+    required_review_signals:
+      - verifier_check
+      - failure_plan

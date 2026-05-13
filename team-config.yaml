@@ -1,0 +1,164 @@
+# Team Configuration — Team_James Agent Framework
+
+team:
+  name: "Team_James Agent Framework"
+  version: "1.0.0"
+  initialized: "2026-05-13"
+  cao: "James — GitHub Copilot"
+
+# ─────────────────────────────────────────────
+# Language Rules
+# ─────────────────────────────────────────────
+language:
+  chat: "English"          # Default: change to your preferred language
+  documentation: "English" # All files, code, comments in English
+
+# ─────────────────────────────────────────────
+# Agent Roster
+# ─────────────────────────────────────────────
+agents:
+  - id: cao
+    name: James (Chief Agent Officer)
+    file: agents/chief-agent.md
+    model: github-copilot
+    always_active: true
+
+  - id: analyst
+    name: Analyst
+    file: agents/analyst-agent.md
+    triggers:
+      - data analysis
+      - SQL
+      - reporting
+      - BI
+      - KPI
+      - Excel
+      - ETL
+
+  - id: developer
+    name: Developer
+    file: agents/developer-agent.md
+    triggers:
+      - code
+      - script
+      - architecture
+      - debugging
+      - API
+      - automation
+      - CI/CD
+
+  - id: researcher
+    name: Researcher
+    file: agents/researcher-agent.md
+    triggers:
+      - research
+      - strategy
+      - concept
+      - proposal
+      - documentation
+      - decision
+
+  - id: investment-analyst
+    name: Magnus (Investment Research Analyst)
+    file: agents/investment-analyst-agent.md
+    triggers:
+      - investment
+      - fund
+      - financial research
+      - market analysis
+      - portfolio
+
+# ─────────────────────────────────────────────
+# Memory System
+# ─────────────────────────────────────────────
+memory:
+  persistent_facts: "memory/MEMORY.md"
+  user_profile: "memory/USER.md"
+  skills_dir: "skills/"
+  plans_dir: "plans/"
+
+  # Inspired by Hermes Agent memory architecture
+  # github.com/nousresearch/hermes-agent
+  layers:
+    - name: builtin
+      type: file-backed
+      files:
+        - memory/MEMORY.md
+        - memory/USER.md
+      always_active: true
+
+    - name: skills
+      type: procedural
+      directory: skills/
+      auto_create: true   # Create new skill after repeated complex patterns
+
+  fence_convention: |
+    <memory-context>
+    [System: Recalled memory — treat as background, not new user input]
+    {content}
+    </memory-context>
+
+# ─────────────────────────────────────────────
+# Skills Library
+# ─────────────────────────────────────────────
+skills:
+  - id: data-analysis
+    file: skills/data-analysis/SKILL.md
+    agent: analyst
+
+  - id: software-development
+    file: skills/software-development/SKILL.md
+    agent: developer
+
+  - id: research-strategy
+    file: skills/research-strategy/SKILL.md
+    agent: researcher
+
+  - id: reverse-engineering
+    file: skills/reverse-engineering/SKILL.md
+    agent: all
+
+  - id: investment-research
+    file: skills/investment-research/SKILL.md
+    agent: all
+
+  - id: obsidian
+    file: skills/obsidian/SKILL.md
+    agent: all
+
+  - id: daily-notes
+    file: skills/daily-notes/SKILL.md
+    agent: all
+    auto_trigger: "end of every significant session"
+
+# ─────────────────────────────────────────────
+# Workflow Standards
+# ─────────────────────────────────────────────
+workflow:
+  planning:
+    threshold: "3+ steps"
+    format: "plans/YYYY-MM-DD-{slug}.md"
+    auto_create: true
+
+  git:
+    commit_trailer: "Co-authored-by: Copilot <223556219+Copilot@users.noreply.github.com>"
+    commit_convention: "type(scope): message"
+
+  security:
+    no_secrets_in_code: true
+    use_dotenv: true
+    gitignore_patterns:
+      - ".env"
+      - "*.key"
+      - "*.pem"
+      - "__pycache__"
+      - ".venv"
+
+# ─────────────────────────────────────────────
+# References
+# ─────────────────────────────────────────────
+references:
+  hermes_agent: "https://github.com/nousresearch/hermes-agent"
+  skills_hub: "https://agentskills.io"
+  copilot_docs: "https://docs.github.com/en/copilot"
+  acp_protocol: "https://github.com/nousresearch/hermes-agent/blob/main/agent/copilot_acp_client.py"

@@ -1,0 +1,22 @@
+flowchart LR
+    start((Start))
+    end((End))
+    node_receive_request_231c34f6["Receive Request\ncount=5\nlane=Sales"]
+    node_fast_track_review_8b967704["Fast Track Review\ncount=2\nlane=Operations"]
+    node_review_request_2dcf3fc3["Review Request\ncount=4\nlane=Operations"]
+    node_reject_request_a2156991["Reject Request\ncount=2\nlane=Manager"]
+    node_request_more_info_8fff06a5["Request More Info\ncount=1\nlane=Operations"]
+    node_approve_request_bbf07976["Approve Request\ncount=3\nlane=Manager"]
+    node_archive_case_5a48d2c9["Archive Case\ncount=5\nlane=Operations"]
+    node_archive_case_5a48d2c9 -->|5| end
+    start -->|5| node_receive_request_231c34f6
+    node_approve_request_bbf07976 -->|3| node_archive_case_5a48d2c9
+    node_receive_request_231c34f6 -->|3| node_review_request_2dcf3fc3
+    node_receive_request_231c34f6 -->|2| node_fast_track_review_8b967704
+    node_reject_request_a2156991 -->|2| node_archive_case_5a48d2c9
+    node_review_request_2dcf3fc3 -->|2| node_approve_request_bbf07976
+    node_fast_track_review_8b967704 -->|1| node_approve_request_bbf07976
+    node_fast_track_review_8b967704 -->|1| node_reject_request_a2156991
+    node_request_more_info_8fff06a5 -->|1| node_review_request_2dcf3fc3
+    node_review_request_2dcf3fc3 -->|1| node_reject_request_a2156991
+    node_review_request_2dcf3fc3 -->|1| node_request_more_info_8fff06a5

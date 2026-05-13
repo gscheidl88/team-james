@@ -1,0 +1,38 @@
+{
+  "created": "2026-04-26T01:32:14",
+  "status": "warn",
+  "summary": {
+    "overall": {
+      "suite_count": 0,
+      "case_count": 0,
+      "passed_suites": 0,
+      "failed_suites": 0,
+      "passed_cases": 0,
+      "failed_cases": 0
+    },
+    "capability": {
+      "suite_count": 0,
+      "case_count": 0,
+      "passed_suites": 0,
+      "failed_suites": 0,
+      "passed_cases": 0,
+      "failed_cases": 0
+    },
+    "regression": {
+      "suite_count": 0,
+      "case_count": 0,
+      "passed_suites": 0,
+      "failed_suites": 0,
+      "passed_cases": 0,
+      "failed_cases": 0
+    }
+  },
+  "reasons": [
+    "workflow-eval-suite-count-below-four"
+  ],
+  "actions": [
+    "Keep at least four private workflow suites active: research synthesis, handoff, trace quality, and hypothesis discipline."
+  ],
+  "failing_cases": [],
+  "suites": []
+}

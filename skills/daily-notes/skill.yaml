@@ -1,0 +1,27 @@
+id: daily-notes
+name: Daily Notes & Session Logging
+version: "1.0"
+owner: James
+category: personal
+description: Session logging, daily/weekly/monthly note creation and summarisation
+triggers:
+  - session start
+  - session end
+  - weekly summary
+  - daily note
+inputs:
+  - type: session_context
+    description: Achievements, learnings, decisions, todos from the current session
+outputs:
+  - type: daily_note
+    path: PersonalNotes/Daily/{date}.md
+  - type: weekly_summary
+    path: PersonalNotes/Weekly/{year}-W{week}.md
+tools_preferred:
+  - python (uv run tools/notes/notes_summarizer.py)
+schedule:
+  daily: "on session end"
+  weekly: "Monday, via Task Scheduler"
+  monthly: "1st of month, via Task Scheduler"
+  annual: "January 1st, via Task Scheduler"
+dependencies: []

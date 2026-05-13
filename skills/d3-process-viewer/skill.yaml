@@ -1,0 +1,25 @@
+id: d3-process-viewer
+name: D3 Process Viewer
+version: "1.0"
+owner: James
+category: visualization
+description: Generate D3-powered local HTML viewers from mined process-map JSON
+triggers:
+  - d3
+  - process visualization
+  - interactive graph
+  - hot path analysis
+inputs:
+  - type: process_map_json
+    description: JSON output from tools/process/event_log_to_process_map.py
+outputs:
+  - type: html
+    path: tools/process/outputs/{name}.d3.html
+tools_preferred:
+  - powershell
+  - uv run tools/process/process_map_to_d3_viewer.py
+constraints:
+  - local_static_html: true
+  - d3_loaded_from_cdn: true
+  - analysis_view_not_final_bpmn: true
+dependencies: []

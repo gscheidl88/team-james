@@ -1,0 +1,36 @@
+id: reverse-engineering
+name: Reverse Engineering
+version: "1.0"
+owner: James
+category: research
+description: Native workspace workflow for understanding unfamiliar tools or codebases through scouting, git archaeology, architecture synthesis, and evidence-tagged findings
+triggers:
+  - reverse engineering
+  - tool analysis
+  - codebase archaeology
+  - unfamiliar repo
+  - legacy system
+  - architecture reconstruction
+inputs:
+  - type: repository
+    description: Local or remote codebase, tool repo, or structured artifact set to inspect
+outputs:
+  - type: research_brief
+    description: Evidence-backed fit or architecture assessment
+  - type: wiki_page
+    path: wiki/{slug}.md
+    description: Durable documentation when the finding should remain discoverable
+  - type: plan
+    path: plans/YYYY-MM-DD-{slug}.md
+    description: Execution container for medium+ reverse-engineering work
+tools_preferred:
+  - view
+  - rg
+  - glob
+  - powershell
+  - git
+constraints:
+  local_first: true
+  evidence_markers_required_when_uncertain: true
+  no_runtime_dependency_on_upstream_reversa: true
+dependencies: []

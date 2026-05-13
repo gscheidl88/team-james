@@ -1,0 +1,47 @@
+{
+  "probe_kind": "neighbors",
+  "probe_ok": true,
+  "page_id": "cognee-memory",
+  "result_count": 4,
+  "target_ids": [
+    "embedded-db-comparison",
+    "agent-team-setup",
+    "openclaw-ecosystem",
+    "zep-graphiti-memory"
+  ],
+  "targets": [
+    {
+      "relation": "DEPENDS_ON",
+      "id": "embedded-db-comparison",
+      "title": "Embedded Databases Compared — SQLite vs DuckDB vs LanceDB vs Kuzu"
+    },
+    {
+      "relation": "RELATES_TO",
+      "id": "agent-team-setup",
+      "title": "Gerhards Agent Team — Architecture & Setup"
+    },
+    {
+      "relation": "RELATES_TO",
+      "id": "openclaw-ecosystem",
+      "title": "OpenClaw Ecosystem — Analysis & Fit Assessment"
+    },
+    {
+      "relation": "RELATES_TO",
+      "id": "zep-graphiti-memory",
+      "title": "Zep & Graphiti — Temporal Knowledge Graphs for Agent Memory"
+    }
+  ],
+  "relates_to_ids": [
+    "agent-team-setup",
+    "openclaw-ecosystem",
+    "zep-graphiti-memory"
+  ],
+  "depends_on_ids": [
+    "embedded-db-comparison"
+  ],
+  "superseded_by_ids": [],
+  "relation_types": [
+    "DEPENDS_ON",
+    "RELATES_TO"
+  ]
+}

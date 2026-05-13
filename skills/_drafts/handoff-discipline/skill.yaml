@@ -1,0 +1,28 @@
+id: handoff-discipline
+name: Handoff Discipline
+version: "0.1-draft"
+owner: James
+category: draft
+description: The workspace repeatedly reinforces explicit plan state, checkpoint blocks, and clean agent handoff behavior.
+status: draft
+review_required: true
+source_candidate: handoff-discipline
+suggested_target: skills\session-handoff\SKILL.md
+draft_path: skills\_drafts\handoff-discipline
+triggers:
+  - review
+  - promotion
+inputs:
+  - type: skill_candidate
+    description: Candidate payload from skill-candidates.json
+outputs:
+  - type: draft_skill
+    path: skills\_drafts\handoff-discipline
+tools_preferred:
+  - uv
+  - powershell
+  - view
+constraints:
+  - canonical_merge_required: true
+  - no_auto_canonization: true
+dependencies: []

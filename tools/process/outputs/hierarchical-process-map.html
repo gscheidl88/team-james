@@ -1,0 +1,487 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Process report — sources\process-visualization\hierarchical-sample-event-log.csv</title>
+  <style>
+    :root {
+      color-scheme: dark;
+      --bg: #0b1020;
+      --panel: #131a2c;
+      --panel-soft: #1a2338;
+      --text: #ecf2ff;
+      --muted: #9eb0d1;
+      --accent: #6ee7ff;
+      --accent-2: #84cc16;
+      --warn: #f59e0b;
+      --border: #2a3550;
+      --edge: #5b709a;
+      --edge-dim: #34435f;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: Inter, Segoe UI, Arial, sans-serif;
+      background: linear-gradient(180deg, #09101d 0%, #0f172a 100%);
+      color: var(--text);
+    }
+    header {
+      padding: 24px 28px 16px;
+      border-bottom: 1px solid var(--border);
+      background: rgba(11, 16, 32, 0.9);
+      position: sticky;
+      top: 0;
+      backdrop-filter: blur(10px);
+      z-index: 10;
+    }
+    header h1 { margin: 0 0 6px; font-size: 28px; }
+    header p { margin: 0; color: var(--muted); }
+    main {
+      padding: 24px 28px 40px;
+      display: grid;
+      gap: 20px;
+    }
+    .cards {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 14px;
+    }
+    .card, .panel {
+      background: var(--panel);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.25);
+    }
+    .card { padding: 16px 18px; }
+    .card .label {
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--muted);
+    }
+    .card .value {
+      margin-top: 8px;
+      font-size: 30px;
+      font-weight: 700;
+    }
+    .panel { padding: 18px; }
+    .panel h2 { margin: 0 0 14px; font-size: 18px; }
+    .layout {
+      display: grid;
+      grid-template-columns: minmax(0, 2fr) minmax(320px, 1fr);
+      gap: 20px;
+      align-items: start;
+    }
+    .controls {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      margin-bottom: 12px;
+    }
+    select, button {
+      background: var(--panel-soft);
+      border: 1px solid var(--border);
+      color: var(--text);
+      padding: 8px 10px;
+      border-radius: 10px;
+      font: inherit;
+    }
+    button { cursor: pointer; }
+    svg {
+      width: 100%;
+      min-height: 620px;
+      display: block;
+      background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0));
+      border-radius: 14px;
+    }
+    .legend {
+      display: flex;
+      gap: 16px;
+      flex-wrap: wrap;
+      color: var(--muted);
+      font-size: 13px;
+      margin-top: 12px;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 14px;
+    }
+    th, td {
+      text-align: left;
+      padding: 10px 8px;
+      border-bottom: 1px solid var(--border);
+      vertical-align: top;
+    }
+    th { color: var(--muted); font-weight: 600; }
+    .variant-row { cursor: pointer; }
+    .variant-row:hover { background: rgba(255,255,255,0.03); }
+    .pill {
+      display: inline-block;
+      border: 1px solid var(--border);
+      background: var(--panel-soft);
+      color: var(--muted);
+      padding: 4px 8px;
+      border-radius: 999px;
+      font-size: 12px;
+      margin-right: 6px;
+      margin-bottom: 6px;
+    }
+    .muted { color: var(--muted); }
+    .path-step {
+      padding: 10px 12px;
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      background: rgba(255,255,255,0.02);
+      margin-bottom: 10px;
+    }
+    .path-step strong {
+      display: block;
+      margin-bottom: 4px;
+    }
+    .path-step code {
+      color: #c7d7f5;
+      font-size: 12px;
+    }
+    @media (max-width: 1100px) {
+      .layout { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Process visualization report</h1>
+    <p>Data-driven process view from mined event data. The JSON contract is hierarchy-aware; Mermaid and BPMN stay flat/draft exports for review.</p>
+  </header>
+  <main>
+    <section class="cards" id="cards"></section>
+    <section class="layout">
+      <div class="panel">
+        <h2>Process map</h2>
+        <div class="controls">
+          <select id="variantSelect"></select>
+          <button id="resetVariant">Reset highlight</button>
+        </div>
+        <svg id="graph" viewBox="0 0 1400 820" preserveAspectRatio="xMidYMid meet"></svg>
+        <div class="legend">
+          <span><strong>Node size</strong> = activity frequency</span>
+          <span><strong>Edge thickness</strong> = transition count</span>
+          <span><strong>Highlight</strong> = selected variant path</span>
+        </div>
+      </div>
+      <div class="panel">
+        <h2>Variant explanation</h2>
+        <div id="variantExplain" class="muted">Select a variant to see the exact step sequence, hierarchy context, and example case IDs.</div>
+        <h2 style="margin-top:18px;">Hierarchy groups</h2>
+        <div id="hierarchyGroups"></div>
+      </div>
+    </section>
+    <section class="layout">
+      <div class="panel">
+        <h2>Activities</h2>
+        <table>
+          <thead><tr><th>Activity</th><th>Count</th><th>Lane</th><th>Hierarchy</th></tr></thead>
+          <tbody id="activities"></tbody>
+        </table>
+      </div>
+      <div class="panel">
+        <h2>Transitions</h2>
+        <table>
+          <thead><tr><th>Transition</th><th>Count</th><th>Median wait</th></tr></thead>
+          <tbody id="transitions"></tbody>
+        </table>
+      </div>
+    </section>
+    <section class="panel">
+      <h2>Variants</h2>
+      <table>
+        <thead><tr><th>Share</th><th>Path</th><th>Examples</th></tr></thead>
+        <tbody id="variants"></tbody>
+      </table>
+    </section>
+  </main>
+  <script>
+    const processMap = {"meta": {"tool": "event_log_to_process_map.py", "generated_at": "2026-04-26T21:38:47.915699+00:00", "source_records": 20, "retained_records": 20, "cases": 4, "top_variants": 10, "hierarchy_enabled": true, "max_hierarchy_depth": 3, "source_path": "sources\\process-visualization\\hierarchical-sample-event-log.csv", "direction": "LR"}, "input": {"case_id_field": "case_id", "activity_field": "activity", "timestamp_field": "timestamp", "actor_field": "actor", "lane_field": "", "lifecycle_field": "lifecycle", "activity_path_field": "activity_path", "parent_activity_field": "parent_activity"}, "summary": {"cases": 4, "activities": 8, "transitions": 12, "avg_case_length": 5.0, "median_case_duration_seconds": 4260.0, "hierarchy_groups": 6}, "hierarchy": {"enabled": true, "max_depth": 3, "groups": [{"prefix": "archive", "label": "archive", "level": 0, "member_count": 1, "event_count": 4, "member_ids": ["node_archive_case_e2dfc4ad"]}, {"prefix": "fulfillment", "label": "fulfillment", "level": 0, "member_count": 5, "event_count": 9, "member_ids": ["node_approve_request_08f07f0d", "node_reject_request_dca42d12", "node_review_request_8050d07c", "node_request_more_info_ee6589e8", "node_review_request_475f36f3"]}, {"prefix": "intake", "label": "intake", "level": 0, "member_count": 2, "event_count": 7, "member_ids": ["node_receive_request_c8978dc9", "node_validate_payload_b91bc743"]}, {"prefix": "fulfillment::decision", "label": "decision", "level": 1, "member_count": 2, "event_count": 4, "member_ids": ["node_approve_request_08f07f0d", "node_reject_request_dca42d12"]}, {"prefix": "fulfillment::fast-track", "label": "fast-track", "level": 1, "member_count": 1, "event_count": 1, "member_ids": ["node_review_request_8050d07c"]}, {"prefix": "fulfillment::manual-review", "label": "manual-review", "level": 1, "member_count": 2, "event_count": 4, "member_ids": ["node_request_more_info_ee6589e8", "node_review_request_475f36f3"]}]}, "activities": [{"id": "node_archive_case_e2dfc4ad", "key": "archive::Archive Case", "label": "Archive Case", "full_path": "archive::Archive Case", "hierarchy_path": "archive::Archive Case", "hierarchy_parent": "archive", "hierarchy_parts": ["archive", "Archive Case"], "hierarchy_level": 1, "hierarchy_group": "archive", "count": 4, "case_share": 1.0, "avg_position": 4.0, "suggested_lane": "Operations", "actors": [{"name": "Operations", "count": 4}]}, {"id": "node_receive_request_c8978dc9", "key": "intake::Receive Request", "label": "Receive Request", "full_path": "intake::Receive Request", "hierarchy_path": "intake::Receive Request", "hierarchy_parent": "intake", "hierarchy_parts": ["intake", "Receive Request"], "hierarchy_level": 1, "hierarchy_group": "intake", "count": 4, "case_share": 1.0, "avg_position": 0.0, "suggested_lane": "Sales", "actors": [{"name": "Sales", "count": 4}]}, {"id": "node_approve_request_08f07f0d", "key": "fulfillment::decision::Approve Request", "label": "Approve Request", "full_path": "fulfillment::decision::Approve Request", "hierarchy_path": "fulfillment::decision::Approve Request", "hierarchy_parent": "fulfillment::decision", "hierarchy_parts": ["fulfillment", "decision", "Approve Request"], "hierarchy_level": 2, "hierarchy_group": "fulfillment", "count": 3, "case_share": 0.75, "avg_position": 3.0, "suggested_lane": "Manager", "actors": [{"name": "Manager", "count": 3}]}, {"id": "node_review_request_475f36f3", "key": "fulfillment::manual-review::Review Request", "label": "Review Request", "full_path": "fulfillment::manual-review::Review Request", "hierarchy_path": "fulfillment::manual-review::Review Request", "hierarchy_parent": "fulfillment::manual-review", "hierarchy_parts": ["fulfillment", "manual-review", "Review Request"], "hierarchy_level": 2, "hierarchy_group": "fulfillment", "count": 3, "case_share": 0.75, "avg_position": 2.33, "suggested_lane": "Operations", "actors": [{"name": "Operations", "count": 3}]}, {"id": "node_validate_payload_b91bc743", "key": "intake::Validate Payload", "label": "Validate Payload", "full_path": "intake::Validate Payload", "hierarchy_path": "intake::Validate Payload", "hierarchy_parent": "intake", "hierarchy_parts": ["intake", "Validate Payload"], "hierarchy_level": 1, "hierarchy_group": "intake", "count": 3, "case_share": 0.75, "avg_position": 1.0, "suggested_lane": "API", "actors": [{"name": "API", "count": 3}]}, {"id": "node_reject_request_dca42d12", "key": "fulfillment::decision::Reject Request", "label": "Reject Request", "full_path": "fulfillment::decision::Reject Request", "hierarchy_path": "fulfillment::decision::Reject Request", "hierarchy_parent": "fulfillment::decision", "hierarchy_parts": ["fulfillment", "decision", "Reject Request"], "hierarchy_level": 2, "hierarchy_group": "fulfillment", "count": 1, "case_share": 0.25, "avg_position": 3.0, "suggested_lane": "Manager", "actors": [{"name": "Manager", "count": 1}]}, {"id": "node_review_request_8050d07c", "key": "fulfillment::fast-track::Review Request", "label": "Review Request", "full_path": "fulfillment::fast-track::Review Request", "hierarchy_path": "fulfillment::fast-track::Review Request", "hierarchy_parent": "fulfillment::fast-track", "hierarchy_parts": ["fulfillment", "fast-track", "Review Request"], "hierarchy_level": 2, "hierarchy_group": "fulfillment", "count": 1, "case_share": 0.25, "avg_position": 1.0, "suggested_lane": "Operations", "actors": [{"name": "Operations", "count": 1}]}, {"id": "node_request_more_info_ee6589e8", "key": "fulfillment::manual-review::Request More Info", "label": "Request More Info", "full_path": "fulfillment::manual-review::Request More Info", "hierarchy_path": "fulfillment::manual-review::Request More Info", "hierarchy_parent": "fulfillment::manual-review", "hierarchy_parts": ["fulfillment", "manual-review", "Request More Info"], "hierarchy_level": 2, "hierarchy_group": "fulfillment", "count": 1, "case_share": 0.25, "avg_position": 2.0, "suggested_lane": "Operations", "actors": [{"name": "Operations", "count": 1}]}], "transitions": [{"source": "__START__", "target": "Receive Request", "source_id": "__START__", "target_id": "node_receive_request_c8978dc9", "source_key": "__START__", "target_key": "intake::Receive Request", "source_path": "", "target_path": "intake::Receive Request", "count": 4, "case_share": 1.0, "median_wait_seconds": null, "mean_wait_seconds": null}, {"source": "Archive Case", "target": "__END__", "source_id": "node_archive_case_e2dfc4ad", "target_id": "__END__", "source_key": "archive::Archive Case", "target_key": "__END__", "source_path": "archive::Archive Case", "target_path": "", "count": 4, "case_share": 1.0, "median_wait_seconds": null, "mean_wait_seconds": null}, {"source": "Approve Request", "target": "Archive Case", "source_id": "node_approve_request_08f07f0d", "target_id": "node_archive_case_e2dfc4ad", "source_key": "fulfillment::decision::Approve Request", "target_key": "archive::Archive Case", "source_path": "fulfillment::decision::Approve Request", "target_path": "archive::Archive Case", "count": 3, "case_share": 0.75, "median_wait_seconds": 900.0, "mean_wait_seconds": 800.0}, {"source": "Receive Request", "target": "Validate Payload", "source_id": "node_receive_request_c8978dc9", "target_id": "node_validate_payload_b91bc743", "source_key": "intake::Receive Request", "target_key": "intake::Validate Payload", "source_path": "intake::Receive Request", "target_path": "intake::Validate Payload", "count": 3, "case_share": 0.75, "median_wait_seconds": 360.0, "mean_wait_seconds": 340.0}, {"source": "Review Request", "target": "Approve Request", "source_id": "node_review_request_475f36f3", "target_id": "node_approve_request_08f07f0d", "source_key": "fulfillment::manual-review::Review Request", "target_key": "fulfillment::decision::Approve Request", "source_path": "fulfillment::manual-review::Review Request", "target_path": "fulfillment::decision::Approve Request", "count": 2, "case_share": 0.5, "median_wait_seconds": 1650.0, "mean_wait_seconds": 1650.0}, {"source": "Validate Payload", "target": "Review Request", "source_id": "node_validate_payload_b91bc743", "target_id": "node_review_request_475f36f3", "source_key": "intake::Validate Payload", "target_key": "fulfillment::manual-review::Review Request", "source_path": "intake::Validate Payload", "target_path": "fulfillment::manual-review::Review Request", "count": 2, "case_share": 0.5, "median_wait_seconds": 1830.0, "mean_wait_seconds": 1830.0}, {"source": "Reject Request", "target": "Archive Case", "source_id": "node_reject_request_dca42d12", "target_id": "node_archive_case_e2dfc4ad", "source_key": "fulfillment::decision::Reject Request", "target_key": "archive::Archive Case", "source_path": "fulfillment::decision::Reject Request", "target_path": "archive::Archive Case", "count": 1, "case_share": 0.25, "median_wait_seconds": 420.0, "mean_wait_seconds": 420.0}, {"source": "Review Request", "target": "Approve Request", "source_id": "node_review_request_8050d07c", "target_id": "node_approve_request_08f07f0d", "source_key": "fulfillment::fast-track::Review Request", "target_key": "fulfillment::decision::Approve Request", "source_path": "fulfillment::fast-track::Review Request", "target_path": "fulfillment::decision::Approve Request", "count": 1, "case_share": 0.25, "median_wait_seconds": 1080.0, "mean_wait_seconds": 1080.0}, {"source": "Request More Info", "target": "Review Request", "source_id": "node_request_more_info_ee6589e8", "target_id": "node_review_request_475f36f3", "source_key": "fulfillment::manual-review::Request More Info", "target_key": "fulfillment::manual-review::Review Request", "source_path": "fulfillment::manual-review::Request More Info", "target_path": "fulfillment::manual-review::Review Request", "count": 1, "case_share": 0.25, "median_wait_seconds": 4200.0, "mean_wait_seconds": 4200.0}, {"source": "Review Request", "target": "Reject Request", "source_id": "node_review_request_475f36f3", "target_id": "node_reject_request_dca42d12", "source_key": "fulfillment::manual-review::Review Request", "target_key": "fulfillment::decision::Reject Request", "source_path": "fulfillment::manual-review::Review Request", "target_path": "fulfillment::decision::Reject Request", "count": 1, "case_share": 0.25, "median_wait_seconds": 1380.0, "mean_wait_seconds": 1380.0}, {"source": "Receive Request", "target": "Review Request", "source_id": "node_receive_request_c8978dc9", "target_id": "node_review_request_8050d07c", "source_key": "intake::Receive Request", "target_key": "fulfillment::fast-track::Review Request", "source_path": "intake::Receive Request", "target_path": "fulfillment::fast-track::Review Request", "count": 1, "case_share": 0.25, "median_wait_seconds": 720.0, "mean_wait_seconds": 720.0}, {"source": "Validate Payload", "target": "Request More Info", "source_id": "node_validate_payload_b91bc743", "target_id": "node_request_more_info_ee6589e8", "source_key": "intake::Validate Payload", "target_key": "fulfillment::manual-review::Request More Info", "source_path": "intake::Validate Payload", "target_path": "fulfillment::manual-review::Request More Info", "count": 1, "case_share": 0.25, "median_wait_seconds": 2100.0, "mean_wait_seconds": 2100.0}], "variants": [{"path": "Receive Request > Validate Payload > Review Request > Approve Request > Archive Case", "count": 1, "share": 0.25, "activity_ids": ["node_receive_request_c8978dc9", "node_validate_payload_b91bc743", "node_review_request_475f36f3", "node_approve_request_08f07f0d", "node_archive_case_e2dfc4ad"], "activity_keys": ["intake::Receive Request", "intake::Validate Payload", "fulfillment::manual-review::Review Request", "fulfillment::decision::Approve Request", "archive::Archive Case"], "activity_paths": ["intake::Receive Request", "intake::Validate Payload", "fulfillment::manual-review::Review Request", "fulfillment::decision::Approve Request", "archive::Archive Case"], "steps": [{"id": "node_receive_request_c8978dc9", "key": "intake::Receive Request", "label": "Receive Request", "full_path": "intake::Receive Request", "hierarchy_parent": "intake", "hierarchy_level": 1}, {"id": "node_validate_payload_b91bc743", "key": "intake::Validate Payload", "label": "Validate Payload", "full_path": "intake::Validate Payload", "hierarchy_parent": "intake", "hierarchy_level": 1}, {"id": "node_review_request_475f36f3", "key": "fulfillment::manual-review::Review Request", "label": "Review Request", "full_path": "fulfillment::manual-review::Review Request", "hierarchy_parent": "fulfillment::manual-review", "hierarchy_level": 2}, {"id": "node_approve_request_08f07f0d", "key": "fulfillment::decision::Approve Request", "label": "Approve Request", "full_path": "fulfillment::decision::Approve Request", "hierarchy_parent": "fulfillment::decision", "hierarchy_level": 2}, {"id": "node_archive_case_e2dfc4ad", "key": "archive::Archive Case", "label": "Archive Case", "full_path": "archive::Archive Case", "hierarchy_parent": "archive", "hierarchy_level": 1}], "case_ids": ["2001"]}, {"path": "Receive Request > Validate Payload > Review Request > Reject Request > Archive Case", "count": 1, "share": 0.25, "activity_ids": ["node_receive_request_c8978dc9", "node_validate_payload_b91bc743", "node_review_request_475f36f3", "node_reject_request_dca42d12", "node_archive_case_e2dfc4ad"], "activity_keys": ["intake::Receive Request", "intake::Validate Payload", "fulfillment::manual-review::Review Request", "fulfillment::decision::Reject Request", "archive::Archive Case"], "activity_paths": ["intake::Receive Request", "intake::Validate Payload", "fulfillment::manual-review::Review Request", "fulfillment::decision::Reject Request", "archive::Archive Case"], "steps": [{"id": "node_receive_request_c8978dc9", "key": "intake::Receive Request", "label": "Receive Request", "full_path": "intake::Receive Request", "hierarchy_parent": "intake", "hierarchy_level": 1}, {"id": "node_validate_payload_b91bc743", "key": "intake::Validate Payload", "label": "Validate Payload", "full_path": "intake::Validate Payload", "hierarchy_parent": "intake", "hierarchy_level": 1}, {"id": "node_review_request_475f36f3", "key": "fulfillment::manual-review::Review Request", "label": "Review Request", "full_path": "fulfillment::manual-review::Review Request", "hierarchy_parent": "fulfillment::manual-review", "hierarchy_level": 2}, {"id": "node_reject_request_dca42d12", "key": "fulfillment::decision::Reject Request", "label": "Reject Request", "full_path": "fulfillment::decision::Reject Request", "hierarchy_parent": "fulfillment::decision", "hierarchy_level": 2}, {"id": "node_archive_case_e2dfc4ad", "key": "archive::Archive Case", "label": "Archive Case", "full_path": "archive::Archive Case", "hierarchy_parent": "archive", "hierarchy_level": 1}], "case_ids": ["2002"]}, {"path": "Receive Request > Review Request > Approve Request > Archive Case", "count": 1, "share": 0.25, "activity_ids": ["node_receive_request_c8978dc9", "node_review_request_8050d07c", "node_approve_request_08f07f0d", "node_archive_case_e2dfc4ad"], "activity_keys": ["intake::Receive Request", "fulfillment::fast-track::Review Request", "fulfillment::decision::Approve Request", "archive::Archive Case"], "activity_paths": ["intake::Receive Request", "fulfillment::fast-track::Review Request", "fulfillment::decision::Approve Request", "archive::Archive Case"], "steps": [{"id": "node_receive_request_c8978dc9", "key": "intake::Receive Request", "label": "Receive Request", "full_path": "intake::Receive Request", "hierarchy_parent": "intake", "hierarchy_level": 1}, {"id": "node_review_request_8050d07c", "key": "fulfillment::fast-track::Review Request", "label": "Review Request", "full_path": "fulfillment::fast-track::Review Request", "hierarchy_parent": "fulfillment::fast-track", "hierarchy_level": 2}, {"id": "node_approve_request_08f07f0d", "key": "fulfillment::decision::Approve Request", "label": "Approve Request", "full_path": "fulfillment::decision::Approve Request", "hierarchy_parent": "fulfillment::decision", "hierarchy_level": 2}, {"id": "node_archive_case_e2dfc4ad", "key": "archive::Archive Case", "label": "Archive Case", "full_path": "archive::Archive Case", "hierarchy_parent": "archive", "hierarchy_level": 1}], "case_ids": ["2003"]}, {"path": "Receive Request > Validate Payload > Request More Info > Review Request > Approve Request > Archive Case", "count": 1, "share": 0.25, "activity_ids": ["node_receive_request_c8978dc9", "node_validate_payload_b91bc743", "node_request_more_info_ee6589e8", "node_review_request_475f36f3", "node_approve_request_08f07f0d", "node_archive_case_e2dfc4ad"], "activity_keys": ["intake::Receive Request", "intake::Validate Payload", "fulfillment::manual-review::Request More Info", "fulfillment::manual-review::Review Request", "fulfillment::decision::Approve Request", "archive::Archive Case"], "activity_paths": ["intake::Receive Request", "intake::Validate Payload", "fulfillment::manual-review::Request More Info", "fulfillment::manual-review::Review Request", "fulfillment::decision::Approve Request", "archive::Archive Case"], "steps": [{"id": "node_receive_request_c8978dc9", "key": "intake::Receive Request", "label": "Receive Request", "full_path": "intake::Receive Request", "hierarchy_parent": "intake", "hierarchy_level": 1}, {"id": "node_validate_payload_b91bc743", "key": "intake::Validate Payload", "label": "Validate Payload", "full_path": "intake::Validate Payload", "hierarchy_parent": "intake", "hierarchy_level": 1}, {"id": "node_request_more_info_ee6589e8", "key": "fulfillment::manual-review::Request More Info", "label": "Request More Info", "full_path": "fulfillment::manual-review::Request More Info", "hierarchy_parent": "fulfillment::manual-review", "hierarchy_level": 2}, {"id": "node_review_request_475f36f3", "key": "fulfillment::manual-review::Review Request", "label": "Review Request", "full_path": "fulfillment::manual-review::Review Request", "hierarchy_parent": "fulfillment::manual-review", "hierarchy_level": 2}, {"id": "node_approve_request_08f07f0d", "key": "fulfillment::decision::Approve Request", "label": "Approve Request", "full_path": "fulfillment::decision::Approve Request", "hierarchy_parent": "fulfillment::decision", "hierarchy_level": 2}, {"id": "node_archive_case_e2dfc4ad", "key": "archive::Archive Case", "label": "Archive Case", "full_path": "archive::Archive Case", "hierarchy_parent": "archive", "hierarchy_level": 1}], "case_ids": ["2004"]}]};
+    const summary = processMap.summary;
+    const hierarchy = processMap.hierarchy || { enabled: false, groups: [] };
+    const cards = [
+      ['Cases', summary.cases],
+      ['Activities', summary.activities],
+      ['Transitions', summary.transitions],
+      ['Avg case length', summary.avg_case_length],
+      ['Hierarchy groups', summary.hierarchy_groups ?? 0]
+    ];
+
+    document.getElementById('cards').innerHTML = cards.map(([label, value]) => `
+      <article class="card">
+        <div class="label">${label}</div>
+        <div class="value">${value}</div>
+      </article>
+    `).join('');
+
+    document.getElementById('hierarchyGroups').innerHTML = hierarchy.enabled
+      ? hierarchy.groups.map(group => `<span class="pill">${group.prefix} · members=${group.member_count} · events=${group.event_count}</span>`).join('')
+      : '<span class="muted">No hierarchy metadata in this process map.</span>';
+
+    document.getElementById('activities').innerHTML = processMap.activities.map(activity => `
+      <tr>
+        <td>
+          <strong>${activity.label}</strong><br>
+          <span class="muted">${activity.full_path}</span>
+        </td>
+        <td>${activity.count}</td>
+        <td>${activity.suggested_lane || '<span class="muted">n/a</span>'}</td>
+        <td>${activity.hierarchy_parent ? `<code>${activity.hierarchy_parent}</code>` : '<span class="muted">flat</span>'}</td>
+      </tr>
+    `).join('');
+
+    document.getElementById('transitions').innerHTML = processMap.transitions.map(transition => `
+      <tr>
+        <td>${transition.source} → ${transition.target}<br><span class="muted">${transition.source_path || 'START'} → ${transition.target_path || 'END'}</span></td>
+        <td>${transition.count}</td>
+        <td>${transition.median_wait_seconds ?? 'n/a'}</td>
+      </tr>
+    `).join('');
+
+    const variantsBody = document.getElementById('variants');
+    variantsBody.innerHTML = processMap.variants.map((variant, index) => `
+      <tr class="variant-row" data-index="${index}">
+        <td>${Math.round(variant.share * 100)}%</td>
+        <td>${variant.path}</td>
+        <td>${variant.case_ids.join(', ') || 'n/a'}</td>
+      </tr>
+    `).join('');
+
+    const variantSelect = document.getElementById('variantSelect');
+    variantSelect.innerHTML = '<option value="">Highlight variant</option>' + processMap.variants.map((variant, index) =>
+      `<option value="${index}">${Math.round(variant.share * 100)}% — ${variant.path}</option>`
+    ).join('');
+
+    const svg = document.getElementById('graph');
+    const NS = 'http://www.w3.org/2000/svg';
+    const activityById = new Map(processMap.activities.map(activity => [activity.id, activity]));
+    const nodePositions = new Map();
+    const nodeElements = new Map();
+    const edgeElements = [];
+    const laneOrder = [];
+    const lanes = new Map();
+
+    for (const activity of processMap.activities) {
+      const lane = activity.suggested_lane || 'Unassigned';
+      if (!lanes.has(lane)) {
+        lanes.set(lane, []);
+        laneOrder.push(lane);
+      }
+      lanes.get(lane).push(activity);
+    }
+
+    const append = (name, attrs, parent = svg) => {
+      const el = document.createElementNS(NS, name);
+      for (const [key, value] of Object.entries(attrs || {})) {
+        el.setAttribute(key, String(value));
+      }
+      parent.appendChild(el);
+      return el;
+    };
+
+    append('rect', { x: 0, y: 0, width: 1400, height: 820, fill: 'transparent' });
+
+    const laneHeight = 150;
+    const colBase = 170;
+    const colStep = 210;
+    laneOrder.forEach((lane, laneIndex) => {
+      const top = 40 + laneIndex * laneHeight;
+      append('rect', {
+        x: 50,
+        y: top,
+        width: 1280,
+        height: laneHeight - 20,
+        rx: 16,
+        fill: laneIndex % 2 === 0 ? 'rgba(255,255,255,0.02)' : 'rgba(255,255,255,0.035)',
+        stroke: '#2a3550'
+      });
+      const label = append('text', {
+        x: 72,
+        y: top + 28,
+        fill: '#9eb0d1',
+        'font-size': 14,
+        'font-weight': 600
+      });
+      label.textContent = lane;
+    });
+
+    const startPos = { x: 80, y: 90 };
+    const endPos = { x: 1260, y: 90 };
+    nodePositions.set('__START__', startPos);
+    nodePositions.set('__END__', endPos);
+
+    for (const activity of processMap.activities) {
+      const lane = activity.suggested_lane || 'Unassigned';
+      const laneIndex = laneOrder.indexOf(lane);
+      const x = colBase + activity.avg_position * colStep;
+      const y = 95 + laneIndex * laneHeight;
+      nodePositions.set(activity.id, { x, y });
+    }
+
+    const maxEdge = Math.max(...processMap.transitions.map(t => t.count), 1);
+    const maxNode = Math.max(...processMap.activities.map(a => a.count), 1);
+    for (const transition of processMap.transitions) {
+      const source = nodePositions.get(transition.source_id);
+      const target = nodePositions.get(transition.target_id);
+      if (!source || !target) continue;
+      const sourceActivity = activityById.get(transition.source_id);
+      const targetActivity = activityById.get(transition.target_id);
+      if (transition.source_id !== '__START__' && !sourceActivity) continue;
+      if (transition.target_id !== '__END__' && !targetActivity) continue;
+      const sourceWidth = transition.source_id === '__START__' ? 36 : 110 + Math.round((sourceActivity.count / maxNode) * 28);
+      const targetWidth = transition.target_id === '__END__' ? 36 : 110 + Math.round((targetActivity.count / maxNode) * 28);
+      const sourceX = transition.source_id === '__START__' ? source.x + 18 : source.x + sourceWidth;
+      const sourceY = transition.source_id === '__START__' ? source.y + 18 : source.y + 29;
+      const targetX = transition.target_id === '__END__' ? target.x + 18 : target.x;
+      const targetY = transition.target_id === '__END__' ? target.y + 18 : target.y + 29;
+      const midX = (sourceX + targetX) / 2;
+      const curvature = Math.abs(targetY - sourceY) > 10 ? 30 : 0;
+      const path = `M ${sourceX} ${sourceY} C ${midX} ${sourceY + curvature}, ${midX} ${targetY - curvature}, ${targetX} ${targetY}`;
+      const edge = append('path', {
+        d: path,
+        fill: 'none',
+        stroke: '#5b709a',
+        'stroke-width': 1 + (transition.count / maxEdge) * 5,
+        opacity: 0.9
+      });
+      const label = append('text', {
+        x: midX,
+        y: (sourceY + targetY) / 2 - 8,
+        fill: '#c7d7f5',
+        'font-size': 12,
+        'text-anchor': 'middle'
+      });
+      label.textContent = transition.count;
+      edgeElements.push({ sourceId: transition.source_id, targetId: transition.target_id, edge, label });
+    }
+
+    const drawEvent = (position, label, color, id) => {
+      const circle = append('circle', { cx: position.x + 18, cy: position.y + 18, r: 18, fill: color, stroke: '#c7d7f5', 'stroke-width': 1.5 });
+      const text = append('text', {
+        x: position.x + 18,
+        y: position.y + 48,
+        fill: '#ecf2ff',
+        'font-size': 12,
+        'text-anchor': 'middle'
+      });
+      text.textContent = label;
+      nodeElements.set(id, [circle, text]);
+    };
+
+    drawEvent(startPos, 'Start', '#0f766e', '__START__');
+    drawEvent(endPos, 'End', '#7c2d12', '__END__');
+
+    for (const activity of processMap.activities) {
+      const position = nodePositions.get(activity.id);
+      const width = 110 + Math.round((activity.count / maxNode) * 28);
+      const height = 58;
+      const box = append('rect', {
+        x: position.x,
+        y: position.y,
+        width,
+        height,
+        rx: 14,
+        fill: '#131a2c',
+        stroke: '#6ee7ff',
+        'stroke-width': 1.2
+      });
+      const title = append('text', {
+        x: position.x + 12,
+        y: position.y + 22,
+        fill: '#ecf2ff',
+        'font-size': 13,
+        'font-weight': 600
+      });
+      title.textContent = activity.label;
+      const subtitle = append('text', {
+        x: position.x + 12,
+        y: position.y + 42,
+        fill: '#9eb0d1',
+        'font-size': 11
+      });
+      subtitle.textContent = activity.hierarchy_parent ? activity.hierarchy_parent : `count=${activity.count}`;
+      nodeElements.set(activity.id, [box, title, subtitle]);
+    }
+
+    function renderVariantExplain(variant) {
+      const panel = document.getElementById('variantExplain');
+      if (!variant) {
+        panel.innerHTML = '<span class="muted">Select a variant to see the exact step sequence, hierarchy context, and example case IDs.</span>';
+        return;
+      }
+      panel.innerHTML = `
+        <div class="pill">share=${Math.round(variant.share * 100)}%</div>
+        <div class="pill">count=${variant.count}</div>
+        <div class="pill">cases=${variant.case_ids.join(', ') || 'n/a'}</div>
+        <div style="margin-top:12px;">
+          ${
+            variant.steps.map((step, index) => `
+              <div class="path-step">
+                <strong>${index + 1}. ${step.label}</strong>
+                <div><code>${step.full_path}</code></div>
+                <div class="muted">${step.hierarchy_parent || 'flat activity'}</div>
+              </div>
+            `).join('')
+          }
+        </div>
+      `;
+    }
+
+    function highlightVariant(index) {
+      const variant = index === null ? null : processMap.variants[index];
+      if (!variant) {
+        for (const item of edgeElements) {
+          item.edge.setAttribute('stroke', '#5b709a');
+          item.edge.setAttribute('opacity', '0.9');
+          item.label.setAttribute('opacity', '1');
+        }
+        for (const [id, elements] of nodeElements.entries()) {
+          const opacity = '1';
+          elements.forEach(element => element.setAttribute('opacity', opacity));
+        }
+        renderVariantExplain(null);
+        return;
+      }
+
+      const nodeSet = new Set(variant.activity_ids);
+      const edgeSet = new Set();
+      for (let i = 0; i < variant.activity_ids.length - 1; i += 1) {
+        edgeSet.add(`${variant.activity_ids[i]}|||${variant.activity_ids[i + 1]}`);
+      }
+
+      for (const item of edgeElements) {
+        const active = edgeSet.has(`${item.sourceId}|||${item.targetId}`);
+        item.edge.setAttribute('stroke', active ? '#f59e0b' : '#34435f');
+        item.edge.setAttribute('opacity', active ? '1' : '0.18');
+        item.label.setAttribute('opacity', active ? '1' : '0.18');
+      }
+      for (const [id, elements] of nodeElements.entries()) {
+        const active = id === '__START__' || id === '__END__' || nodeSet.has(id);
+        elements.forEach(element => element.setAttribute('opacity', active ? '1' : '0.28'));
+      }
+      renderVariantExplain(variant);
+    }
+
+    document.getElementById('resetVariant').addEventListener('click', () => {
+      variantSelect.value = '';
+      highlightVariant(null);
+    });
+    variantSelect.addEventListener('change', event => {
+      const value = event.target.value;
+      highlightVariant(value === '' ? null : Number(value));
+    });
+    variantsBody.querySelectorAll('.variant-row').forEach(row => {
+      row.addEventListener('click', () => {
+        variantSelect.value = row.dataset.index;
+        highlightVariant(Number(row.dataset.index));
+      });
+    });
+  </script>
+</body>
+</html>

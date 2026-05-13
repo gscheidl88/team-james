@@ -1,0 +1,145 @@
+# config/agent-permissions.yaml
+# Declarative permission whitelist by agent type.
+#
+# This file complements config/model-routing.yaml (which governs model selection)
+# and is NOT a replacement for it. Model routing and tool permissions are
+# separate concerns.
+#
+# First-pass additive policy — conservative whitelist.
+# Expand agent entries as use-cases are confirmed; never silently grant broad access.
+#
+# Enforced at runtime by: tools/agents/preflight_guard.py
+# Glossary: CONTEXT.md
+#
+version: "1.0"
+owner: "James"
+updated: "2026-04-30"
+note: >
+  This is a slice-1 additive policy. Entries reflect current confirmed delegation patterns.
+  Widening any permission requires an explicit update here plus a note in memory/MEMORY.md.
+
+# ─────────────────────────────────────────────
+# Tool categories (shared vocabulary)
+# ─────────────────────────────────────────────
+tool_categories:
+  file_read:
+    - view
+    - glob
+    - grep
+  file_write:
+    - create
+    - edit
+  shell:
+    - powershell
+    - bash
+  git:
+    - git_commit
+    - git_push
+    - git_status
+  web:
+    - web_fetch
+    - web_search
+  agent_spawn:
+    - task
+  github:
+    - gh_issue
+    - gh_pr
+  memory_write:
+    - store_memory
+    - sql
+
+# ─────────────────────────────────────────────
+# Agent permission whitelist
+# ─────────────────────────────────────────────
+agents:
+
+  # ── CAO (James) ──────────────────────────────
+  # The CAO is the only agent permitted to spawn sub-agents and write to git.
+  - id: cao
+    label: "James — Chief Agent Officer"
+    permitted_tools:
+      - file_read
+      - file_write
+      - shell
+      - git
+      - web
+      - agent_spawn
+      - github
+      - memory_write
+    denied_tools: []
+    notes: "Full permissions. CAO owns orchestration, quality sign-off, and git commits."
+
+  # ── Analyst ──────────────────────────────────
+  - id: analyst
+    label: "Analyst (leaf-agent)"
+    permitted_tools:
+      - file_read
+      - file_write      # analysis outputs, reports
+      - shell           # uv run for data scripts
+      - web             # data sourcing
+      - memory_write    # write findings to memory/sql
+    denied_tools:
+      - agent_spawn     # leaf-agents do not spawn further agents
+      - git             # git ops require CAO sign-off
+      - github
+    notes: "Read/write for analysis artifacts. No delegation. No git."
+
+  # ── Developer ────────────────────────────────
+  - id: developer
+    label: "Developer (leaf-agent)"
+    permitted_tools:
+      - file_read
+      - file_write
+      - shell
+      - web
+      - memory_write
+    denied_tools:
+      - agent_spawn     # leaf-agents do not spawn further agents
+      - git             # git ops require CAO sign-off
+      - github
+    notes: "Full file and shell access for implementation. No delegation. No git push."
+
+  # ── Researcher ───────────────────────────────
+  - id: researcher
+    label: "Researcher (leaf-agent)"
+    permitted_tools:
+      - file_read
+      - file_write      # wiki pages, plans, research notes
+      - web
+      - memory_write
+    denied_tools:
+      - agent_spawn
+      - git
+      - github
+      - shell           # researcher does not run shell commands
+    notes: "Read/write + web. No shell execution, no delegation, no git."
+
+  # ── QA ───────────────────────────────────────
+  - id: qa
+    label: "QA (leaf-agent)"
+    permitted_tools:
+      - file_read
+      - shell           # run evals, linters, tests
+      - web
+      - memory_write
+    denied_tools:
+      - agent_spawn
+      - git
+      - github
+      - file_write      # QA reports findings; CAO decides on file changes
+    notes: "Read + shell for validation only. No file writes, no delegation."
+
+  # ── Explore (ad-hoc sub-agent type) ──────────
+  - id: explore
+    label: "Explore (ad-hoc research sub-agent)"
+    permitted_tools:
+      - file_read
+      - web
+    denied_tools:
+      - agent_spawn
+      - git
+      - github
+      - file_write
+      - shell
+      - memory_write
+    notes: "Narrow read + web only. Lightweight lookup agent spawned by CAO."

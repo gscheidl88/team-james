@@ -1,0 +1,52 @@
+{
+  "probe_kind": "neighbors",
+  "probe_ok": true,
+  "page_id": "memory-session-lifecycle",
+  "result_count": 5,
+  "target_ids": [
+    "agent-team-setup",
+    "claude-code-harness",
+    "human-memory-inspired-agent-memory-gap-analysis",
+    "memory-runtime-tooling",
+    "personal-notes-system"
+  ],
+  "targets": [
+    {
+      "relation": "RELATES_TO",
+      "id": "agent-team-setup",
+      "title": "Gerhards Agent Team — Architecture & Setup"
+    },
+    {
+      "relation": "RELATES_TO",
+      "id": "claude-code-harness",
+      "title": "Claude Code Harness — Pattern Analysis & Fit Assessment"
+    },
+    {
+      "relation": "RELATES_TO",
+      "id": "human-memory-inspired-agent-memory-gap-analysis",
+      "title": "Human-Memory-Inspired Agent Memory — Gap Analysis for Gerhard's Team"
+    },
+    {
+      "relation": "RELATES_TO",
+      "id": "memory-runtime-tooling",
+      "title": "Memory Runtime Tooling"
+    },
+    {
+      "relation": "RELATES_TO",
+      "id": "personal-notes-system",
+      "title": "Personal Notes System — Daily/Weekly/Monthly/Annual Pipeline"
+    }
+  ],
+  "relates_to_ids": [
+    "agent-team-setup",
+    "claude-code-harness",
+    "human-memory-inspired-agent-memory-gap-analysis",
+    "memory-runtime-tooling",
+    "personal-notes-system"
+  ],
+  "depends_on_ids": [],
+  "superseded_by_ids": [],
+  "relation_types": [
+    "RELATES_TO"
+  ]
+}

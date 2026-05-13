@@ -1,0 +1,22 @@
+name: orchestration
+description: "Standard delegation template, checkpoint cadence, and model-routing contract for James when managing sub-agents."
+version: "1.0"
+agent: James
+category: agent-management
+tools_required:
+  - task
+  - read_agent
+  - list_agents
+triggers:
+  - "delegating work to Analyst, Developer, or Researcher"
+  - "multi-step task requiring a leaf-agent"
+  - "task needing explicit progress checks or verifier routing"
+outputs:
+  - "structured task prompt with metadata"
+  - "explicit checkpoint cadence"
+  - "documented model selection and override rationale"
+source: "workspace-native"
+adapted_by: "James (CAO)"
+adapted_date: "2026-04-15"
+wiki_ref: "[[agent-team-setup]]"
+is_valid: true

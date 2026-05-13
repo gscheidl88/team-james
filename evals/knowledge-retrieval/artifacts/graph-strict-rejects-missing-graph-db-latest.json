@@ -1,0 +1,9 @@
+{
+  "probe_kind": "neighbors",
+  "probe_ok": false,
+  "failure_class": "stale_graph",
+  "stale_reasons": [
+    "graph-db-missing"
+  ],
+  "page_id": "cognee-memory"
+}

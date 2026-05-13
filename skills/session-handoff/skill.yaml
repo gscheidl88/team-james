@@ -1,0 +1,27 @@
+name: session-handoff
+description: "Creates comprehensive handoff documents for seamless Copilot CLI session transfers. Solves context loss on session end by capturing state, decisions, and next steps."
+version: "1.0-gerhards"
+agent: James
+category: memory-continuity
+tools_required:
+  - powershell
+  - file-io
+triggers:
+  - "context window approaching capacity"
+  - "session ending"
+  - "major milestone completed"
+  - "5+ file edits in one session"
+  - "user: save state / pause / create handoff / continue later"
+outputs:
+  - "plans/handoffs/YYYY-MM-DD-HHMMSS-[slug].md"
+source: "https://github.com/softaworks/agent-toolkit/tree/main/skills/session-handoff"
+adapted_by: "James (CAO)"
+adapted_date: "2026-04-13"
+changes_from_source:
+  - "bash → PowerShell (Windows)"
+  - "Python scripts replaced with inline PowerShell snippets"
+  - ".claude/handoffs/ → plans/handoffs/ (Gerhards workspace structure)"
+  - "Added staleness thresholds in commits instead of time-based"
+  - "Removed validation script dependency (manual checklist instead)"
+wiki_ref: "[[session-handoff]]"
+is_valid: true

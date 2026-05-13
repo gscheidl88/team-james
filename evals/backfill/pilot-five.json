@@ -1,0 +1,166 @@
+{
+  "version": 1,
+  "created": "2026-04-15T16:18:35Z",
+  "description": "First real-case pilot extraction batch for workflow eval backfill.",
+  "cases": [
+    {
+      "id": "research-synthesis-agi-rollout-eval-discipline",
+      "created": "2026-04-15T16:18:35Z",
+      "suite": "research-synthesis",
+      "mode": "capability",
+      "case_type": "plan-validation",
+      "source_family": "plans",
+      "source_path": "plans/2026-04-15-agi-harness-epistemic-upgrades.md",
+      "title": "AGI rollout plan preserves eval discipline",
+      "description": "Verify that the AGI rollout plan keeps explicit eval-phase structure and capability-vs-regression discipline.",
+      "test_type": "file_contains",
+      "test_payload": {
+        "path": "plans\\2026-04-15-agi-harness-epistemic-upgrades.md",
+        "contains": [
+          "### Phase 4 — Eval harness",
+          "private workflow eval suites",
+          "Do not mix capability evals and regression evals."
+        ]
+      },
+      "expected_outcome": "pass",
+      "confidence": "high",
+      "components_covered": [
+        "checkpoint",
+        "ledger"
+      ],
+      "evidence": [
+        "The plan explicitly defines a dedicated eval phase.",
+        "The guardrail section preserves capability-vs-regression separation."
+      ],
+      "contradiction": null,
+      "next_test": "Backfill a second planning artifact that references the same eval discipline."
+    },
+    {
+      "id": "handoff-backfill-plan-state-visibility",
+      "created": "2026-04-15T16:18:35Z",
+      "suite": "handoff",
+      "mode": "capability",
+      "case_type": "plan-validation",
+      "source_family": "plans",
+      "source_path": "plans/2026-04-15-eval-backfill-and-repo-publish.md",
+      "title": "Backfill plan preserves handoff visibility",
+      "description": "Verify that the backfill/publish plan keeps validation, replanning, handoff, and checkpoint sections visible.",
+      "test_type": "file_contains",
+      "test_payload": {
+        "path": "plans\\2026-04-15-eval-backfill-and-repo-publish.md",
+        "contains": [
+          "### Validation plan",
+          "### Replan rule",
+          "### Handoff state",
+          "## Checkpoint summary"
+        ]
+      },
+      "expected_outcome": "pass",
+      "confidence": "high",
+      "components_covered": [
+        "checkpoint",
+        "ledger"
+      ],
+      "evidence": [
+        "The plan exposes explicit handoff and checkpoint sections.",
+        "Validation and replanning rules are documented in the same container."
+      ],
+      "contradiction": null,
+      "next_test": "Backfill a second handoff-oriented plan to prove the pattern is not single-use."
+    },
+    {
+      "id": "hypothesis-discipline-backfill-plan-ledger",
+      "created": "2026-04-15T16:18:35Z",
+      "suite": "hypothesis-discipline",
+      "mode": "capability",
+      "case_type": "plan-validation",
+      "source_family": "plans",
+      "source_path": "plans/2026-04-15-eval-backfill-and-repo-publish.md",
+      "title": "Backfill plan keeps hypothesis ledger explicit",
+      "description": "Verify that the current backfill plan preserves a visible hypothesis ledger and an explicit next test.",
+      "test_type": "file_contains",
+      "test_payload": {
+        "path": "plans\\2026-04-15-eval-backfill-and-repo-publish.md",
+        "contains": [
+          "## Hypothesis Ledger",
+          "Pilot-extract 5 real cases and validate quality",
+          "### Source priority"
+        ]
+      },
+      "expected_outcome": "pass",
+      "confidence": "high",
+      "components_covered": [
+        "ledger"
+      ],
+      "evidence": [
+        "The plan contains an explicit hypothesis ledger table.",
+        "The next test for the eval corpus is written down as a concrete action."
+      ],
+      "contradiction": null,
+      "next_test": "Validate that a second plan artifact exposes the same hypothesis structure."
+    },
+    {
+      "id": "trace-quality-daily-phase4-green-baseline",
+      "created": "2026-04-15T16:18:35Z",
+      "suite": "trace-quality",
+      "mode": "regression",
+      "case_type": "daily-session",
+      "source_family": "daily-notes",
+      "source_path": "PersonalNotes/Daily/2026-04-15.md",
+      "title": "Daily note records green workflow-eval baseline",
+      "description": "Verify that the daily log preserves the successful phase-4 workflow-eval baseline entry.",
+      "test_type": "file_contains",
+      "test_payload": {
+        "path": "PersonalNotes\\Daily\\2026-04-15.md",
+        "contains": [
+          "### [15:39] Session · AGI Harness Phase 4",
+          "workflow eval status `ok`; suites `4`; cases `6`; failed cases `0`"
+        ]
+      },
+      "expected_outcome": "pass",
+      "confidence": "high",
+      "components_covered": [
+        "verifier",
+        "checkpoint"
+      ],
+      "evidence": [
+        "The daily note captures the exact green baseline summary.",
+        "The session log ties the result to a concrete rollout phase."
+      ],
+      "contradiction": null,
+      "next_test": "Backfill another daily note once a larger eval baseline exists."
+    },
+    {
+      "id": "hypothesis-discipline-daily-phase5-warning",
+      "created": "2026-04-15T16:18:35Z",
+      "suite": "hypothesis-discipline",
+      "mode": "regression",
+      "case_type": "daily-session",
+      "source_family": "daily-notes",
+      "source_path": "PersonalNotes/Daily/2026-04-15.md",
+      "title": "Daily note preserves conservative ablation warning",
+      "description": "Verify that the daily log preserves the reconcile warning and conservative optimization posture from phase 5.",
+      "test_type": "file_contains",
+      "test_payload": {
+        "path": "PersonalNotes\\Daily\\2026-04-15.md",
+        "contains": [
+          "### [15:44] Session · AGI Harness Phase 5",
+          "reconcile-ablation-not-eval-backed",
+          "baseline workflow eval `ok`"
+        ]
+      },
+      "expected_outcome": "pass",
+      "confidence": "high",
+      "components_covered": [
+        "verifier",
+        "ledger"
+      ],
+      "evidence": [
+        "The daily note keeps the ablation warning reason explicit.",
+        "The entry preserves the baseline-vs-warning relationship."
+      ],
+      "contradiction": null,
+      "next_test": "Backfill a later daily entry after reconcile gets private eval coverage."
+    }
+  ]
+}

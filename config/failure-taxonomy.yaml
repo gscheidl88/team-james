@@ -1,0 +1,32 @@
+version: 1
+failure_classes:
+  auth:
+    description: Authentication, credential, or session expiry failure.
+    default_retry: re-authenticate or refresh session once
+    fallback: switch to documented recovery path and validate access before proceeding
+    escalate_when: credentials remain invalid after one controlled recovery attempt
+  tool:
+    description: Local tool or script invocation failed despite valid task context.
+    default_retry: rerun once with clearer inputs or corrected parameters
+    fallback: switch to a simpler verified tool path
+    escalate_when: same tool fails twice without a clear fix
+  retrieval:
+    description: Needed memory, wiki, or notebook context could not be found or trusted.
+    default_retry: refresh retrieval path and narrow the query
+    fallback: use explicit file or source reads and record the gap
+    escalate_when: required context remains unavailable or contradictory
+  logic:
+    description: Reasoning, planning, or inference defect in the work product.
+    default_retry: add verifier or discriminating test before retry
+    fallback: absorb to James or escalate to stronger model/reviewer
+    escalate_when: contradiction remains unresolved after one review cycle
+  orchestration:
+    description: Multi-step flow, agent routing, handoff, or checkpoint breakdown.
+    default_retry: restart from the last valid checkpoint
+    fallback: simplify topology or absorb the task directly
+    escalate_when: repeated coordination failure or unclear ownership persists
+fallback_order:
+  - retry_once
+  - fallback_path
+  - escalate
+  - absorb

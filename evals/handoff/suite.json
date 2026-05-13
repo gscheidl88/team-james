@@ -1,0 +1,43 @@
+{
+  "name": "handoff",
+  "mode": "capability",
+  "description": "Checks that long-running handoff artifacts preserve execution state, checkpoint state, hypothesis state, and failure state.",
+  "cases": [
+    {
+      "id": "handoff-skill-has-required-sections",
+      "type": "file_contains",
+      "path": "skills\\session-handoff\\SKILL.md",
+      "components": ["checkpoint", "ledger"],
+      "contains": [
+        "## Handoff State",
+        "## Checkpoint Summary",
+        "## Failure State",
+        "## Hypothesis Ledger"
+      ]
+    },
+    {
+      "id": "complex-plan-checkpoint-block-present",
+      "type": "file_contains",
+      "path": "plans\\_template-complex-task.md",
+      "components": ["checkpoint"],
+      "contains": [
+        "### Checkpoint Summary",
+        "- Open WIP:",
+        "- Open hypotheses:",
+        "- Next test:"
+      ]
+    },
+    {
+      "id": "backfill-plan-keeps-handoff-state-visible",
+      "type": "file_contains",
+      "path": "plans\\2026-04-15-eval-backfill-and-repo-publish.md",
+      "components": ["checkpoint", "ledger"],
+      "contains": [
+        "### Validation plan",
+        "### Replan rule",
+        "### Handoff state",
+        "## Checkpoint summary"
+      ]
+    }
+  ]
+}

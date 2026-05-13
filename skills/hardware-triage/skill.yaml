@@ -1,0 +1,32 @@
+id: hardware-triage
+name: Hardware Triage
+version: "1.0"
+owner: James
+category: operations
+description: Windows host-side USB, PnP, disk, and volume snapshot/diff workflow for device triage
+triggers:
+  - usb
+  - hardware
+  - device maintenance
+  - storage visibility
+  - before after diff
+inputs:
+  - type: host_state
+    description: Current Windows host with PowerShell-visible USB, PnP, and storage signals
+  - type: event
+    description: Device connect, disconnect, boot change, or recovery attempt
+outputs:
+  - type: snapshot_json
+    path: tools/hardware/snapshots/{name}.json
+  - type: diff_report
+    description: Added, removed, and changed device/storage records between snapshots
+tools_preferred:
+  - powershell
+  - uv run tools/hardware/usb_snapshot.py
+  - uv run tools/hardware/usb_diff.py
+constraints:
+  - windows_only: true
+  - host_visible_only: true
+  - no_raw_usb_c_diagnostics: true
+  - operator_review_required: true
+dependencies: []

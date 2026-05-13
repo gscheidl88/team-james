@@ -1,0 +1,23 @@
+flowchart LR
+    start((Start))
+    end((End))
+    node_receive_request_c8978dc9["Receive Request\ncount=4\nlane=Sales\npath=intake"]
+    node_validate_payload_b91bc743["Validate Payload\ncount=3\nlane=API\npath=intake"]
+    node_review_request_8050d07c["Review Request\ncount=1\nlane=Operations\npath=fulfillment::fast-track"]
+    node_request_more_info_ee6589e8["Request More Info\ncount=1\nlane=Operations\npath=fulfillment::manual-review"]
+    node_review_request_475f36f3["Review Request\ncount=3\nlane=Operations\npath=fulfillment::manual-review"]
+    node_approve_request_08f07f0d["Approve Request\ncount=3\nlane=Manager\npath=fulfillment::decision"]
+    node_reject_request_dca42d12["Reject Request\ncount=1\nlane=Manager\npath=fulfillment::decision"]
+    node_archive_case_e2dfc4ad["Archive Case\ncount=4\nlane=Operations\npath=archive"]
+    start -->|4| node_receive_request_c8978dc9
+    node_archive_case_e2dfc4ad -->|4| end
+    node_approve_request_08f07f0d -->|3| node_archive_case_e2dfc4ad
+    node_receive_request_c8978dc9 -->|3| node_validate_payload_b91bc743
+    node_review_request_475f36f3 -->|2| node_approve_request_08f07f0d
+    node_validate_payload_b91bc743 -->|2| node_review_request_475f36f3
+    node_reject_request_dca42d12 -->|1| node_archive_case_e2dfc4ad
+    node_review_request_8050d07c -->|1| node_approve_request_08f07f0d
+    node_request_more_info_ee6589e8 -->|1| node_review_request_475f36f3
+    node_review_request_475f36f3 -->|1| node_reject_request_dca42d12
+    node_receive_request_c8978dc9 -->|1| node_review_request_8050d07c
+    node_validate_payload_b91bc743 -->|1| node_request_more_info_ee6589e8

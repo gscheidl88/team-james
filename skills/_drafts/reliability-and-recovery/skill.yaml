@@ -1,0 +1,28 @@
+id: reliability-and-recovery
+name: Reliability And Recovery
+version: "0.1-draft"
+owner: James
+category: draft
+description: Operational reliability repeatedly depends on typed failures, fallback paths, recovery rules, and escalation signals.
+status: draft
+review_required: true
+source_candidate: reliability-and-recovery
+suggested_target: memory\procedures.md
+draft_path: skills\_drafts\reliability-and-recovery
+triggers:
+  - review
+  - promotion
+inputs:
+  - type: skill_candidate
+    description: Candidate payload from skill-candidates.json
+outputs:
+  - type: draft_skill
+    path: skills\_drafts\reliability-and-recovery
+tools_preferred:
+  - uv
+  - powershell
+  - view
+constraints:
+  - canonical_merge_required: true
+  - no_auto_canonization: true
+dependencies: []

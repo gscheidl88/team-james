@@ -1,0 +1,30 @@
+id: obsidian
+name: Obsidian Vault Management
+version: "1.0"
+owner: James
+category: personal
+description: Obsidian vault operations — note creation, frontmatter, Dataview queries, wiki filing
+triggers:
+  - obsidian
+  - vault
+  - note
+  - wiki
+  - frontmatter
+inputs:
+  - type: content
+    description: Note content or wiki page to file
+  - type: query
+    description: Dataview query or vault search
+outputs:
+  - type: markdown_file
+    path: wiki/{slug}.md or PersonalNotes/{type}/{name}.md
+tools_preferred:
+  - view
+  - edit
+  - create
+  - grep
+constraints:
+  - all_wiki_pages_must_follow_schema: wiki/_schema.md
+  - l0_description_in_frontmatter: true
+  - l1_overview_section_required: true
+dependencies: []

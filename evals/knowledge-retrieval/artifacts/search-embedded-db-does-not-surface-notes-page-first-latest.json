@@ -1,0 +1,24 @@
+{
+  "probe_kind": "search",
+  "probe_ok": true,
+  "query": "local embedded database agent knowledge storage tradeoffs",
+  "top": 5,
+  "result_count": 5,
+  "top_hit_file": "system-architecture-db-upgrade-analysis.md",
+  "top_hit_title": "Architecture Analysis — Upgrading the Agent KB System with Kuzu, LanceDB & DuckDB",
+  "top_hit_score": 0.0323,
+  "top_files": [
+    "system-architecture-db-upgrade-analysis.md",
+    "embedded-db-comparison.md",
+    "cognee-memory.md",
+    "openviking-context-db.md",
+    "zep-graphiti-memory.md"
+  ],
+  "top_titles": [
+    "Architecture Analysis — Upgrading the Agent KB System with Kuzu, LanceDB & DuckDB",
+    "Embedded Databases Compared — SQLite vs DuckDB vs LanceDB vs Kuzu",
+    "Cognee — Knowledge Graph Memory for AI Agents",
+    "OpenViking — Filesystem-Paradigm Context Database for AI Agents",
+    "Zep & Graphiti — Temporal Knowledge Graphs for Agent Memory"
+  ]
+}

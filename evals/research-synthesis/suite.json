@@ -1,0 +1,40 @@
+{
+  "name": "research-synthesis",
+  "mode": "capability",
+  "description": "Checks that the research-synthesis workflow retains the AGI-derived structure: decomposition, explicit uncertainty, eval discipline, and typed handoffs.",
+  "cases": [
+    {
+      "id": "agi-analysis-patterns-present",
+      "type": "file_contains",
+      "path": "wiki\\agi-project-analysis-patterns.md",
+      "components": ["ledger"],
+      "contains": [
+        "hierarchical decomposition",
+        "private regression sets",
+        "typed handoffs"
+      ]
+    },
+    {
+      "id": "complex-plan-fields-present",
+      "type": "file_contains",
+      "path": "plans\\_template-complex-task.md",
+      "components": ["checkpoint", "ledger"],
+      "contains": [
+        "validation_plan",
+        "handoff_state",
+        "Hypothesis Ledger"
+      ]
+    },
+    {
+      "id": "agi-rollout-plan-keeps-eval-discipline-visible",
+      "type": "file_contains",
+      "path": "plans\\2026-04-15-agi-harness-epistemic-upgrades.md",
+      "components": ["checkpoint", "ledger"],
+      "contains": [
+        "### Phase 4 — Eval harness",
+        "private workflow eval suites",
+        "Do not mix capability evals and regression evals."
+      ]
+    }
+  ]
+}

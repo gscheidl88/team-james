@@ -1,0 +1,155 @@
+{
+  "_meta": {
+    "description": "Skill usage telemetry — tracks use_count, view_count, last_used_at, state, and pinned per skill. Managed by tools/skills/skills_curator.py.",
+    "schema_version": "1.0",
+    "states": [
+      "active",
+      "stale",
+      "archived"
+    ],
+    "stale_after_days": 30,
+    "archive_after_days": 90
+  },
+  "skills": {
+    "daily-notes": {
+      "use_count": 0,
+      "view_count": 0,
+      "last_used_at": "2026-05-10",
+      "state": "active",
+      "pinned": true
+    },
+    "session-handoff": {
+      "use_count": 0,
+      "view_count": 0,
+      "last_used_at": "2026-05-10",
+      "state": "active",
+      "pinned": true
+    },
+    "orchestration": {
+      "use_count": 0,
+      "view_count": 0,
+      "last_used_at": "2026-05-10",
+      "state": "active",
+      "pinned": true
+    },
+    "research-strategy": {
+      "use_count": 0,
+      "view_count": 0,
+      "last_used_at": "2026-05-10",
+      "state": "active",
+      "pinned": false
+    },
+    "software-development": {
+      "use_count": 0,
+      "view_count": 0,
+      "last_used_at": "2026-05-10",
+      "state": "active",
+      "pinned": false
+    },
+    "data-analysis": {
+      "use_count": 0,
+      "view_count": 0,
+      "last_used_at": "2026-05-10",
+      "state": "active",
+      "pinned": false
+    },
+    "presentations": {
+      "use_count": 0,
+      "view_count": 0,
+      "last_used_at": "2026-05-10",
+      "state": "active",
+      "pinned": false
+    },
+    "process-visualization": {
+      "use_count": 0,
+      "view_count": 0,
+      "last_used_at": "2026-05-10",
+      "state": "active",
+      "pinned": false
+    },
+    "d3-process-viewer": {
+      "use_count": 0,
+      "view_count": 0,
+      "last_used_at": "2026-05-10",
+      "state": "active",
+      "pinned": false
+    },
+    "investment-research": {
+      "use_count": 0,
+      "view_count": 0,
+      "last_used_at": "2026-05-10",
+      "state": "active",
+      "pinned": false
+    },
+    "hardware-triage": {
+      "use_count": 0,
+      "view_count": 0,
+      "last_used_at": "2026-05-10",
+      "state": "active",
+      "pinned": false
+    },
+    "reverse-engineering": {
+      "use_count": 0,
+      "view_count": 0,
+      "last_used_at": "2026-05-10",
+      "state": "active",
+      "pinned": false
+    },
+    "secrets-management": {
+      "use_count": 0,
+      "view_count": 0,
+      "last_used_at": "2026-05-10",
+      "state": "active",
+      "pinned": false
+    },
+    "obsidian": {
+      "use_count": 0,
+      "view_count": 0,
+      "last_used_at": "2026-05-10",
+      "state": "active",
+      "pinned": false
+    },
+    "writing-clearly-and-concisely": {
+      "use_count": 0,
+      "view_count": 0,
+      "last_used_at": "2026-05-10",
+      "state": "active",
+      "pinned": false
+    },
+    "_drafts/handoff-discipline": {
+      "use_count": 0,
+      "view_count": 0,
+      "last_used_at": "2026-05-10",
+      "state": "active",
+      "pinned": false
+    },
+    "_drafts/reliability-and-recovery": {
+      "use_count": 0,
+      "view_count": 0,
+      "last_used_at": "2026-05-10",
+      "state": "active",
+      "pinned": false
+    },
+    "_drafts/skill-promotion": {
+      "use_count": 0,
+      "view_count": 0,
+      "last_used_at": "2026-05-10",
+      "state": "active",
+      "pinned": false
+    },
+    "_drafts/trace-aware-operations": {
+      "use_count": 0,
+      "view_count": 0,
+      "last_used_at": "2026-05-10",
+      "state": "active",
+      "pinned": false
+    },
+    "_drafts/verification-and-evals": {
+      "use_count": 0,
+      "view_count": 0,
+      "last_used_at": "2026-05-10",
+      "state": "active",
+      "pinned": false
+    }
+  }
+}

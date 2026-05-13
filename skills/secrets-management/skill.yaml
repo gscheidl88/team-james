@@ -1,0 +1,37 @@
+id: secrets-management
+name: Secrets Management
+version: "1.0"
+created: "2026-04-10"
+created_by: James (CAO)
+category: security
+
+description: >
+  Convention for storing all secrets (API keys, tokens, cookies) in the
+  user-level store at ~\.gerhards-analyst\secrets\ —
+  never in the workspace or project directories.
+
+triggers:
+  - "API key needed"
+  - "store secret"
+  - "env file"
+  - ".env"
+  - "credentials"
+  - "token"
+  - "password"
+
+store_location: "~\.gerhards-analyst\\secrets\\"
+
+rules:
+  - Never create .env files in <WORKSPACE_ROOT> or subdirectories
+  - One file per service
+  - Prefix env vars by service name
+  - Document in README.txt (keys only, no values)
+  - Rotate credentials when uncertain
+
+known_stores:
+  - name: NotebookLM
+    path: "~\.notebooklm-mcp-cli\\profiles\\default\\"
+    managed_by: nlm CLI
+  - name: General secrets
+    path: "~\.gerhards-analyst\\secrets\\"
+    managed_by: manual / James

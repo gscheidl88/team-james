@@ -1,0 +1,39 @@
+id: presentations
+name: Presentations with Marp
+version: "1.0"
+owner: Researcher
+category: communication
+description: Create professional slide decks from Markdown using Marp — HTML, PDF, and PPTX export with version-controlled source
+triggers:
+  - presentation
+  - slide deck
+  - slides
+  - status report
+  - client deck
+  - present
+  - export PDF
+  - export PPTX
+inputs:
+  - type: topic
+    description: Subject matter, key findings, or data to present
+  - type: file
+    description: Optional source data or wiki pages to draw content from
+  - type: format
+    description: Desired output format — HTML | PDF | PPTX
+outputs:
+  - type: file
+    path: plans/{slug}.md
+    description: Marp Markdown source file (version-controlled)
+  - type: file
+    path: plans/{slug}.pdf
+    description: Exported PDF presentation
+  - type: file
+    path: plans/{slug}.pptx
+    description: Exported PowerPoint presentation (optional)
+tools_preferred:
+  - npx @marp-team/marp-cli@latest
+  - VS Code with marp-team.marp-vscode extension
+dependencies:
+  - node >= 18
+  - chrome or edge (for PDF/PPTX export)
+wiki_ref: "[[marp]]"

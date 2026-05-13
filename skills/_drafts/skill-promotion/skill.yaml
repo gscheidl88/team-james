@@ -1,0 +1,28 @@
+id: skill-promotion
+name: Skill Promotion
+version: "0.1-draft"
+owner: James
+category: draft
+description: Repeated local evidence suggests a reusable skill or procedure should be promoted from real work artifacts.
+status: draft
+review_required: true
+source_candidate: skill-promotion
+suggested_target: skills\skill-promotion\SKILL.md
+draft_path: skills\_drafts\skill-promotion
+triggers:
+  - review
+  - promotion
+inputs:
+  - type: skill_candidate
+    description: Candidate payload from skill-candidates.json
+outputs:
+  - type: draft_skill
+    path: skills\_drafts\skill-promotion
+tools_preferred:
+  - uv
+  - powershell
+  - view
+constraints:
+  - canonical_merge_required: true
+  - no_auto_canonization: true
+dependencies: []

@@ -1,0 +1,235 @@
+{
+  "created": "2026-04-26T01:34:07",
+  "status": "warn",
+  "summary": {
+    "overall": {
+      "suite_count": 1,
+      "case_count": 7,
+      "passed_suites": 1,
+      "failed_suites": 0,
+      "passed_cases": 7,
+      "failed_cases": 0
+    },
+    "capability": {
+      "suite_count": 0,
+      "case_count": 0,
+      "passed_suites": 0,
+      "failed_suites": 0,
+      "passed_cases": 0,
+      "failed_cases": 0
+    },
+    "regression": {
+      "suite_count": 1,
+      "case_count": 7,
+      "passed_suites": 1,
+      "failed_suites": 0,
+      "passed_cases": 7,
+      "failed_cases": 0
+    }
+  },
+  "reasons": [
+    "workflow-eval-suite-count-below-four"
+  ],
+  "actions": [
+    "Keep at least four private workflow suites active: research synthesis, handoff, trace quality, and hypothesis discipline."
+  ],
+  "failing_cases": [],
+  "suites": [
+    {
+      "name": "knowledge-retrieval",
+      "mode": "regression",
+      "description": "Checks that wiki search and graph retrieval keep returning expected high-signal pages and relations instead of only producing telemetry volume.",
+      "passed": true,
+      "cases": [
+        {
+          "id": "search-memory-lifecycle-ranks-session-page-first",
+          "type": "retrieval_probe",
+          "passed": true,
+          "detail": "all assertions passed",
+          "assertions": [
+            {
+              "path": "result_count",
+              "result": "pass",
+              "detail": "5.0 >= 1.0"
+            },
+            {
+              "path": "top_hit_file",
+              "result": "pass",
+              "detail": "equals 'memory-session-lifecycle.md'"
+            },
+            {
+              "path": "top_files",
+              "result": "pass",
+              "detail": "contains 'memory-runtime-tooling.md'"
+            },
+            {
+              "path": "top_hit_file",
+              "result": "pass",
+              "detail": "not equals 'autonomic-tooling-pattern.md' (got 'memory-session-lifecycle.md')"
+            }
+          ],
+          "probe_kind": "search",
+          "top_hit_file": "memory-session-lifecycle.md",
+          "result_count": 5,
+          "artifact_path": "<WORKSPACE_ROOT>\evals\\knowledge-retrieval\\artifacts\\search-memory-lifecycle-ranks-session-page-first-latest.json"
+        },
+        {
+          "id": "search-autonomic-tooling-ranks-pattern-page-first",
+          "type": "retrieval_probe",
+          "passed": true,
+          "detail": "all assertions passed",
+          "assertions": [
+            {
+              "path": "result_count",
+              "result": "pass",
+              "detail": "5.0 >= 1.0"
+            },
+            {
+              "path": "top_hit_file",
+              "result": "pass",
+              "detail": "equals 'autonomic-tooling-pattern.md'"
+            },
+            {
+              "path": "top_files",
+              "result": "pass",
+              "detail": "contains 'agent-orchestration-policy.md'"
+            },
+            {
+              "path": "top_hit_file",
+              "result": "pass",
+              "detail": "not equals 'memory-session-lifecycle.md' (got 'autonomic-tooling-pattern.md')"
+            }
+          ],
+          "probe_kind": "search",
+          "top_hit_file": "autonomic-tooling-pattern.md",
+          "result_count": 5,
+          "artifact_path": "<WORKSPACE_ROOT>\evals\\knowledge-retrieval\\artifacts\\search-autonomic-tooling-ranks-pattern-page-first-latest.json"
+        },
+        {
+          "id": "graph-cognee-memory-keeps-core-dependencies",
+          "type": "retrieval_probe",
+          "passed": true,
+          "detail": "all assertions passed",
+          "assertions": [
+            {
+              "path": "result_count",
+              "result": "pass",
+              "detail": "4.0 >= 4.0"
+            },
+            {
+              "path": "target_ids",
+              "result": "pass",
+              "detail": "contains 'embedded-db-comparison'"
+            },
+            {
+              "path": "target_ids",
+              "result": "pass",
+              "detail": "contains 'zep-graphiti-memory'"
+            },
+            {
+              "path": "depends_on_ids",
+              "result": "pass",
+              "detail": "contains 'embedded-db-comparison'"
+            },
+            {
+              "path": "relates_to_ids",
+              "result": "pass",
+              "detail": "contains 'zep-graphiti-memory'"
+            },
+            {
+              "path": "depends_on_ids",
+              "result": "pass",
+              "detail": "does not contain 'zep-graphiti-memory'"
+            }
+          ],
+          "probe_kind": "neighbors",
+          "top_hit_file": null,
+          "result_count": 4,
+          "artifact_path": "<WORKSPACE_ROOT>\evals\\knowledge-retrieval\\artifacts\\graph-cognee-memory-keeps-core-dependencies-latest.json"
+        },
+        {
+          "id": "graph-memory-session-lifecycle-keeps-runtime-links",
+          "type": "retrieval_probe",
+          "passed": true,
+          "detail": "all assertions passed",
+          "assertions": [
+            {
+              "path": "result_count",
+              "result": "pass",
+              "detail": "5.0 >= 5.0"
+            },
+            {
+              "path": "target_ids",
+              "result": "pass",
+              "detail": "contains 'memory-runtime-tooling'"
+            },
+            {
+              "path": "target_ids",
+              "result": "pass",
+              "detail": "contains 'personal-notes-system'"
+            },
+            {
+              "path": "relates_to_ids",
+              "result": "pass",
+              "detail": "contains 'memory-runtime-tooling'"
+            },
+            {
+              "path": "relates_to_ids",
+              "result": "pass",
+              "detail": "contains 'personal-notes-system'"
+            }
+          ],
+          "probe_kind": "neighbors",
+          "top_hit_file": null,
+          "result_count": 5,
+          "artifact_path": "<WORKSPACE_ROOT>\evals\\knowledge-retrieval\\artifacts\\graph-memory-session-lifecycle-keeps-runtime-links-latest.json"
+        },
+        {
+          "id": "search-embedded-db-does-not-surface-notes-page-first",
+          "type": "retrieval_probe",
+          "passed": true,
+          "detail": "all assertions passed",
+          "assertions": [
+            {
+              "path": "result_count",
+              "result": "pass",
+              "detail": "5.0 >= 1.0"
+            },
+            {
+              "path": "top_hit_file",
+              "result": "pass",
+              "detail": "not equals 'personal-notes-system.md' (got 'system-architecture-db-upgrade-analysis.md')"
+            },
+            {
+              "path": "top_hit_file",
+              "result": "pass",
+              "detail": "not equals 'memory-session-lifecycle.md' (got 'system-architecture-db-upgrade-analysis.md')"
+            }
+          ],
+          "probe_kind": "search",
+          "top_hit_file": "system-architecture-db-upgrade-analysis.md",
+          "result_count": 5,
+          "artifact_path": "<WORKSPACE_ROOT>\evals\\knowledge-retrieval\\artifacts\\search-embedded-db-does-not-surface-notes-page-first-latest.json"
+        },
+        {
+          "id": "graph-nonexistent-page-fails-missing-node",
+          "type": "retrieval_probe",
+          "passed": true,
+          "detail": "probe correctly reported failure_class=missing_source_node",
+          "failure_class": "missing_source_node",
+          "probe_kind": "neighbors",
+          "artifact_path": "<WORKSPACE_ROOT>\evals\\knowledge-retrieval\\artifacts\\graph-nonexistent-page-fails-missing-node-latest.json"
+        },
+        {
+          "id": "graph-strict-rejects-missing-graph-db",
+          "type": "retrieval_probe",
+          "passed": true,
+          "detail": "probe correctly reported failure_class=stale_graph",
+          "failure_class": "stale_graph",
+          "probe_kind": "neighbors",
+          "artifact_path": "<WORKSPACE_ROOT>\evals\\knowledge-retrieval\\artifacts\\graph-strict-rejects-missing-graph-db-latest.json"
+        }
+      ]
+    }
+  ]
+}

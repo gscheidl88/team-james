@@ -1,0 +1,107 @@
+{
+  "name": "knowledge-retrieval",
+  "mode": "regression",
+  "description": "Checks that wiki search and graph retrieval keep returning expected high-signal pages and relations instead of only producing telemetry volume.",
+  "cases": [
+    {
+      "id": "search-memory-lifecycle-ranks-session-page-first",
+      "type": "retrieval_probe",
+      "components": ["verifier"],
+      "probe_kind": "search",
+      "query": "session lifecycle preflight checkpoint guard recovery",
+      "top": 5,
+      "assertions": [
+        { "path": "result_count", "gte": 1 },
+        { "path": "top_hit_file", "equals": "memory-session-lifecycle.md" },
+        { "path": "top_files", "contains": "memory-runtime-tooling.md" },
+        { "path": "top_hit_file", "not_equals": "autonomic-tooling-pattern.md" }
+      ]
+    },
+    {
+      "id": "search-autonomic-tooling-ranks-pattern-page-first",
+      "type": "retrieval_probe",
+      "components": ["verifier"],
+      "probe_kind": "search",
+      "query": "autonomic tool-driven routine automation workspace operations",
+      "top": 5,
+      "assertions": [
+        { "path": "result_count", "gte": 1 },
+        { "path": "top_hit_file", "equals": "autonomic-tooling-pattern.md" },
+        { "path": "top_files", "contains": "agent-orchestration-policy.md" },
+        { "path": "top_hit_file", "not_equals": "memory-session-lifecycle.md" }
+      ]
+    },
+    {
+      "id": "graph-cognee-memory-keeps-core-dependencies",
+      "type": "retrieval_probe",
+      "components": ["verifier"],
+      "probe_kind": "neighbors",
+      "page_id": "cognee-memory",
+      "assertions": [
+        { "path": "result_count", "gte": 4 },
+        { "path": "target_ids", "contains": "embedded-db-comparison" },
+        { "path": "target_ids", "contains": "zep-graphiti-memory" },
+        { "path": "depends_on_ids", "contains": "embedded-db-comparison" },
+        { "path": "relates_to_ids", "contains": "zep-graphiti-memory" },
+        { "path": "depends_on_ids", "not_contains": "zep-graphiti-memory" }
+      ]
+    },
+    {
+      "id": "graph-memory-session-lifecycle-keeps-runtime-links",
+      "type": "retrieval_probe",
+      "components": ["verifier"],
+      "probe_kind": "neighbors",
+      "page_id": "memory-session-lifecycle",
+      "assertions": [
+        { "path": "result_count", "gte": 5 },
+        { "path": "target_ids", "contains": "memory-runtime-tooling" },
+        { "path": "target_ids", "contains": "personal-notes-system" },
+        { "path": "relates_to_ids", "contains": "memory-runtime-tooling" },
+        { "path": "relates_to_ids", "contains": "personal-notes-system" }
+      ]
+    },
+    {
+      "id": "search-embedded-db-does-not-surface-notes-page-first",
+      "type": "retrieval_probe",
+      "components": ["verifier"],
+      "probe_kind": "search",
+      "query": "local embedded database agent knowledge storage tradeoffs",
+      "top": 5,
+      "assertions": [
+        { "path": "result_count", "gte": 1 },
+        { "path": "top_hit_file", "not_equals": "personal-notes-system.md" },
+        { "path": "top_hit_file", "not_equals": "memory-session-lifecycle.md" },
+        { "path": "top_files", "contains": "embedded-db-comparison.md" }
+      ]
+    },
+    {
+      "id": "graph-nonexistent-page-fails-missing-node",
+      "type": "retrieval_probe",
+      "components": ["verifier"],
+      "probe_kind": "neighbors",
+      "page_id": "nonexistent-page-xyzzy-sentinel",
+      "expected_failure_class": "missing_source_node"
+    },
+    {
+      "id": "graph-strict-rejects-missing-graph-db",
+      "type": "retrieval_probe",
+      "components": ["verifier"],
+      "probe_kind": "neighbors",
+      "page_id": "cognee-memory",
+      "strict": true,
+      "index_dir": ".wiki_index_stale_fixture",
+      "expected_failure_class": "stale_graph"
+    },
+    {
+      "id": "search-strict-rejects-missing-index",
+      "type": "retrieval_probe",
+      "components": ["verifier"],
+      "probe_kind": "search",
+      "query": "sentinel stale index regression probe",
+      "top": 3,
+      "strict": true,
+      "index_dir": ".wiki_index_stale_fixture",
+      "expected_failure_class": "stale_index"
+    }
+  ]
+}

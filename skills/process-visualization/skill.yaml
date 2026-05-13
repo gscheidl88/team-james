@@ -1,0 +1,31 @@
+id: process-visualization
+name: BPMN and Process Visualization
+version: "1.0"
+owner: James
+category: analysis
+description: Local-first workflow for mining event logs into process maps, Mermaid diagrams, and BPMN draft XML
+triggers:
+  - bpmn
+  - process mining
+  - workflow visualization
+  - event log
+  - process discovery
+inputs:
+  - type: event_log
+    description: CSV or JSON event records with at least case_id and activity
+outputs:
+  - type: process_map_json
+    path: tools/process/outputs/{name}.json
+  - type: mermaid
+    path: tools/process/outputs/{name}.mmd
+  - type: bpmn_xml
+    path: tools/process/outputs/{name}.bpmn
+tools_preferred:
+  - powershell
+  - uv run tools/process/event_log_to_process_map.py
+  - uv run tools/process/process_map_to_bpmn.py
+constraints:
+  - local_first: true
+  - token_free_preferred: true
+  - bpmn_output_is_draft: true
+dependencies: []
