@@ -1,4 +1,4 @@
-# Team_James — Personal AI Agent Framework
+﻿# Team_James — Personal AI Agent Framework
 
 > A production-tested, local-first agent team for GitHub Copilot CLI.  
 > Orchestration · Memory · Skills · Knowledge — all in your repo.
@@ -105,7 +105,7 @@ Team_James/
 ### 2. Clone and configure
 
 ```bash
-git clone https://github.com/<YOUR_GITHUB_USERNAME>/team-james
+git clone https://github.com/gscheidl88/team-james
 cd team-james
 
 # Create your personal memory files (gitignored)
