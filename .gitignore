@@ -51,6 +51,8 @@ plans/*.md
 !plans/2026-05-02-strategic-agentic-slices.md
 
 # ── Runtime outputs ──────────────────────────────────────────────────────────
+.wiki_index/
+.wiki_index_stale_fixture/
 wiki/reviews/
 *.jsonl
 *.log
