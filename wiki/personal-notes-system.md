@@ -15,7 +15,7 @@ valid_to:
 superseded_by:
 
 confidence: high
-reviewed_by: Gerhard
+reviewed_by: the owner
 review_date: 2026-04-08
 
 created: 2026-04-08
@@ -97,7 +97,7 @@ uv run tools\notes\notes_summarizer.py --weekly --overwrite         # replace ex
 
 ## Task Scheduler
 
-Three tasks registered under `\GerhardsAgentTeam\`:
+Three tasks registered under `\ownerAgentTeam\`:
 
 | Task | Trigger | Script Flag |
 |------|---------|-------------|

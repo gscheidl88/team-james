@@ -15,7 +15,7 @@ valid_to:
 superseded_by:
 
 confidence: high
-reviewed_by: Gerhard
+reviewed_by: the owner
 review_date: 2026-04-08
 
 created: 2026-04-08
@@ -34,7 +34,7 @@ depends_on: []
 
 ## Overview
 
-The team's tooling policy establishing `uv` Python scripts as the primary tool standard, with MCPs as an acceptable fallback only when no practical alternative exists. The policy covers the decision criteria (token-free, local-first, reproducible), the uv inline script format, and the MCP evaluation process. James acts as sparring partner — both options are weighed before Gerhard decides.
+The team's tooling policy establishing `uv` Python scripts as the primary tool standard, with MCPs as an acceptable fallback only when no practical alternative exists. The policy covers the decision criteria (token-free, local-first, reproducible), the uv inline script format, and the MCP evaluation process. James acts as sparring partner — both options are weighed before the owner decides.
 
 # Tooling Policy — uv Python Tools vs MCPs
 
@@ -42,7 +42,7 @@ The team's tooling policy establishing `uv` Python scripts as the primary tool s
 
 **Prefer direct Python tools via `uv run` over MCPs whenever a token-free, flexible alternative exists.**
 
-MCPs are acceptable when there is no practical alternative. James acts as sparring partner — weighing both options, giving a recommendation, Gerhard decides.
+MCPs are acceptable when there is no practical alternative. James acts as sparring partner — weighing both options, giving a recommendation, the owner decides.
 
 ---
 
@@ -54,7 +54,7 @@ MCPs are acceptable when there is no practical alternative. James acts as sparri
 | Auth overhead | None | Depends on MCP |
 | Control & transparency | Full — we own the code | Limited — black box |
 | Logging | Custom, clean, structured | Varies |
-| Collaboration fit | High — James and Gerhard work through it together | Lower |
+| Collaboration fit | High — James and the owner work through it together | Lower |
 | Maintenance | We own it | External dependency |
 | Fit with workflow | Perfect — same pattern as existing tools | Separate runtime |
 
@@ -64,7 +64,7 @@ MCPs are acceptable when there is no practical alternative. James acts as sparri
 
 1. **Can it run without external API tokens / auth overhead?** → uv Python tool
 2. **Is there no practical alternative?** → MCP acceptable
-3. **Gray area?** → James presents both options with tradeoff analysis; Gerhard decides
+3. **Gray area?** → James presents both options with tradeoff analysis; the owner decides
 
 ---
 

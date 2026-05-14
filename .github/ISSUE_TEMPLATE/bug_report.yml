@@ -1,0 +1,50 @@
+name: Bug report
+description: Report a reproducible problem in Team_James.
+title: "[Bug]: "
+labels:
+  - bug
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for filing a bug report. Please include enough detail for someone else to reproduce the problem locally.
+  - type: input
+    id: summary
+    attributes:
+      label: Summary
+      description: What broke?
+      placeholder: setup.ps1 does not replace placeholders in ...
+    validations:
+      required: true
+  - type: textarea
+    id: steps
+    attributes:
+      label: Steps to reproduce
+      description: Include commands, file paths, or prompts when relevant.
+      placeholder: |
+        1. Clone the repo
+        2. Run .\setup.ps1 -WorkspaceRoot ...
+        3. Open GitHub Copilot CLI
+        4. Observe ...
+    validations:
+      required: true
+  - type: textarea
+    id: expected
+    attributes:
+      label: Expected behavior
+    validations:
+      required: true
+  - type: textarea
+    id: actual
+    attributes:
+      label: Actual behavior
+    validations:
+      required: true
+  - type: input
+    id: environment
+    attributes:
+      label: Environment
+      description: OS, shell, and tool versions
+      placeholder: Windows 11, PowerShell 7.5, uv 0.7.x, Copilot CLI 1.0.x
+    validations:
+      required: true

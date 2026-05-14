@@ -20,7 +20,7 @@ adapted_date: "2026-04-13"
 changes_from_source:
   - "bash → PowerShell (Windows)"
   - "Python scripts replaced with inline PowerShell snippets"
-  - ".claude/handoffs/ → plans/handoffs/ (Gerhards workspace structure)"
+  - ".claude/handoffs/ → plans/handoffs/ (owner workspace structure)"
   - "Added staleness thresholds in commits instead of time-based"
   - "Removed validation script dependency (manual checklist instead)"
 wiki_ref: "[[session-handoff]]"

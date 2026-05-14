@@ -10,7 +10,7 @@ Full policy lives in `AGENTS.md` under "Memory-System".
 | Layer | File | Purpose |
 |-------|------|---------|
 | Persistent facts | `memory/MEMORY.md` | Project-wide facts, cross-session |
-| User profile | `memory/USER.md` | Gerhard's preferences and working style |
+| User profile | `memory/USER.md` | the owner's preferences and working style |
 | Vector memory | `.mnemosyne/` | Semantic recall via Mnemosyne |
 | Skills | `skills/*/SKILL.md` | Reusable procedures |
 | Wiki | `wiki/*.md` | Deep knowledge, ADRs, research briefs |
@@ -20,7 +20,7 @@ Full policy lives in `AGENTS.md` under "Memory-System".
 - **After any completed task:** check whether a new insight belongs in `MEMORY.md`
 - **New user preference observed:** update `memory/USER.md`
 - **New repeatable pattern found:** create or extend a skill in `skills/`
-- **Research / ADR completed:** create a wiki page (threshold: "would Gerhard want this in 3 months?")
+- **Research / ADR completed:** create a wiki page (threshold: "would the owner want this in 3 months?")
 
 ## Memory Fence Convention
 

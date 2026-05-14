@@ -14,7 +14,7 @@
     {
       "relation": "RELATES_TO",
       "id": "agent-team-setup",
-      "title": "Gerhards Agent Team — Architecture & Setup"
+      "title": "Team_James Agent Team — Architecture & Setup"
     },
     {
       "relation": "RELATES_TO",
@@ -24,7 +24,7 @@
     {
       "relation": "RELATES_TO",
       "id": "human-memory-inspired-agent-memory-gap-analysis",
-      "title": "Human-Memory-Inspired Agent Memory — Gap Analysis for Gerhard's Team"
+      "title": "Human-Memory-Inspired Agent Memory — Gap Analysis for the owner's Team"
     },
     {
       "relation": "RELATES_TO",

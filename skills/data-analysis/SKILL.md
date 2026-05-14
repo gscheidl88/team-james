@@ -1,6 +1,6 @@
 ---
 name: data-analysis
-description: "SQL patterns, DuckDB analytics, pandas profiling, BI reporting, and exec summary templates for Gerhard's analyst work"
+description: "SQL patterns, DuckDB analytics, pandas profiling, BI reporting, and exec summary templates for the owner's analyst work"
 agent: Analyst
 tools_required: [uv, duckdb, python]
 wiki_ref: "[[research-synthesis-memory-systems]]"
@@ -17,7 +17,7 @@ version: "1.0"
 
 ## When to Use This Skill
 
-- Gerhard provides a dataset (CSV, Excel, database table) and wants insights
+- the owner provides a dataset (CSV, Excel, database table) and wants insights
 - SQL query needed for business reporting
 - KPI dashboard design
 - Financial or operational analysis
@@ -121,7 +121,7 @@ GROUP BY category;
 ## Anti-patterns
 
 - **Skipping profiling** — jumping straight to analysis without checking shape, nulls, and types; produces silent garbage results.
-- **Presenting numbers without interpretation** — tables and aggregates with no narrative = no value for Gerhard.
+- **Presenting numbers without interpretation** — tables and aggregates with no narrative = no value for the owner.
 - **Mixing cleaning and analysis steps** — makes results unreproducible; always separate CLEAN from ANALYZE.
 - **Ignoring outliers** — not flagging high-variance or extreme values distorts aggregates and misleads conclusions.
 - **Using pandas for large files** — anything >500 MB should use DuckDB directly; pandas will OOM or be unacceptably slow.
@@ -138,4 +138,4 @@ GROUP BY category;
 - [ ] Reproducible SQL or Python code included
 - [ ] Outliers / anomalies explicitly acknowledged
 - [ ] Clear recommendation or next step provided
-- [ ] Output readable by Gerhard without context (self-contained summary)
+- [ ] Output readable by the owner without context (self-contained summary)

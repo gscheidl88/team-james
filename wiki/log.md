@@ -1,4 +1,4 @@
-﻿# Wiki Log
+# Wiki Log
 
 > **Append-only** chronological record of all wiki operations.
 > Format: `## [YYYY-MM-DD] operation | title`
@@ -189,7 +189,7 @@
 
 - **Operation:** documentation / implementation-sync
 - **Agent:** James (CAO)
-- **Description:** Added the first finance-domain reference layer for Magnus, the investment research analyst. Created a PRIIP/KID reading guide and an Austrian fund landscape page to support later the investment research pattern.
+- **Description:** Added the first finance-domain reference layer for Investment Analyst, the investment research analyst. Created a PRIIP/KID reading guide and an Austrian fund landscape page to support later the investment research pattern.
 - **Pages created:** `priip-kid-structure.md`, `austrian-fund-landscape.md`
 - **Session ref:** Daily Note 2026-04-30
 
@@ -274,7 +274,7 @@
 
 - **Operation:** analysis
 - **Agent:** Analyst
-- **Sources:** internal (Gerhard's company system description + embedded-db-comparison)
+- **Sources:** internal (the owner's company system description + embedded-db-comparison)
 - **Description:** Full architectural analysis of upgrading current SQLite+NetworkX+Azure OpenAI KB system. Phase 0-3 migration plan. Biggest win: Kuzu replaces SQLite entity_relations + NetworkX in-memory graph. LanceDB replaces Azure embedding blobs. DuckDB adds analytics layer via ATTACH bridge (zero migration).
 - **Pages created:** system-architecture-db-upgrade-analysis.md
 - **Session ref:** Daily Note 2026-04-08
@@ -442,7 +442,7 @@
 - **Operation:** research / documentation
 - **Agent:** Researcher
 - **Source:** https://marp.app/ + https://github.com/marp-team/marp-cli + https://github.com/marp-team/marp-core + https://marketplace.visualstudio.com/items?itemName=marp-team.marp-vscode
-- **Description:** Full research and documentation of the Marp ecosystem. Covers Marp Core, Marp CLI, Marp for VS Code, slide syntax, directives, built-in themes (default/gaia/uncover), custom CSS themes, background images, two-column layout, math typesetting, CLI flags, VS Code workflow, and use cases for Gerhard's team. Created wiki page and skills/presentations/ skill with complete working analyst presentation example.
+- **Description:** Full research and documentation of the Marp ecosystem. Covers Marp Core, Marp CLI, Marp for VS Code, slide syntax, directives, built-in themes (default/gaia/uncover), custom CSS themes, background images, two-column layout, math typesetting, CLI flags, VS Code workflow, and use cases for the owner's team. Created wiki page and skills/presentations/ skill with complete working analyst presentation example.
 - **Pages created:** marp.md
 - **Skills created:** skills/presentations/SKILL.md, skills/presentations/skill.yaml
 - **Session ref:** Daily Note 2026-04-10

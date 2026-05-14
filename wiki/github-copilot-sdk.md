@@ -233,7 +233,7 @@ asyncio.run(main())
 
 Run: `uv run tools/analyse_report.py`
 
-### Concrete Use Cases for Gerhard's Workflow
+### Concrete Use Cases for the owner's Workflow
 
 | Use Case | What it does | Trigger |
 |----------|-------------|---------|

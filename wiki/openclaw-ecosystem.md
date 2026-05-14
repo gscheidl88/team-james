@@ -342,7 +342,7 @@ ACP (agentclientprotocol.com) is an emerging open protocol for structured agent-
 
 ---
 
-## 8. Open Questions for Gerhard
+## 8. Open Questions for the owner
 
 1. **Lobster-inspired runner:** Should we define a `workflow.yaml` format and build a Python runner, or is the current pattern of standalone `uv run` scripts sufficient for now?
 

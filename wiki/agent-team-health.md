@@ -2,7 +2,7 @@
 id: agent-team-health
 type: documentation
 title: "Agent Team Health — Live Status"
-description: "Live auto-refreshed summary of memory system health, knowledge graph state, and top compounding memories for the Gerhards Agent Team."
+description: "Live auto-refreshed summary of memory system health, knowledge graph state, and top compounding memories for the Team_James Agent Team."
 tags: [health, memory, knowledge, live, meta]
 domain: meta
 

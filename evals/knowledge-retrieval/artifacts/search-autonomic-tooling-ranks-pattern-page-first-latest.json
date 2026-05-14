@@ -9,16 +9,16 @@
   "top_hit_score": 0.0328,
   "top_files": [
     "autonomic-tooling-pattern.md",
+    "agent-orchestration-policy.md",
     "agent-ecosystem-upgrade-opportunities.md",
-    "agent-team-setup.md",
     "github-copilot-hooks.md",
-    "agent-orchestration-policy.md"
+    "openclaw-may2026.md"
   ],
   "top_titles": [
     "Autonomic Tooling Pattern",
+    "Agent Orchestration Policy and Model Routing",
     "Agent Ecosystem Upgrade Opportunities",
-    "Gerhards Agent Team — Architecture & Setup",
     "GitHub Copilot Hooks",
-    "Agent Orchestration Policy and Model Routing"
+    "OpenClaw May 2026 — Skill Workshop, Standing Orders & Auto-Dream v4.0"
   ]
 }

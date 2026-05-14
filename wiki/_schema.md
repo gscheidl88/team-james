@@ -31,12 +31,12 @@ superseded_by:                          # [[link-to-newer-page]] if replaced
 
 # ── Quality / Confidence ──────────────────────────────────
 confidence: high                        # high | medium | low
-reviewed_by:                            # Gerhard | James | agent name
+reviewed_by:                            # the owner | James | agent name
 review_date:                            # date of last human review
 
 # ── Provenance ────────────────────────────────────────────
 created: 2026-04-08
-created_by: James                       # James | Analyst | Developer | Researcher | Gerhard
+created_by: James                       # James | Analyst | Developer | Researcher | the owner
 last_modified: 2026-04-08
 modified_by: James
 source:                                 # URL or file path (for source-summary pages)

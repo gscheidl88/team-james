@@ -224,7 +224,7 @@ Our wiki frontmatter was designed independently by looking at Karpathy's wiki pa
 
 1. **`depends_on`:** Explicit prerequisite dependency tracking. Graphiti has no equivalent — it models relationships but not logical dependencies.
 2. **`confidence` as stored metadata:** We can flag a page as `confidence: low` with a note. Graphiti confidence is implicit in retrieval scores.
-3. **Human prose:** Our wiki pages are full markdown documents readable by Gerhard. Graphiti stores structured triples and summaries, not human-readable pages.
+3. **Human prose:** Our wiki pages are full markdown documents readable by the owner. Graphiti stores structured triples and summaries, not human-readable pages.
 4. **Zero infrastructure cost:** Markdown files in Obsidian need no server, no database, no embeddings. Graphiti needs a graph DB + LLM API.
 
 ---
@@ -273,7 +273,7 @@ Agent
 
 ### Our Architecture
 ```
-Agent interactions / Gerhard's decisions
+Agent interactions / the owner's decisions
         ↓ [manual or agent-written]
 MEMORY.md (append-only, timestamped entries)
 wiki/*.md (structured pages, temporal frontmatter)
@@ -336,11 +336,11 @@ We have `valid_to` (when fact stopped being true) but no field for "when we disc
 From the context engineering contest: explicitly constrain session bootstrap context to a character/token budget. Structure `START-SESSION.md` so highest-signal facts appear first. Document the budget in `tooling-policy.md`.
 
 **C. Atomic fact notation in MEMORY.md**
-Graphiti stores facts as atomic triples: `"(Gerhard, PREFERS_TOOL, uv) [valid_at: 2026-01-15]"`. Our MEMORY.md entries are prose paragraphs. **Adopt a hybrid:** keep prose for narrative, but for preference/decision facts, add a structured summary line at the end of each entry:
+Graphiti stores facts as atomic triples: `"(the owner, PREFERS_TOOL, uv) [valid_at: 2026-01-15]"`. Our MEMORY.md entries are prose paragraphs. **Adopt a hybrid:** keep prose for narrative, but for preference/decision facts, add a structured summary line at the end of each entry:
 ```
 ## 2026-04-08 — Tooling decision
 [narrative prose...]
-> FACT: (Gerhard, USES_FOR_PYTHON, uv) | valid_from: 2026-01-15
+> FACT: (the owner, USES_FOR_PYTHON, uv) | valid_from: 2026-01-15
 ```
 
 **D. Provenance at the fact level**
@@ -357,7 +357,7 @@ Build a lightweight index of `relates_to` and `depends_on` links (e.g., a JSON a
 ### ⚠️ Evaluate Carefully (significant cost)
 
 **G. Graphiti with Kuzu (fully embedded)**
-Kuzu is an embedded graph database (file-based, no server) that Graphiti supports. This is the lowest-cost path to actual graph-backed memory. **Prerequisite:** an LLM API for ingestion (cannot avoid). Consider for a specific high-value use case (e.g., ingesting all past Gerhard sessions into a persistent fact graph). Cost: ~$0.01-0.05 per session ingested at gpt-4o-mini rates.
+Kuzu is an embedded graph database (file-based, no server) that Graphiti supports. This is the lowest-cost path to actual graph-backed memory. **Prerequisite:** an LLM API for ingestion (cannot avoid). Consider for a specific high-value use case (e.g., ingesting all past the owner sessions into a persistent fact graph). Cost: ~$0.01-0.05 per session ingested at gpt-4o-mini rates.
 
 **H. Graphiti MCP server**
 Graphiti ships an MCP server (`mcp_server/` directory) that integrates with Claude, Cursor, etc. This would give Claude Code access to a real temporal knowledge graph. **Requires:** Docker + graph DB + LLM API. High setup cost; high potential value.
@@ -372,7 +372,7 @@ Ingesting our existing wiki pages through Graphiti's LLM entity extraction pipel
 
 ---
 
-## 10. Open Questions for Gerhard
+## 10. Open Questions for the owner
 
 1. **Kuzu evaluation:** Kuzu is a file-based embedded graph DB (no Docker, no server) that Graphiti can use as a backend. Worth a spike to see if `graphiti-core[kuzu]` is feasible on Windows without major friction. Would you like the Analyst to prototype this?
 

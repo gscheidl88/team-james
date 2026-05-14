@@ -166,7 +166,7 @@ GitHub's reported value proposition is strongest for:
 - test coverage review before test execution
 - cases where a wrong early decision compounds later
 
-This fits Gerhard's "sparring partner, not a yes-man" preference better than simple autocomplete-style assistance.
+This fits the owner's "sparring partner, not a yes-man" preference better than simple autocomplete-style assistance.
 
 ---
 
@@ -272,7 +272,7 @@ Rubber Duck aligns with several things we want:
 - challenge to early plans and hidden assumptions
 - more value on **complex, risky tasks** than on trivial edits
 
-That is directionally consistent with Gerhard's preference for a sparring partner rather than a compliance-oriented yes-man.
+That is directionally consistent with the owner's preference for a sparring partner rather than a compliance-oriented yes-man.
 
 ### Weak fit
 
@@ -334,7 +334,7 @@ The strongest pairing is:
 Practical reading:
 
 - **do not** turn on experimental mode and forget about it as a permanent default
-- **do** try Rubber Duck in a low-risk CLI session on non-sensitive code if Gerhard wants to evaluate its sparring value
+- **do** try Rubber Duck in a low-risk CLI session on non-sensitive code if the owner wants to evaluate its sparring value
 - if the test is positive, use it selectively for high-stakes refactors and planning-heavy tasks
 - if the goal is stable, auditable, reproducible day-to-day workflow quality, **wait for better documentation or GA**
 

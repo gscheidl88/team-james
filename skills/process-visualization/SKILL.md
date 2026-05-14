@@ -153,3 +153,16 @@ When the first slice proves useful, the next likely upgrades are:
 2. richer HTML/D3 overlays for throughput, cost, and bottlenecks
 3. richer BPMN XML/DI generation
 4. optional workflow runtime integration via SpiffWorkflow
+
+## Anti-patterns
+
+- Do not activate this skill when a simpler direct answer or a different specialist skill is a better fit.
+- Do not hide assumptions, uncertainty, or missing inputs behind confident-sounding prose.
+- Do not skip the required validation, evidence, or operator handoff that makes the output usable.
+- Do not turn examples into universal rules without checking whether the current task actually matches them.
+## Checklist
+
+- [ ] The skill matches the actual task trigger.
+- [ ] Assumptions, limits, or unknowns are stated explicitly.
+- [ ] Output format matches the operator need.
+- [ ] Validation, evidence, or next-step guidance is included where relevant.

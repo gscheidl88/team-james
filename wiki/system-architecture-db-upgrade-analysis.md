@@ -21,7 +21,7 @@ depends_on: ["[[embedded-db-comparison]]"]
 
 ## Overview
 
-Architectural analysis of upgrading Gerhard's company knowledge base system, which currently uses SQLite for everything including graph storage (via NetworkX in-memory) and Azure OpenAI embeddings. The analysis identifies three structural pain points and maps each to a targeted database upgrade: Kuzu for graph traversal (replacing SQLite + NetworkX), LanceDB for vector storage (replacing Azure embedding blobs), and DuckDB as a new analytics layer. A phased migration plan (Phase 0–3) is included, each phase independently deployable.
+Architectural analysis of upgrading the owner's company knowledge base system, which currently uses SQLite for everything including graph storage (via NetworkX in-memory) and Azure OpenAI embeddings. The analysis identifies three structural pain points and maps each to a targeted database upgrade: Kuzu for graph traversal (replacing SQLite + NetworkX), LanceDB for vector storage (replacing Azure embedding blobs), and DuckDB as a new analytics layer. A phased migration plan (Phase 0–3) is included, each phase independently deployable.
 
 # Architecture Analysis — Upgrading the Agent KB System with Kuzu, LanceDB & DuckDB
 
@@ -269,7 +269,7 @@ WHERE confidence > 0.8
 ORDER BY confidence DESC;
 ```
 
-The value here is not replacing SQLite — it is giving Gerhard a proper analytical interface over data that was previously only accessible via bespoke Python scripts or hand-crafted SQLite aggregations.
+The value here is not replacing SQLite — it is giving the owner a proper analytical interface over data that was previously only accessible via bespoke Python scripts or hand-crafted SQLite aggregations.
 
 ---
 

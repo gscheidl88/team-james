@@ -1,0 +1,8 @@
+blank_issues_enabled: false
+contact_links:
+  - name: Security issue
+    url: https://github.com/gscheidl88/team-james/security
+    about: Please report vulnerabilities privately through the repository security tab when possible.
+  - name: Quick start guide
+    url: https://github.com/gscheidl88/team-james#quick-start
+    about: Review the onboarding steps before opening a setup issue.

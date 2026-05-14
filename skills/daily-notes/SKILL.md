@@ -10,7 +10,7 @@ version: "1.1"
 # Skill: Daily Notes Session Logging
 
 > **Purpose:** Defines exactly how James logs each work session into Obsidian daily notes.
-> **Trigger:** Automatically at the end of every significant interaction with Gerhard.
+> **Trigger:** Automatically at the end of every significant interaction with the owner.
 
 ---
 
@@ -120,3 +120,16 @@ $env:PATH += ";~\.local\bin"
 uv run tools\notes\notes_summarizer.py --weekly
 uv run tools\notes\notes_summarizer.py --monthly --date 2026-04-01
 ```
+
+## Anti-patterns
+
+- Do not activate this skill when a simpler direct answer or a different specialist skill is a better fit.
+- Do not hide assumptions, uncertainty, or missing inputs behind confident-sounding prose.
+- Do not skip the required validation, evidence, or operator handoff that makes the output usable.
+- Do not turn examples into universal rules without checking whether the current task actually matches them.
+## Checklist
+
+- [ ] The skill matches the actual task trigger.
+- [ ] Assumptions, limits, or unknowns are stated explicitly.
+- [ ] Output format matches the operator need.
+- [ ] Validation, evidence, or next-step guidance is included where relevant.

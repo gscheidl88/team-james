@@ -163,7 +163,7 @@ size: 16:9           # 16:9 (default) | 4:3
 math: mathjax        # mathjax | katex
 paginate: true
 header: "Q3 Report"
-footer: "Confidential — Gerhard's Team"
+footer: "Confidential — the owner's Team"
 style: |
   section {
     font-size: 28px;
@@ -193,7 +193,7 @@ style: |
 |-----------|-------------|---------|
 | `paginate` | Show page numbers | `true` / `false` / `skip` / `hold` |
 | `header` | Slide header text | `"Project Alpha"` |
-| `footer` | Slide footer text | `"© 2026 Gerhard"` |
+| `footer` | Slide footer text | `"© 2026 the owner"` |
 | `class` | CSS class on `<section>` | `lead`, `invert` |
 | `backgroundColor` | Background color | `#2d2d2d` |
 | `backgroundImage` | Background image URL | `url(./bg.jpg)` |
@@ -552,7 +552,7 @@ Content...
 
 ---
 
-## Use Cases for Gerhard's Team
+## Use Cases for the owner's Team
 
 | Use Case | Format | Notes |
 |----------|--------|-------|

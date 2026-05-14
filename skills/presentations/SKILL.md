@@ -17,7 +17,7 @@ version: "1.0"
 
 ## When to Use This Skill
 
-- Gerhard needs a slide deck for a project status update, sprint review, or client meeting
+- the owner needs a slide deck for a project status update, sprint review, or client meeting
 - An analysis result needs to be presented (not just documented)
 - A wiki page or report should be exported as a shareable PDF/PPTX
 - Technical architecture decisions need to be communicated visually
@@ -121,7 +121,7 @@ theme: gaia
 
 # Project Alpha — Q3 Status Report
 
-**Analyst:** Gerhard's Team  
+**Analyst:** the owner's Team  
 **Date:** 2026-04-10
 ```
 
@@ -316,7 +316,7 @@ theme: default
 size: 16:9
 paginate: true
 header: "Project Alpha · Q2 2026 Status Report"
-footer: "Gerhard's Team — Internal Use Only"
+footer: "the owner's Team — Internal Use Only"
 style: |
   section {
     font-family: "Calibri", "Segoe UI", sans-serif;
@@ -426,7 +426,7 @@ style: |
 
 # Questions?
 
-**Contact:** Gerhard's Team  
+**Contact:** the owner's Team  
 **Deck source:** `plans/project-alpha-q2-status.md`  
 **Next review:** 2026-05-08
 ```
@@ -623,3 +623,16 @@ h2::after {
 }
 ul li::marker { color: #8B4A8B; font-weight: bold; }
 ```
+
+## Anti-patterns
+
+- Do not activate this skill when a simpler direct answer or a different specialist skill is a better fit.
+- Do not hide assumptions, uncertainty, or missing inputs behind confident-sounding prose.
+- Do not skip the required validation, evidence, or operator handoff that makes the output usable.
+- Do not turn examples into universal rules without checking whether the current task actually matches them.
+## Checklist
+
+- [ ] The skill matches the actual task trigger.
+- [ ] Assumptions, limits, or unknowns are stated explicitly.
+- [ ] Output format matches the operator need.
+- [ ] Validation, evidence, or next-step guidance is included where relevant.

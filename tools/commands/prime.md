@@ -18,7 +18,7 @@ Pay special attention to entries marked:
 
 ## Step 3 — User Profile
 
-Read `memory/USER.md` — load Gerhard's preferences, working style, and goals.
+Read `memory/USER.md` — load the owner's preferences, working style, and goals.
 
 ## Step 4 — Current Plans
 

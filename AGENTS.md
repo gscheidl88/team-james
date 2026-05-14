@@ -1,5 +1,9 @@
 # Team_James Agent Framework — Workspace Instructions
 
+> This file is the operating contract of the Team_James framework.  
+> It defines how James delegates work, how memory and skills are handled, and which guardrails apply to sub-agents.  
+> If you fork this repo, customize names, language defaults, and domain-specific examples here first.
+
 > This file governs the behavior of ALL agents in this workspace.  
 > Language: configure in team-config.yaml (default: English).
 
@@ -24,7 +28,7 @@ The team combines expertise across data analysis, software development, research
 | **CAO** (Copilot) | Orchestrierung, Qualitätskontrolle, Entscheidungen | Immer aktiv |
 | **Analyst** | Daten, SQL, BI, Reports, Excel | Analyse-Anfragen |
 | **Developer** | Code, Architektur, Reviews, Debugging | Entwicklungs-Aufgaben |
-| **Investment Analyst (Magnus)** | Anlageprodukt-Recherche, Factsheets, KID/BIB-Analyse, Markt-Kontext | Fonds-, Wertpapier- und Investment-Recherche |
+| **Investment Analyst** | Anlageprodukt-Recherche, Factsheets, KID/BIB-Analyse, Markt-Kontext | Fonds-, Wertpapier- und Investment-Recherche |
 | **QA** | Kritische Abnahme, Failure Hunting, harte Review-Schleifen | Nicht-triviale Planung, Implementierung, Regressionen |
 | **Researcher** | Recherche, Strategien, Konzepte, Docs | Wissens-Aufgaben |
 | **Memory Keeper** | Wissensmanagement, Skills, Kontext | Hintergrund-Prozess |
@@ -41,7 +45,7 @@ Das Team nutzt ein **dreischichtiges Memory-System** (validiert durch OpenViking
 - Format: `[DATUM] FAKT — Quelle/Kontext`
 
 ### 2. User Profile (`memory/USER.md`)
-- owner's Präferenzen, Arbeitsweise, Ziele
+- The owner's preferences, working style, and goals
 - Wird laufend verfeinert
 - Nie löschen — nur ergänzen/korrigieren
 

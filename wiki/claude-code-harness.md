@@ -1,4 +1,4 @@
-﻿---
+---
 # ── Identity ──────────────────────────────────────────────
 id: claude-code-harness
 type: research

@@ -1,7 +1,7 @@
 ---
 id: agent-team-setup
 type: documentation
-title: "Gerhards Agent Team — Architecture & Setup"
+title: "Team_James Agent Team — Architecture & Setup"
 tags: [agent-team, james, architecture, memory, skills, obsidian]
 domain: meta
 
@@ -15,7 +15,7 @@ valid_to:
 superseded_by:
 
 confidence: high
-reviewed_by: Gerhard
+reviewed_by: the owner
 review_date: 2026-04-08
 
 created: 2026-04-08
@@ -41,7 +41,7 @@ relates_to:
 depends_on: []
 ---
 
-# Gerhards Agent Team — Architecture & Setup
+# Team_James Agent Team — Architecture & Setup
 
 ## Overview
 
@@ -60,7 +60,7 @@ A personal AI agent team built on GitHub Copilot CLI, inspired by the [Hermes Ag
 | **James** (CAO) | Chief Agent Officer — orchestrates, quality-gates, maintains memory | Always active |
 | **Analyst** | Data analysis, SQL, BI, reporting, KPIs | data, SQL, reports, BI |
 | **Developer** | Code, architecture, debugging, automation | code, script, API, CI/CD |
-| **Magnus** | Investment research, fund documents, KID/PRIIP interpretation, market-context synthesis | investment, fund, factsheet, market context |
+| **Investment Analyst** | Investment research, fund documents, KID/PRIIP interpretation, market-context synthesis | investment, fund, factsheet, market context |
 | **Researcher** | Research, strategy, concepts, documentation | research, strategy, decision |
 
 ---
@@ -72,7 +72,7 @@ Three layers, read at every session start:
 ```
 memory/
 ├── MEMORY.md     — persistent cross-session facts (append-only)
-└── USER.md       — Gerhard's profile, preferences, tooling policy
+└── USER.md       — the owner's profile, preferences, tooling policy
 
 skills/
 ├── data-analysis/SKILL.md
@@ -128,7 +128,7 @@ The `james` function (in `D:\OneDrive\Documents\PowerShell\profile.ps1`):
 
 ### Wiki Protocol
 
-New wiki page when: *"Would Gerhard want to find this in 3 months?"*
+New wiki page when: *"Would the owner want to find this in 3 months?"*
 
 Every wiki page has full frontmatter: `is_valid`, `confidence`, `created_by`, `relates_to`, `depends_on` — enabling Obsidian Dataview queries and knowledge graph navigation.
 
@@ -157,7 +157,7 @@ Powered by `tools/notes/notes_summarizer.py` (uv inline script).
 | `team-config.yaml` | Full team configuration |
 | `START-SESSION.md` | How to start a CLI session |
 | `memory/MEMORY.md` | Persistent facts register |
-| `memory/USER.md` | Gerhard's profile & preferences |
+| `memory/USER.md` | the owner's profile & preferences |
 
 ---
 

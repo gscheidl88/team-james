@@ -202,7 +202,7 @@ Structured templates for recurring prompt types — ensures consistent AI output
 
 These two commands, translated to our environment, address the two biggest recurring gaps:
 
-**Gap 1 — Session close:** James forgets/skips the closing checklist when Gerhard types `/exit`  
+**Gap 1 — Session close:** James forgets/skips the closing checklist when the owner types `/exit`  
 **Fix:** Create `tools/commands/handoff.md` — a structured prompt James executes before closing
 
 **Gap 2 — Context loss:** After session compaction, James loses project context  
@@ -242,7 +242,7 @@ AGENTS.md becomes a lightweight index that references these files.
 
 ## CLAUDE.md Engineering Principles Worth Noting
 
-Archon's CLAUDE.md encodes engineering principles that Gerhard's team can adopt:
+Archon's CLAUDE.md encodes engineering principles that the owner's team can adopt:
 
 | Principle | Archon's Formulation | Relevance |
 |-----------|---------------------|-----------|

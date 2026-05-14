@@ -63,7 +63,7 @@ Three of the four systems (Graphiti, Cognee, OpenViking) combine semantic vector
 All four systems that do automatic knowledge extraction require an LLM for ingestion — there is no token-free path to automated graph/entity construction. This is not a design flaw; it is the fundamental trade-off. Automated extraction costs tokens; manual frontmatter costs human time. At our scale, human time wins. The crossover point is when corpus volume or churn makes manual maintenance impractical.
 
 ### Agent/user memory split
-OpenViking explicitly partitions memory into `user/` (profile, preferences, entities, events — facts *about* Gerhard) and `agent/` (cases, patterns, tools, skills — things the *agent* learned). Cognee mirrors this with user vs. agent ontologies. Our `USER.md` and `MEMORY.md` implicitly conflate these two streams. Separating them clarifies lifecycles: user facts are updated in-place; agent-learned cases are immutable append entries.
+OpenViking explicitly partitions memory into `user/` (profile, preferences, entities, events — facts *about* the owner) and `agent/` (cases, patterns, tools, skills — things the *agent* learned). Cognee mirrors this with user vs. agent ontologies. Our `USER.md` and `MEMORY.md` implicitly conflate these two streams. Separating them clarifies lifecycles: user facts are updated in-place; agent-learned cases are immutable append entries.
 
 ### Claims vs. pages
 OpenClaw's `memory-wiki` plugin tracks `claims:` as first-class objects with `{ id, text, confidence, evidence[] }` — separate from the page they live in. Graphiti tracks `EntityEdge.fact` as an atomic NL string with its own temporal envelope. Both point away from page-level confidence toward claim-level confidence. Our current model operates at page granularity.
@@ -95,7 +95,7 @@ One-paragraph files in `skills/`, `tools/`, `wiki/`, `memory/` describing what e
 **G. Atomic FACT notation in MEMORY.md**
 For preference and decision entries, add a structured summary line:
 ```
-> FACT: (Gerhard, PREFERS_TOOL, uv) | valid_from: 2026-01-15
+> FACT: (the owner, PREFERS_TOOL, uv) | valid_from: 2026-01-15
 ```
 Keeps MEMORY.md human-readable prose while making key facts machine-parseable without an LLM.
 
@@ -141,7 +141,7 @@ Explicitly decided against — not just deferred.
 
 ## 7. Open Questions
 
-1. **Memory restructure scope:** Should the 8-category taxonomy restructure happen immediately or after a session to validate the categories fit Gerhard's actual usage patterns? Risk of over-engineering a structure that doesn't match reality.
+1. **Memory restructure scope:** Should the 8-category taxonomy restructure happen immediately or after a session to validate the categories fit the owner's actual usage patterns? Risk of over-engineering a structure that doesn't match reality.
 
 2. **`expired_at` vs. `valid_to` in practice:** For most wiki pages, `valid_to` and `expired_at` will be the same date. Is the distinction worth the extra field? Only clearly valuable for pages covering external facts (vendor status, library support) where there is a real information-lag gap.
 

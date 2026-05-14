@@ -2,7 +2,7 @@
 # ── Identity ──────────────────────────────────────────────
 id: human-memory-inspired-agent-memory-gap-analysis
 type: analysis
-title: "Human-Memory-Inspired Agent Memory — Gap Analysis for Gerhard's Team"
+title: "Human-Memory-Inspired Agent Memory — Gap Analysis for the owner's Team"
 description: "Compares our current markdown-first memory stack against human-memory-inspired agent architectures; strongest coverage is memory layering and consolidation, while the biggest gaps are active working memory, conflict-aware reconsolidation, metacognitive confidence gating, and adaptive forgetting."
 tags: [memory, agent-memory, notebooklm, human-memory, consolidation, forgetting, metacognition]
 domain: meta

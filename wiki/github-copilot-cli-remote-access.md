@@ -262,7 +262,7 @@ It is a GitHub-mediated steering channel into an already-running local agent ses
 `/remote` is useful for our harness when:
 
 - a long-running CLI task needs occasional approvals
-- James is executing locally but Gerhard wants mobile continuity
+- James is executing locally but the owner wants mobile continuity
 - we want a clean split between local execution and remote steering
 - a session runs into plan approvals or decision checkpoints while away from the desk
 
@@ -283,7 +283,7 @@ For us, `/remote` should be treated as a **continuity feature**, not as an orche
 
 ## Telegram implications
 
-This is the key boundary for Gerhard's earlier question:
+This is the key boundary for the owner's earlier question:
 
 ### What `/remote` does **not** mean
 

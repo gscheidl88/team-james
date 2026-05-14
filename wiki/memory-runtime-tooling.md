@@ -2,7 +2,7 @@
 id: memory-runtime-tooling
 type: documentation
 title: "Memory Runtime Tooling"
-description: "Runtime memory tooling for Gerhard's agent team: scratchpad finalization, local retrieval, reconciliation review, maintenance scoring, and repeatable QA."
+description: "Runtime memory tooling for the owner's agent team: scratchpad finalization, local retrieval, reconciliation review, maintenance scoring, and repeatable QA."
 tags: [memory, tooling, qa, retrieval, reconciliation]
 domain: meta
 is_project: true

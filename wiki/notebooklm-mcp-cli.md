@@ -40,7 +40,7 @@ depends_on: []
 
 ## Overview
 
-`notebooklm-mcp-cli` is a unified Python package that provides both a CLI (`nlm`) and an MCP server (`notebooklm-mcp`) for programmatic access to Google NotebookLM. It uses browser-extracted cookies for authentication (no official API). The package was installed on 2026-04-10 via `uv tool install notebooklm-mcp-cli`, authenticated successfully, and gives access to Gerhard's 73 NotebookLM notebooks. The MCP server is configured in `~/.copilot/mcp.json` but may not be loaded in all Copilot CLI sessions — use `nlm` CLI as a reliable fallback.
+`notebooklm-mcp-cli` is a unified Python package that provides both a CLI (`nlm`) and an MCP server (`notebooklm-mcp`) for programmatic access to Google NotebookLM. It uses browser-extracted cookies for authentication (no official API). The package was installed on 2026-04-10 via `uv tool install notebooklm-mcp-cli`, authenticated successfully, and gives access to the owner's 73 NotebookLM notebooks. The MCP server is configured in `~/.copilot/mcp.json` but may not be loaded in all Copilot CLI sessions — use `nlm` CLI as a reliable fallback.
 
 ---
 
@@ -137,7 +137,7 @@ When auto-refresh fails: `nlm login` (re-authenticates via browser).
 
 ### Browser auth recovery pattern
 
-For Gerhard's workspace, `nlm login` should not blindly launch a new browser every time auth expires. The stable recovery order is:
+For the owner's workspace, `nlm login` should not blindly launch a new browser every time auth expires. The stable recovery order is:
 
 1. check whether a local Chrome debug session for NotebookLM auth is already running
 2. inspect active debug ports and Chrome command lines
@@ -181,7 +181,7 @@ So the correct operational rule is: **reuse existing debug browser first, spawn 
 
 ---
 
-## Gerhard's Usage Context
+## the owner's Usage Context
 
 - **73 notebooks** available as of 2026-04-10
 - Primary use: access notebooks from Copilot CLI sessions, query content, add sources programmatically

@@ -1,4 +1,4 @@
-# Contributing to Kortexx
+# Contributing to Team_James
 
 ## Principles
 
@@ -23,9 +23,10 @@ Use `uv run` for local scripts.
 Common commands:
 
 ```powershell
-& "uv" run tools\evals\run_workflow_evals.py
-& "uv" run tools\evals\run_ablation_review.py
-& "uv" run tools\evals\extract_backfill_cases.py --inputs plans\2026-04-15-agi-harness-epistemic-upgrades.md plans\2026-04-15-eval-backfill-and-repo-publish.md PersonalNotes\Daily\2026-04-15.md --output evals\backfill\generated-pilot.json
+uv run tools\wiki\wiki_lint.py --strict
+uv run --python 3.12 tools\evals\run_workflow_evals.py
+uv run --python 3.12 tools\evals\run_ablation_review.py
+uv run --python 3.12 tools\evals\extract_backfill_cases.py --inputs plans\2026-04-15-agi-harness-epistemic-upgrades.md plans\2026-04-15-eval-backfill-and-repo-publish.md PersonalNotes\Daily\2026-04-15.md --output evals\backfill\generated-pilot.json
 ```
 
 ## Content conventions
@@ -49,3 +50,5 @@ Common commands:
 - Explain the user-visible or operator-visible effect.
 - Mention the canonical files changed.
 - Call out any publish-surface or privacy impact.
+- Use conventional commit style for PR titles when possible (`feat:`, `fix:`, `docs:`, `chore:`).
+- Include the exact validation commands you ran.

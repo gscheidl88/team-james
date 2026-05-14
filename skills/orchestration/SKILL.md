@@ -47,7 +47,7 @@ Use `model_override` only when the standard routing policy is intentionally bypa
 
 ```markdown
 [ROLE]
-You are the <specialist> leaf-agent for Gerhard's team. Do not spawn any sub-agents. Work directly and return the result to James.
+You are the <specialist> leaf-agent for the owner's team. Do not spawn any sub-agents. Work directly and return the result to James.
 
 [TASK METADATA]
 - task_id: <kebab-case-unique-id>

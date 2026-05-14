@@ -15,7 +15,7 @@ valid_to:
 superseded_by:
 
 confidence: high
-reviewed_by: Gerhard
+reviewed_by: the owner
 review_date: 2026-04-08
 
 created: 2026-04-08

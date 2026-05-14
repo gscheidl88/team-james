@@ -51,3 +51,16 @@ The D3 viewer is the next visualization layer after process-map JSON:
 - D3 is loaded from CDN in the current first slice
 - this is an analysis viewer, not a final BPMN renderer
 - no separate visualization agent role is required at current scope
+
+## Anti-patterns
+
+- Do not activate this skill when a simpler direct answer or a different specialist skill is a better fit.
+- Do not hide assumptions, uncertainty, or missing inputs behind confident-sounding prose.
+- Do not skip the required validation, evidence, or operator handoff that makes the output usable.
+- Do not turn examples into universal rules without checking whether the current task actually matches them.
+## Checklist
+
+- [ ] The skill matches the actual task trigger.
+- [ ] Assumptions, limits, or unknowns are stated explicitly.
+- [ ] Output format matches the operator need.
+- [ ] Validation, evidence, or next-step guidance is included where relevant.

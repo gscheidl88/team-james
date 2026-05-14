@@ -51,7 +51,7 @@ If yes → append to `memory/MEMORY.md` with `[DATE]` prefix and correct priorit
 - `🔥 HIGH` — important, doubled weight
 - `📌 PIN` — reference material
 
-If Gerhard showed a new preference → also update `memory/USER.md`.
+If the owner showed a new preference → also update `memory/USER.md`.
 
 ## Step 5 — Dream Consolidation
 
@@ -86,7 +86,7 @@ Replace `[DATE HH:MM]` with actual timestamp. Replace `none` with open WIP items
 
 ## Step 9 — Confirm
 
-Respond to Gerhard:
+Respond to the owner:
 
 ```
 Session geschlossen ✅

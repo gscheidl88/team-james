@@ -9,15 +9,15 @@
   "top_hit_score": 0.0328,
   "top_files": [
     "memory-session-lifecycle.md",
-    "autonomic-tooling-pattern.md",
     "agent-orchestration-policy.md",
+    "autonomic-tooling-pattern.md",
     "memory-runtime-tooling.md",
     "claude-code-harness.md"
   ],
   "top_titles": [
     "Memory Session Lifecycle",
-    "Autonomic Tooling Pattern",
     "Agent Orchestration Policy and Model Routing",
+    "Autonomic Tooling Pattern",
     "Memory Runtime Tooling",
     "Claude Code Harness — Pattern Analysis & Fit Assessment"
   ]

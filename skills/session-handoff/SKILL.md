@@ -1,6 +1,6 @@
 ---
 name: session-handoff
-description: "Creates comprehensive handoff documents for seamless Copilot CLI session transfers. Triggered when: context approaches capacity, major task milestone completed, session ending, user says 'save state' / 'create handoff' / 'pause'. Enables fresh sessions to continue with zero ambiguity. Adapted from softaworks/agent-toolkit for Gerhards team workflow."
+description: "Creates comprehensive handoff documents for seamless Copilot CLI session transfers. Triggered when: context approaches capacity, major task milestone completed, session ending, user says 'save state' / 'create handoff' / 'pause'. Enables fresh sessions to continue with zero ambiguity. Adapted from softaworks/agent-toolkit for owner team workflow."
 agent: James
 tools_required: [powershell, file-io]
 wiki_ref: "[[session-handoff]]"
@@ -36,7 +36,7 @@ James creates a handoff **proactively** — not only when asked:
 - After a complex debugging session  
 - At the end of any non-trivial work session
 - When context window is >70% full
-- When Gerhard says "pause", "save state", "continue later"
+- When the owner says "pause", "save state", "continue later"
 
 **Proactive suggestion text:**
 > "Wir haben erheblichen Fortschritt gemacht. Soll ich einen Handoff erstellen, damit die nächste Session nahtlos weiterarbeiten kann?"
@@ -68,7 +68,7 @@ Before finalizing, verify:
 - [ ] "Immediate Next Steps" are actionable, not vague
 - [ ] Git status captured (branch, last commit)
 
-### Step 4: Confirm to Gerhard
+### Step 4: Confirm to the owner
 
 Report:
 - Handoff file location
@@ -106,7 +106,7 @@ quality_score: [0-100]
 - [Critical decision made with rationale]
 - [Non-obvious behavior discovered]
 - [Constraint or limitation found]
-- [Gerhard preference expressed]
+- [the owner preference expressed]
 
 ## Immediate Next Steps
 
@@ -247,3 +247,16 @@ Naming: `YYYY-MM-DD-HHMMSS-[slug].md`
 - [ ] No secrets/tokens in document
 - [ ] Gotchas section catches known surprises
 - [ ] Verification commands copy-paste ready
+
+## Anti-patterns
+
+- Do not activate this skill when a simpler direct answer or a different specialist skill is a better fit.
+- Do not hide assumptions, uncertainty, or missing inputs behind confident-sounding prose.
+- Do not skip the required validation, evidence, or operator handoff that makes the output usable.
+- Do not turn examples into universal rules without checking whether the current task actually matches them.
+## Checklist
+
+- [ ] The skill matches the actual task trigger.
+- [ ] Assumptions, limits, or unknowns are stated explicitly.
+- [ ] Output format matches the operator need.
+- [ ] Validation, evidence, or next-step guidance is included where relevant.

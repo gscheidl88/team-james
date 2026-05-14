@@ -143,7 +143,7 @@ Tracks consecutive days with a completed dream cycle. Displayed in each notifica
 Triggered at: 1st dream, 7th dream, 30th dream, 100 entries, 200 entries, 500 entries. Each milestone emits a distinct notification with a short summary of system growth since last milestone.
 
 ### Weekly Sunday Summary
-Every Sunday, the dream report includes a week-over-week growth diff: new entries added, entries archived, health score delta, entries referenced this week. Gives Gerhard a cadence-based mental model of memory growth.
+Every Sunday, the dream report includes a week-over-week growth diff: new entries added, entries archived, health score delta, entries referenced this week. Gives the owner a cadence-based mental model of memory growth.
 
 ---
 

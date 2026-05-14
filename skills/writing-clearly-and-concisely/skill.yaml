@@ -35,7 +35,7 @@ source: "https://github.com/softaworks/agent-toolkit/tree/main/skills/writing-cl
 adapted_by: "James (CAO)"
 adapted_date: "2026-04-13"
 changes_from_source:
-  - "Added Gerhards wiki L0/L1/L2 standard"
+  - "Added owner wiki L0/L1/L2 standard"
   - "Added team-specific examples"
   - "Integrated with AGENTS.md writing conventions"
 wiki_ref: "[[writing-style]]"

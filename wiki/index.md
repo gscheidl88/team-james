@@ -24,7 +24,7 @@
 | [[cognee-memory]] | research | Cognee knowledge engine — hybrid vector+graph pipeline; steal Kuzu+LanceDB backends; skip full lib | research | ✅ |
 | [[research-synthesis-memory-systems]] | decision | Synthesis of 4 memory systems (OpenClaw/Graphiti/OpenViking/Cognee) — decision matrix, adopt-now/later/skip | decision | ✅ |
 | [[embedded-db-comparison]] | analysis | Deep technical comparison: SQLite vs DuckDB vs LanceDB vs Kuzu — data models, storage, queries, weaknesses | technical | ✅ |
-| [[system-architecture-db-upgrade-analysis]] | analysis | Architecture upgrade analysis: how Kuzu/LanceDB/DuckDB improve Gerhard's company KB system (SQLite+NetworkX+Azure) | technical | ✅ |
+| [[system-architecture-db-upgrade-analysis]] | analysis | Architecture upgrade analysis: how Kuzu/LanceDB/DuckDB improve the owner's company KB system (SQLite+NetworkX+Azure) | technical | ✅ |
 | [[zep-graphiti-memory]] | research | Zep & Graphiti temporal knowledge graphs — deep-dive, data model, fit analysis vs our wiki | research | ✅ |
 | [[openclaw-ecosystem]] | research | OpenClaw ecosystem deep-dive — architecture, Lobster, ACP, Windows, fit analysis | research | ✅ |
 | [[openclaw-auto-dream]] | research | Auto-Dream v4.0 — 5-layer cognitive memory architecture, importance scoring, forgetting curves, dream cycles; adopted: priority markers + procedures.md | agent-memory | ✅ |

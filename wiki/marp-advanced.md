@@ -97,7 +97,7 @@ headingDivider: false
 # Project Alpha
 ## Q3 Performance Review
 
-**Prepared by:** Gerhard's Team | **Date:** 2026-09-30
+**Prepared by:** the owner's Team | **Date:** 2026-09-30
 
 ---
 
@@ -861,7 +861,7 @@ footer: "Confidential — Internal Use Only"
 # Project Name
 ## Deck Type — Month Year
 
-**Prepared by:** Gerhard's Team
+**Prepared by:** the owner's Team
 
 ---
 
@@ -919,7 +919,7 @@ Content supports the title. Three bullets maximum.
 
 # Questions?
 
-**Contact:** Gerhard's Team
+**Contact:** the owner's Team
 **Next review:** [Date]
 ```
 

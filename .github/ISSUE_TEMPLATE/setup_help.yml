@@ -1,0 +1,36 @@
+name: Setup help
+description: Get help with installation, path replacement, or first-run configuration.
+title: "[Setup]: "
+labels:
+  - setup
+  - question
+body:
+  - type: markdown
+    attributes:
+      value: |
+        For setup issues, please include the exact command you ran and the relevant output.
+  - type: input
+    id: command
+    attributes:
+      label: Command used
+      placeholder: .\setup.ps1 -WorkspaceRoot "D:\workspace"
+    validations:
+      required: true
+  - type: textarea
+    id: output
+    attributes:
+      label: Output or error message
+      render: shell
+    validations:
+      required: true
+  - type: input
+    id: environment
+    attributes:
+      label: Environment
+      placeholder: Windows 11 / PowerShell 7 / GitHub Copilot CLI 1.0.x
+    validations:
+      required: true
+  - type: textarea
+    id: what_you_expected
+    attributes:
+      label: What did you expect to happen?

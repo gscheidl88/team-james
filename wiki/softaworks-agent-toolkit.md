@@ -69,12 +69,12 @@ This was the highest-value import for James because it directly addresses Copilo
 
 ### 2. writing-clearly-and-concisely
 
-This skill distilled Strunk-style writing rules plus AI-writing anti-pattern detection into an operational checklist. We imported it because Gerhard prefers compact, precise prose and our workspace produces many human-facing artifacts.
+This skill distilled Strunk-style writing rules plus AI-writing anti-pattern detection into an operational checklist. We imported it because the owner prefers compact, precise prose and our workspace produces many human-facing artifacts.
 
 **Why it matters:**
 - improves wiki pages, plans, memory entries, and user-facing summaries
 - cuts common LLM filler words and puffery
-- aligns with Gerhard's preference for short, information-dense communication
+- aligns with the owner's preference for short, information-dense communication
 
 ### 3. marp-slide patterns
 
@@ -97,7 +97,7 @@ We did not import the upstream skill as-is because we already had a stronger loc
 
 ## Decision
 
-Use `softaworks/agent-toolkit` as a **pattern source**, not as a dependency. Import only the skills or structures that solve a real workspace pain point, then adapt them to Gerhard's Windows paths, memory model, and James orchestration rules.
+Use `softaworks/agent-toolkit` as a **pattern source**, not as a dependency. Import only the skills or structures that solve a real workspace pain point, then adapt them to the owner's Windows paths, memory model, and James orchestration rules.
 
 ---
 

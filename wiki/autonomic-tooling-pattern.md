@@ -77,7 +77,7 @@ They mutate durable state or create external side effects. They need explicit gu
 
 ### 3. Human judgment loops
 
-These should remain led by James and Gerhard:
+These should remain led by James and the owner:
 
 - setting priorities
 - defining what "important" means
@@ -298,6 +298,6 @@ Think of James as the **cortex** and `tools/` as the **vegetative nervous system
 
 - `tools/` maintains routine regulation
 - James notices anomalies, sets goals, and chooses interventions
-- Gerhard decides priorities and strategic direction
+- the owner decides priorities and strategic direction
 
-That is the stable split: tools regulate, James orchestrates, Gerhard decides.
+That is the stable split: tools regulate, James orchestrates, the owner decides.

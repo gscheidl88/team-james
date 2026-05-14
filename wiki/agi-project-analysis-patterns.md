@@ -45,7 +45,7 @@ description: "The strongest lessons from AGI/alignment/economic-impact research 
 
 ## Overview
 
-The AGI notebook reinforces that sustainable progress on complex topics comes less from a stronger single model and more from a stronger operating system around the models. The recurring patterns are hierarchical decomposition, explicit uncertainty handling, continuous feedback loops, role specialization, and evaluation discipline grounded in real tasks rather than leaderboard metrics. For Gerhard's workspace, the conclusion is that the biggest next step is not more memory, but more epistemic structure: hypotheses, confidence, validation plans, and typed handoffs across long-running work.
+The AGI notebook reinforces that sustainable progress on complex topics comes less from a stronger single model and more from a stronger operating system around the models. The recurring patterns are hierarchical decomposition, explicit uncertainty handling, continuous feedback loops, role specialization, and evaluation discipline grounded in real tasks rather than leaderboard metrics. For the owner's workspace, the conclusion is that the biggest next step is not more memory, but more epistemic structure: hypotheses, confidence, validation plans, and typed handoffs across long-running work.
 
 ## Core lessons from the notebook
 

@@ -1,4 +1,9 @@
-﻿# Team_James — Personal AI Agent Framework
+[![CI](https://github.com/gscheidl88/team-james/actions/workflows/ci.yml/badge.svg)](https://github.com/gscheidl88/team-james/actions/workflows/ci.yml)
+[![Lint](https://github.com/gscheidl88/team-james/actions/workflows/lint.yml/badge.svg)](https://github.com/gscheidl88/team-james/actions/workflows/lint.yml)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
+[![Version](https://img.shields.io/badge/version-0.1.0--alpha-blue.svg)](CHANGELOG.md)
+
+# Team_James — Personal AI Agent Framework
 
 > A production-tested, local-first agent team for GitHub Copilot CLI.  
 > Orchestration · Memory · Skills · Knowledge — all in your repo.
@@ -53,6 +58,9 @@ Memory Layers:
 ```
 Team_James/
 ├── .github/
+│   ├── ISSUE_TEMPLATE/           # Bug, feature, and setup-help templates
+│   ├── workflows/                # GitHub Actions for lint and eval CI
+│   ├── pull_request_template.md
 │   └── copilot-instructions.md   # Copilot-specific system prompt
 ├── agents/                        # Agent persona definitions
 │   ├── chief-agent.md             # James — CAO
@@ -90,6 +98,10 @@ Team_James/
 │   └── _template-complex-task.md  # Plan template with phase table
 ├── evals/                         # Evaluation suites for key workflows
 ├── AGENTS.md                      # Team constitution (read every session)
+├── CHANGELOG.md
+├── CODE_OF_CONDUCT.md
+├── setup.ps1                      # Windows bootstrap for local path placeholders
+├── setup.sh                       # POSIX bootstrap for local path placeholders
 └── team-config.yaml               # Agent roster + skill registry
 ```
 
@@ -114,25 +126,25 @@ cp memory/MEMORY.example.md memory/MEMORY.md
 # → Edit both files with your personal details
 ```
 
-### 3. Configure the workspace path
+### 3. Run the setup script
 
-Search for `<WORKSPACE_ROOT>` across the repo and replace with your actual workspace path.
+The framework uses `<WORKSPACE_ROOT>` placeholders in several operational files. Run one setup command once after cloning:
 
 ```powershell
-# Windows
-$ws = "D:\your-workspace"
-Get-ChildItem -Recurse -Include "*.md","*.yaml","*.py","*.ps1" |
-    ForEach-Object {
-        (Get-Content $_ -Raw) -replace '<WORKSPACE_ROOT>', $ws |
-        Set-Content $_ -Encoding UTF8
-    }
+.\setup.ps1 -WorkspaceRoot "D:\your-workspace"
 ```
 
 ```bash
-# macOS / Linux
-find . -type f \( -name "*.md" -o -name "*.yaml" -o -name "*.py" -o -name "*.sh" \) |
-    xargs sed -i 's|<WORKSPACE_ROOT>|/your/workspace/path|g'
+./setup.sh /your/workspace/path
 ```
+
+The setup script:
+
+- replaces `<WORKSPACE_ROOT>` placeholders in tracked framework files
+- creates `memory/USER.md` and `memory/MEMORY.md` from the example templates if they do not exist
+- keeps the public templates untouched in Git history
+
+Your local working tree will contain personalized path changes after setup. That is expected for a local-first workspace fork.
 
 ### 4. Verify
 
@@ -257,7 +269,7 @@ The orchestration policy, memory fence convention, model routing, and skill inje
 
 ## Contributing
 
-See [CONTRIBUTING.md](CONTRIBUTING.md).
+See [CONTRIBUTING.md](CONTRIBUTING.md), [CODE_OF_CONDUCT.md](CODE_OF_CONDUCT.md), and [CHANGELOG.md](CHANGELOG.md).
 
 This is a personal framework — contributions are welcome as improvements to the methodology, tooling, and skill library. Domain-specific agents (like the investment analyst) are provided as examples of the pattern, not as production content.
 

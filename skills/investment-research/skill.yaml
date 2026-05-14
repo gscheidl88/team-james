@@ -1,7 +1,7 @@
 id: investment-research
 name: Investment Research
 version: "1.0"
-owner: Magnus
+owner: Investment Analyst
 category: research
 description: Educational workflow for factsheet analysis, KID interpretation, market-context synthesis, and structured investment-product comparison
 triggers:

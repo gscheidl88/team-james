@@ -7,7 +7,7 @@ Full policy lives in `AGENTS.md` under "Sub-Agent Orchestration Rules".
 
 ## Core Rules
 
-1. **Only James spawns agents.** Sub-agents (Analyst, Developer, Researcher, QA, Magnus) are leaf-nodes — they never spawn further agents. If a sub-agent needs another agent, it returns the request to James.
+1. **Only James spawns agents.** Sub-agents (Analyst, Developer, Researcher, QA, Investment Analyst) are leaf-nodes — they never spawn further agents. If a sub-agent needs another agent, it returns the request to James.
 
 2. **Every spawn has a task descriptor** with: `task_id`, `goal`, `dod`, `verification_plan`, `agent_role`, `requested_tools`, `timeout_hint`, `skill_context`, `escalation_path`.
 

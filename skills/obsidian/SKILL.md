@@ -1,4 +1,4 @@
-﻿---
+---
 name: obsidian
 description: "Obsidian CLI command reference for vault browsing and search — PRESENTATION ONLY, never use in automation scripts"
 agent: Researcher
@@ -323,3 +323,16 @@ obsidian create name=Note content="# Title\n\n## Section 1\n\nParagraph text.\n\
 - [ ] Frontmatter properties set (created, agent, tags, status)
 - [ ] Backlinks considered — did any existing note need updating?
 - [ ] Important findings → also synced to `memory/MEMORY.md`
+
+## Anti-patterns
+
+- Do not activate this skill when a simpler direct answer or a different specialist skill is a better fit.
+- Do not hide assumptions, uncertainty, or missing inputs behind confident-sounding prose.
+- Do not skip the required validation, evidence, or operator handoff that makes the output usable.
+- Do not turn examples into universal rules without checking whether the current task actually matches them.
+## Checklist
+
+- [ ] The skill matches the actual task trigger.
+- [ ] Assumptions, limits, or unknowns are stated explicitly.
+- [ ] Output format matches the operator need.
+- [ ] Validation, evidence, or next-step guidance is included where relevant.

@@ -43,12 +43,12 @@ relates_to:
   - "[[agi-project-analysis-patterns]]"
 depends_on: []
 
-description: "The workspace now has a fixed policy for sub-agent spawning, checkpointing, trace logging, and cross-family model verification, backed by local routing and review tooling."
+description: "Defines the governance layer for autonomic, tool-driven workspace operations: sub-agent spawning, automation checkpoints, trace logging, and cross-family model verification."
 ---
 
 ## Overview
 
-Gerhard's workspace now uses a concrete orchestration standard for delegated agent work. The policy combines three layers: a mandatory task descriptor for every sub-agent spawn, a declarative routing policy for primary and verifier models, and repeatable trace/review tooling so James can inspect delegated work operationally instead of relying on memory. The design is inspired by Rubber Duck's cross-family verification pattern, but implemented locally and deterministically through workspace files and scripts. The remaining limitation is that live sub-agent progress is still trace-driven rather than natively streamed through a manager console.
+This page defines the governance layer for autonomic, tool-driven automation in workspace operations. The policy combines three layers: a mandatory task descriptor for every sub-agent spawn, a declarative routing policy for primary and verifier models, and repeatable trace/review tooling so James can inspect delegated work operationally instead of relying on memory. It is the control surface that decides which automation loops can run routinely, which need guarded checkpoints, and how orchestration remains auditable. The design is inspired by Rubber Duck's cross-family verification pattern, but implemented locally and deterministically through workspace files and scripts.
 
 ---
 

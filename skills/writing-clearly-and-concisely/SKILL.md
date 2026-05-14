@@ -33,7 +33,7 @@ Use it when writing:
 - Commit messages
 - Code comments (the few that are needed)
 - Any report, summary, or explanation
-- Responses where Gerhard will copy/paste text externally
+- Responses where the owner will copy/paste text externally
 
 **If you're writing sentences a human will read → activate this skill.**
 
@@ -105,7 +105,7 @@ If you can replace it with a specific, concrete phrase — do it.
 
 ---
 
-## For Wiki Pages (Gerhards Team Standard)
+## For Wiki Pages (owner Team Standard)
 
 Apply these rules in addition to Strunk:
 
@@ -126,7 +126,7 @@ Apply these rules in addition to Strunk:
 
 ---
 
-## Checklist Before Delivering Prose
+## Checklist
 
 - [ ] Every sentence uses active voice (or has a reason not to)
 - [ ] No banned AI words present
@@ -143,3 +143,10 @@ Apply these rules in addition to Strunk:
 Source material from softaworks/agent-toolkit:
 - `signs-of-ai-writing.md` — Comprehensive Wikipedia editor guide to AI-generated text patterns
 - `elements-of-style/` — Full Strunk text by chapter
+
+## Anti-patterns
+
+- Do not activate this skill when a simpler direct answer or a different specialist skill is a better fit.
+- Do not hide assumptions, uncertainty, or missing inputs behind confident-sounding prose.
+- Do not skip the required validation, evidence, or operator handoff that makes the output usable.
+- Do not turn examples into universal rules without checking whether the current task actually matches them.

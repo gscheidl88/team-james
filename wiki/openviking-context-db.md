@@ -45,7 +45,7 @@ Research brief on OpenViking, a filesystem-paradigm context database for AI agen
 
 OpenViking (volcengine/OpenViking, AGPL-3.0, Alpha) is a ByteDance-originated open-source **context database** that solves a real problem: fragmented, opaque, and token-hungry context management in long-running AI agents. Its core innovation is treating all agent context — memory, resources, and skills — as a virtual filesystem with three-tier content summaries (L0/L1/L2) and hierarchical semantic retrieval.
 
-**Verdict:** OpenViking is architecturally elegant and solves the right problems. Several of its ideas are directly adoptable in our setup without installing the system at all. The system itself is more practical to install than it first appears (binaries are bundled in `pip install`), but still carries real operational overhead: it requires an LLM VLM model and embedding model to function, and runs as a multi-process microservice stack. **For Gerhard's current single-user personal setup, the recommendation is "adopt the concepts, skip the stack."**
+**Verdict:** OpenViking is architecturally elegant and solves the right problems. Several of its ideas are directly adoptable in our setup without installing the system at all. The system itself is more practical to install than it first appears (binaries are bundled in `pip install`), but still carries real operational overhead: it requires an LLM VLM model and embedding model to function, and runs as a multi-process microservice stack. **For the owner's current single-user personal setup, the recommendation is "adopt the concepts, skip the stack."**
 
 ---
 
@@ -252,7 +252,7 @@ OpenViking is **AGPL-3.0** — strong copyleft. For personal local use, this is 
 
 Our three-layer hierarchy is organized by **content type and purpose**:
 ```
-memory/   → identity context (who am I, what do I know about Gerhard)
+memory/   → identity context (who am I, what do I know about the owner)
 skills/   → procedural context (how to do things, patterns, templates)
 wiki/     → referential context (what I've learned, research, decisions)
 ```
@@ -297,7 +297,7 @@ This 1:1 mapping is solid and intentional. The filesystem paradigm makes explici
 
 3. **Session memory extraction** — our memory layer is manually maintained. OpenViking extracts structured memories automatically from conversation history using 8 typed categories.
 
-4. **Agent-memory separation** — we treat agent patterns and user facts the same. OpenViking distinguishes `user/memories/` (about Gerhard) from `agent/memories/` (learned by the agent: cases, patterns, tool knowledge).
+4. **Agent-memory separation** — we treat agent patterns and user facts the same. OpenViking distinguishes `user/memories/` (about the owner) from `agent/memories/` (learned by the agent: cases, patterns, tool knowledge).
 
 5. **Memory deduplication** — no equivalent in our system.
 
@@ -393,7 +393,7 @@ memory/
 ├── user/
 │   ├── profile.md      (identity, background)
 │   ├── preferences.md  (per-topic preferences)
-│   ├── entities.md     (people, projects Gerhard cares about)
+│   ├── entities.md     (people, projects the owner cares about)
 │   └── events.md       (key decisions, milestones — append-only)
 └── agent/
     ├── cases.md        (problems solved + solutions — append-only)
@@ -440,7 +440,7 @@ Irrelevant for single-user personal setup.
 
 ---
 
-## 10. Open Questions for Gerhard
+## 10. Open Questions for the owner
 
 1. **Ollama investment:** Do you currently have Ollama running? If yes with a vision model (llava, llama3.2-vision), the barrier to piloting OpenViking drops significantly. If no, that's a separate infrastructure decision that should not be made solely for OV.
 
