@@ -1,5 +1,3 @@
-[![CI](https://github.com/gscheidl88/team-james/actions/workflows/ci.yml/badge.svg)](https://github.com/gscheidl88/team-james/actions/workflows/ci.yml)
-[![Lint](https://github.com/gscheidl88/team-james/actions/workflows/lint.yml/badge.svg)](https://github.com/gscheidl88/team-james/actions/workflows/lint.yml)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 [![Version](https://img.shields.io/badge/version-0.1.0--alpha-blue.svg)](CHANGELOG.md)
 
@@ -59,7 +57,6 @@ Memory Layers:
 Team_James/
 ├── .github/
 │   ├── ISSUE_TEMPLATE/           # Bug, feature, and setup-help templates
-│   ├── workflows/                # GitHub Actions for lint and eval CI
 │   ├── pull_request_template.md
 │   └── copilot-instructions.md   # Copilot-specific system prompt
 ├── agents/                        # Agent persona definitions

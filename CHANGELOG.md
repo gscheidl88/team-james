@@ -11,7 +11,6 @@ public framework surface is still stabilizing.
 ### Added
 
 - community health files: `CODE_OF_CONDUCT.md`, issue templates, and a PR template
-- GitHub Actions workflows for lint and workflow eval CI
 - `setup.ps1` and `setup.sh` for local workspace placeholder bootstrapping
 - README badges and public-beta onboarding improvements
 - `dependabot.yml` for GitHub Actions updates
